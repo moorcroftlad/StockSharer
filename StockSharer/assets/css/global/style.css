@@ -1,0 +1,194 @@
+body {
+    font-family: Roboto, sans-serif;
+}
+
+.navbar {
+    margin-bottom: 0;
+    background-color: white;
+}
+
+.main-cta {
+    height: 516px;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.tools-cta {
+    background-image: url(/assets/images/tools.jpg);
+    background-position: 55% 100%;
+}
+
+.games-cta {
+    background-image: url(/assets/images/games.jpg);
+    background-position: 55% 100%;
+}
+
+@media (min-width: 768px) {
+    .main-cta {
+        background-position: 50% 25%;
+        height: 650px;
+    }
+}
+
+@media (min-width: 992px) and (max-width:1199px) {
+    .jumbotron .h1, .jumbotron h1{
+        font-size: 55px;
+    }
+}
+
+.main-cta h1 {
+    font-weight: bold;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.25);
+    z-index: 0;
+}
+
+.main-cta-header {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .main-cta-header {
+        margin-top: 110px;
+    }
+}
+
+.main-cta-header p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.main-cta-btn-primary {
+background-color: #0bb8e3;color: white;}
+
+.main-cta-btn {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+}
+
+.main-cta-buttons {
+    margin-top: 30px;
+}
+
+.main-cta-btn-secondary {
+    background-color: white;
+    color: #0bb8e3;
+}
+
+.main-cta-btn-primary:hover {
+    background-color: #07deff;
+    color: white;
+}
+
+.main-cta-btn-primary:active {
+    background-color: #07deff;
+    color: white;
+}
+
+.main-cta-btn-primary:focus {
+    border: none;
+    background-color: #07deff;
+    color: white;
+    outline: none;
+}
+
+.main-cta-btn-secondary:hover {
+    color: #0bb8e3;
+}
+
+.main-cta-btn-secondary {
+    color: #0bb8e3;
+}
+
+.main-cta-btn-secondary:focus {
+    color: #0bb8e3;
+}
+
+.main-cta-btn-primary:active:focus {
+    background-color: #07deff;
+    color: white;
+}
+
+.main-cta-btn-secondary:active:focus{
+    
+color: #0bb8e3;
+}
+
+.home-selling-point p {
+    font-size: 18px;
+    padding: 0 25px;
+}
+
+.home-selling-point h3 {
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    font-weight: bold;
+}
+
+.home-section {
+    padding: 40px 0;
+    background-color: #EFEFEF;
+}
+
+.home-step-holder {
+    background-color: white;
+}
+
+.home-section h2 {
+margin: 0 0 30px 0;font-weight: bold;}
+
+.home-step-row {
+    margin-bottom: 40px;
+}
+
+.circle {
+   width: 50px;
+   height: 50px;
+   background: #EFEFEF;
+   -moz-border-radius: 70px;
+   -webkit-border-radius: 70px;
+   border-radius: 70px;
+   display: inline-block;
+   font-weight: bold;
+   line-height: 50px;
+   font-size: 20px;
+   color: black;
+}
+
+.home-step-holder p {
+    font-size: 22px;
+    padding: 0 40px;
+}
+
+@media (min-width: 481px) {
+    .col-sm-vcenter {
+    margin-top: 30px;
+    }
+}
+
+.home-step-holder-alt {
+    background-color: #0BB8E3;
+}
+
+.home-step-holder-alt p {
+    color: white;
+}
+
+.home-step-holder-alt h2 {
+    color: white;
+}
