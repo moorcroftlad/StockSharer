@@ -21,6 +21,7 @@ body {
 .games-cta {
     background-image: url(/assets/images/games.jpg);
     background-position: 55% 100%;
+    background-size: cover;
 }
 
 @media (min-width: 768px) {
