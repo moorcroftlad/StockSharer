@@ -101,6 +101,7 @@
   <ItemGroup>
     <Content Include="assets\css\global\style.css" />
     <Content Include="assets\css\lib\bootstrap.min.css" />
+    <Content Include="assets\css\search\results.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\games.jpg" />
     <Content Include="assets\images\tools.jpg" />
@@ -115,6 +116,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -135,7 +137,8 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Home\Tools.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
-    <Content Include="Views\Home\Games.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

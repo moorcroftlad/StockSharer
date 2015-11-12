@@ -4,14 +4,14 @@ namespace StockSharer.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Tools()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Games()
+        public ActionResult Tools()
         {
             return View();
         }
-	}
+    }
 }

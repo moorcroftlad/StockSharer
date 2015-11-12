@@ -13,6 +13,9 @@ namespace StockSharer.App_Start
             bundles.Add(new StyleBundle("~/bundles/styles/global").Include(
                 "~/assets/css/lib/bootstrap.min.css",
                 "~/assets/css/global/style.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/styles/search").Include(
+                "~/assets/css/search/results.css"));
         }
     }
 }
