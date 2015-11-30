@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@model StockSharer.Controllers.SearchResultsViewModel
 <div class="page-content-holder">
     <div class="container">
         <div class="page-content">
@@ -10,7 +11,7 @@
                 </div>
                 <div class="col-sm-8 col-md-9">
                     <div class="search-results">
-                        <h1>Games found near M4 1PE</h1>
+                        <h1>Games found near M4 1PE, test number: @Model.Number</h1>
                         <div class="row">
                             <div class="col-sm-6 col-md-4">
                                 <div class="result-holder">
