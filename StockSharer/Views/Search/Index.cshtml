@@ -13,150 +13,25 @@
                     <div class="search-results">
                         <h1>Games found near M4 1PE</h1>
                         <div class="row">
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
+                            @foreach (var searchResult in Model.SearchResults)
+                            {
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="result-holder">
+                                        <div class="result-header">
+                                            <h3>@searchResult.GameName
+                                                <span class="label label-success pull-right">@searchResult.Availability</span>
+                                            </h3>
+                                        </div>
+                                        <div class="result-image">
+                                            <img class="center-block" src="@searchResult.ImageUrl"/>
+                                        </div>
+                                        <div class="result-footer">
+                                            <span class="price"><strong>&pound;2.00</strong> / day</span>
+                                            <span class="user pull-right">2 miles away</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="result-holder">
-                                    <div class="result-header">
-                                        <h3>FIFA 16
-                                            <span class="label label-success pull-right">Available</span>
-                                        </h3>
-                                    </div>
-                                    <div class="result-image">
-                                        <img class="center-block" src="http://i.imgur.com/2B9Z62J.jpg"/>
-                                    </div>
-                                    <div class="result-footer">
-                                        <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                        <span class="user pull-right">2 miles away</span>
-                                    </div>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
