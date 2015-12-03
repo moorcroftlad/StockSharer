@@ -1,0 +1,29 @@
+.page-content-holder {
+    min-height: 600px;
+}
+
+.login-holder h1 {
+    margin-top: 0;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.login-holder h2 {
+    margin-top: 0px;
+    font-size: 20px;
+    color: grey;
+    border-bottom: 1px solid #BDBCBC;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.form-control {
+    padding: 20px 12px;
+    font-size: 20px;
+}
+
+.main-cta-btn {
+    margin-bottom: 0;
+}

@@ -16,6 +16,9 @@ namespace StockSharer.App_Start
 
             bundles.Add(new StyleBundle("~/bundles/styles/search").Include(
                 "~/assets/css/search/results.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/styles/user").Include(
+                "~/assets/css/user/login.css"));
         }
     }
 }
