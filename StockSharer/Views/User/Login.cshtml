@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model StockSharer.Controllers.SearchResultsViewModel
+@model StockSharer.Controllers.LoginViewModel
 <div class="page-content-holder">
     <div class="container">
         <div class="row">
@@ -8,8 +8,16 @@
                     <h1 class="text-center">Sign in to StockSharer</h1>
                     <h2 class="text-center">Enter your email and password</h2>
                     <form method="POST">
+                        @if (Model.LoginError)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                Please enter a valid email address and password
+                            </div>
+                        }
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" class="form-control" placeholder="Email" value="@Model.Email">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Password">
