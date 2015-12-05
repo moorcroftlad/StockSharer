@@ -7,7 +7,7 @@
                 <div class="page-content login-holder">
                     <h1 class="text-center">Sign in to StockSharer</h1>
                     <h2 class="text-center">Enter your email and password</h2>
-                    <form method="POST">
+                    <form method="POST" action="/user/login?ReturnUrl=@Model.ReturnUrl">
                         @if (Model.LoginError)
                         {
                             <div class="alert alert-danger" role="alert">
@@ -17,10 +17,10 @@
                             </div>
                         }
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email" value="@Model.Email">
+                            <input type="email" class="form-control" name="Email" placeholder="Email" value="@Model.Email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" name="Password" placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-default btn-block main-cta-btn main-cta-btn-primary">Login</button>
                     </form>
