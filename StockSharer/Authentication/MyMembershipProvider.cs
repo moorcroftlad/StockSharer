@@ -1,9 +1,12 @@
 ﻿using System.Web.Security;
+using StockSharer.Data;
 
 namespace StockSharer.Authentication
 {
     public class MyMembershipProvider : MembershipProvider
     {
+        private readonly UserRepository _userRepository = new UserRepository();
+
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
             throw new System.NotImplementedException();
@@ -36,7 +39,8 @@ namespace StockSharer.Authentication
 
         public override bool ValidateUser(string username, string password)
         {
-            return true;
+            var passwordHash = _userRepository.RetrievePasswordHash(username);
+            return passwordHash != null && PasswordHash.ValidatePassword(password, passwordHash);
         }
 
         public override bool UnlockUser(string userName)
