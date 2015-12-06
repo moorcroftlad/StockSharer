@@ -7,7 +7,7 @@
                 <div class="page-content login-holder">
                     <h1 class="text-center">Register an account</h1>
                     <h2 class="text-center">Simply enter your email address and password</h2>
-                    <form method="POST" action="/user/register">
+                    <form method="POST" action="/user/register" data-toggle="validator">
                         @if (Model.LoginError)
                         {
                             <div class="alert alert-danger" role="alert">
@@ -17,13 +17,16 @@
                             </div>
                         }
                         <div class="form-group">
-                            <input type="email" class="form-control" name="Email" placeholder="Email" value="@Model.Email">
+                            <input type="email" class="form-control" name="Email" placeholder="Email" value="@Model.Email" required data-error="Please enter a valid email">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="Password" placeholder="Password">
+                            <input type="password" class="form-control" name="Password" placeholder="Password" required data-error="Please enter a valid password">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm password">
+                            <input type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm password" required data-error="Please enter a valid password">
+                            <div class="help-block with-errors"></div>
                         </div>
                         <button type="submit" class="btn btn-default btn-block main-cta-btn main-cta-btn-primary">Register</button>
                     </form>

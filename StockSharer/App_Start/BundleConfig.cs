@@ -8,7 +8,8 @@ namespace StockSharer.App_Start
         {
             bundles.Add(new ScriptBundle("~/bundles/scripts/global").Include(
                 "~/assets/js/lib/jquery-1.11.3.min.js",
-                "~/assets/js/lib/bootstrap.min.js"));
+                "~/assets/js/lib/bootstrap.min.js",
+                "~/assets/js/lib/validator.js"));
 
             bundles.Add(new StyleBundle("~/bundles/styles/global").Include(
                 "~/assets/css/lib/bootstrap.min.css",
