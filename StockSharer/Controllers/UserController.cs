@@ -51,6 +51,7 @@ namespace StockSharer.Controllers
             var userId = _userRepository.CreateUser(registerViewModel.Email, PasswordHash.CreateHash(registerViewModel.Password));
             if (userId > 0 )
             {
+                FormsAuthentication.SetAuthCookie(registerViewModel.Email, false);
                 return RedirectToAction("Index", "Home");
             }
             registerViewModel.Error = "An account with your email address already exists";
