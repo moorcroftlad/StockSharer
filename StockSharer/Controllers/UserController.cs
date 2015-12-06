@@ -21,6 +21,12 @@ namespace StockSharer.Controllers
         {
             if (ValidateUser(loginViewModel.Email, loginViewModel.Password))
             {
+                FormsAuthentication.SetAuthCookie(loginViewModel.Email, false);
+                if (!string.IsNullOrEmpty(loginViewModel.ReturnUrl) && Url.IsLocalUrl(loginViewModel.ReturnUrl) && loginViewModel.ReturnUrl.StartsWith("/")
+                    && !loginViewModel.ReturnUrl.StartsWith("//") && !loginViewModel.ReturnUrl.StartsWith("/\\"))
+                {
+                    return Redirect(loginViewModel.ReturnUrl);
+                }
                 return RedirectToAction("Index", "Home");
             }
             loginViewModel.LoginError = true;
