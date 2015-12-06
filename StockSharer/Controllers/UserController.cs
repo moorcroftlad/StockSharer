@@ -37,14 +37,18 @@ namespace StockSharer.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel registerViewModel)
         {
+            if (registerViewModel.Password != registerViewModel.ConfirmPassword)
+            {
+                registerViewModel.Error = "Passwords must match";
+                return View(registerViewModel);
+            }
             var userId = _userRepository.CreateUser(registerViewModel.Email, PasswordHash.CreateHash(registerViewModel.Password));
-            if (userId > 0)
+            if (userId > 0 )
             {
                 return RedirectToAction("Index", "Home");
             }
-            registerViewModel.LoginError = true;
-            TempData["RegisterViewModel"] = registerViewModel;
-            return Register();
+            registerViewModel.Error = "An account with your email address already exists";
+            return View(registerViewModel);
         }
 
         private bool ValidateUser(string email, string password)
