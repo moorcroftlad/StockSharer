@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model StockSharer.Controllers.SearchResultsViewModel
+@model StockSharer.ViewModels.SearchResultsViewModel
 @{
     ViewBag.Title = "Search results";
 }
@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-sm-8 col-md-9">
                     <div class="search-results">
-                        <h1>Games found near M4 1PE</h1>
+                        <h1>Games found near @Model.PostCode</h1>
                         <div class="row">
                             @foreach (var searchResult in Model.SearchResults)
                             {

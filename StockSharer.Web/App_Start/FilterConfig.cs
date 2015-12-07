@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace StockSharer.App_Start
+namespace StockSharer.Web.App_Start
 {
     public class FilterConfig
     {

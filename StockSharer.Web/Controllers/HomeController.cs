@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace StockSharer.Controllers
+namespace StockSharer.Web.Controllers
 {
     public class HomeController : Controller
     {

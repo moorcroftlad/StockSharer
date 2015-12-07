@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using Dapper;
 using MySql.Data.MySqlClient;
+using StockSharer.Web.Models;
+using StockSharer.Web.ViewModels;
 
-namespace StockSharer.Controllers
+namespace StockSharer.Web.Controllers
 {
     public class SearchController : Controller
     {
@@ -22,22 +23,11 @@ namespace StockSharer.Controllers
 
                 var searchResultsViewModel = new SearchResultsViewModel
                     {
-                        SearchResults = connection.Query<SearchResult>(sql).ToList()
+                        SearchResults = connection.Query<SearchResult>(sql).ToList(),
+                        PostCode = "M41PE"
                     };
                 return View(searchResultsViewModel);
             }
         }
-    }
-
-    public class SearchResult
-    {
-        public string GameName { get; set; }
-        public string Availability { get; set; }
-        public string ImageUrl { get; set; }
-    }
-
-    public class SearchResultsViewModel
-    {
-        public List<SearchResult> SearchResults { get; set; }
     }
 }

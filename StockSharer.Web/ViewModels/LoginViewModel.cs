@@ -1,4 +1,4 @@
-﻿namespace StockSharer.ViewModels
+﻿namespace StockSharer.Web.ViewModels
 {
     public class LoginViewModel
     {

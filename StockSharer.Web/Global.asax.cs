@@ -4,10 +4,10 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
-using StockSharer.App_Start;
 using System.Security.Principal;
+using StockSharer.Web.App_Start;
 
-namespace StockSharer
+namespace StockSharer.Web
 {
     public class MvcApplication : HttpApplication
     {

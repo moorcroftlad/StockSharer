@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace StockSharer.Authentication
+namespace StockSharer.Web.Authentication
 {
     public class PasswordHash
     {

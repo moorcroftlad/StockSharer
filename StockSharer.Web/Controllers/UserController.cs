@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
-using StockSharer.Authentication;
-using StockSharer.Data;
-using StockSharer.ViewModels;
+using StockSharer.Web.Authentication;
+using StockSharer.Web.Data;
+using StockSharer.Web.ViewModels;
 
-namespace StockSharer.Controllers
+namespace StockSharer.Web.Controllers
 {
     public class UserController : Controller
     {

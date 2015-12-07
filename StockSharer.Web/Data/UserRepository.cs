@@ -3,7 +3,7 @@ using System.Linq;
 using Dapper;
 using MySql.Data.MySqlClient;
 
-namespace StockSharer.Data
+namespace StockSharer.Web.Data
 {
     public class UserRepository
     {
