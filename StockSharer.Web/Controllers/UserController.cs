@@ -12,7 +12,10 @@ namespace StockSharer.Web.Controllers
 
         public ActionResult Login(string returnUrl = "")
         {
-            var loginViewModel = (TempData["LoginViewModel"] as LoginViewModel) ?? new LoginViewModel();
+            var loginViewModel = new LoginViewModel
+                {
+                    ReturnUrl = returnUrl
+                };
             return User.Identity.IsAuthenticated ? LogOut() : View(loginViewModel);
         }
 
@@ -30,14 +33,12 @@ namespace StockSharer.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
             loginViewModel.LoginError = true;
-            TempData["LoginViewModel"] = loginViewModel;
-            return Login();
+            return View(loginViewModel);
         }
 
         public ActionResult Register()
         {
-            var registerViewModel = (TempData["RegisterViewModel"] as RegisterViewModel) ?? new RegisterViewModel();
-            return View(registerViewModel);
+            return View(new RegisterViewModel());
         }
 
         [HttpPost]
