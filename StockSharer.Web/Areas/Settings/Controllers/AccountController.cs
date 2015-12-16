@@ -2,11 +2,11 @@
 
 namespace StockSharer.Web.Areas.Settings.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseSettingsController
     {
         public ActionResult Index()
         {
             return View();
         }
-	}
+    }
 }
