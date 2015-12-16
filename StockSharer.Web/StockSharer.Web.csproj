@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\settings\settings.css" />
     <Content Include="assets\css\global\style.css" />
     <Content Include="assets\css\lib\bootstrap.min.css" />
     <Content Include="assets\css\search\results.css" />
@@ -127,6 +128,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Settings\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Authentication\PasswordHash.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -159,6 +162,9 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Areas\Settings\Views\web.config" />
+    <Content Include="Areas\Settings\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\_ViewStart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -170,6 +176,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Settings\Models\" />
+    <Folder Include="Areas\Settings\Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,32 @@
+﻿@using System.Web.Optimization
+@model StockSharer.Web.ViewModels.SearchResultsViewModel
+@{
+    ViewBag.Title = "Account";
+}
+
+<div class="page-content-holder">
+    <div class="container">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="settings-sidebar">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation" class="active"><a href="#">Account</a></li>
+                            <li role="presentation"><a href="#">Your games</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="settings-main">
+                        <h1>Account</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/settings")
+}
