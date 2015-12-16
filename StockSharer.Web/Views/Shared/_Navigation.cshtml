@@ -11,11 +11,18 @@
             <a class="navbar-brand" href="/">Stock Sharer</a>
         </div>
         
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a href="/user/login">Log out</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/settings/account"><i class="fa fa-cog"></i> Account</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/user/login"><i class="fa fa-sign-out"></i> Log out</a></li>
+                        </ul>
+                    </li>
                 }
                 else
                 {
