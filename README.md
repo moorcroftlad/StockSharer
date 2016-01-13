@@ -1,3 +1,3 @@
 # StockSharer
 
-Share your games with your neighbours
+Share your games with your neighbours.
