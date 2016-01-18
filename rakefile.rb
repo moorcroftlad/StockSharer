@@ -13,5 +13,6 @@ build :compile_this do |b|
   b.file   = Paths.join 'StockSharer.Web', 'StockSharer.Web.csproj'
   b.target = ['Clean', 'Rebuild']
   b.prop 'Configuration', 'Release'
-  b.logging = 'detailed'
+  b.nologo
+  b.be_quiet
 end
