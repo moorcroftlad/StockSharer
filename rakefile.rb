@@ -15,4 +15,8 @@ build :compile_this do |b|
   b.prop 'Configuration', 'Release'
   b.nologo
   b.be_quiet
+  b.prop 'UseWPP_CopyWebApplication', 'true'
+  b.prop 'PipelineDependsOnBuild', 'false'
+  b.prop 'webprojectoutputdir', '../deploy/'
+  b.prop 'outdir', 'bin/'
 end
