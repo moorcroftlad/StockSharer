@@ -5,15 +5,6 @@ $connection_string = ENV['CONNECTION_STRING']
 
 task :default => [:restore, :compile_this, :transform_config]
 
-#http://www.nokogiri.org/tutorials/modifying_an_html_xml_document.html
-task :transform_config do
-  filename = "deploy/Web.config"
-  doc = File.open(filename) { |f| Nokogiri::XML(f) }
-  node = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
-  node['connectionString'] = $connection_string
-  File.write(filename, doc.to_xml)
-end
-
 #https://github.com/Albacore/albacore/wiki/nugets_restore
 nugets_restore :restore do |p|
   p.out       = 'packages'
@@ -31,4 +22,13 @@ build :compile_this do |b|
   b.prop 'PipelineDependsOnBuild', 'false'
   b.prop 'webprojectoutputdir', '../deploy/'
   b.prop 'outdir', 'bin/'
+end
+
+#http://www.nokogiri.org/tutorials/modifying_an_html_xml_document.html
+task :transform_config do
+  filename = "deploy/Web.config"
+  doc = File.open(filename) { |f| Nokogiri::XML(f) }
+  node = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
+  node['connectionString'] = $connection_string
+  File.write(filename, doc.to_xml)
 end
