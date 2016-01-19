@@ -1,6 +1,18 @@
 require 'albacore'
+require 'nokogiri'
 
-task :default => [:restore, :compile_this]
+$connection_string = ENV['CONNECTION_STRING']
+
+task :default => [:transform_config, :restore, :compile_this]
+
+#http://www.nokogiri.org/tutorials/modifying_an_html_xml_document.html
+task :transform_config do
+  filename = "deploy/Web.config"
+  doc = File.open(filename) { |f| Nokogiri::XML(f) }
+  node = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
+  node['connectionString'] = $connection_string
+  File.write(filename, doc.to_xml)
+end
 
 #https://github.com/Albacore/albacore/wiki/nugets_restore
 nugets_restore :restore do |p|
