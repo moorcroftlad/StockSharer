@@ -12,7 +12,6 @@ task :transform_config do
   node = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
   node['connectionString'] = $connection_string
   File.write(filename, doc.to_xml)
-  puts $connection_string
 end
 
 #https://github.com/Albacore/albacore/wiki/nugets_restore
