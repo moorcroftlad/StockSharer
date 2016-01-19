@@ -3,7 +3,7 @@ require 'nokogiri'
 
 $connection_string = ENV['CONNECTION_STRING']
 
-task :default => [:transform_config, :restore, :compile_this]
+task :default => [:restore, :compile_this, :transform_config]
 
 #http://www.nokogiri.org/tutorials/modifying_an_html_xml_document.html
 task :transform_config do
