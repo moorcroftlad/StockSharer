@@ -3,7 +3,7 @@ require 'nokogiri'
 
 $connection_string = ENV['CONNECTION_STRING']
 
-task :default => [:restore, :compile_this, :transform_config]
+task :default => [:restore, :compile_this, :transform_config, :deploy]
 
 #https://github.com/Albacore/albacore/wiki/nugets_restore
 nugets_restore :restore do |p|
@@ -31,4 +31,8 @@ task :transform_config do
   node = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
   node['connectionString'] = $connection_string
   File.write(filename, doc.to_xml)
+end
+
+task :deploy do
+  FileUtils.cp_r 'deploy/.', 'C:/inetpub/wwwroot'
 end
