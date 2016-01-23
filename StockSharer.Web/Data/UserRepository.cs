@@ -23,7 +23,7 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"SELECT PasswordHash FROM User WHERE Email = @Email;";
+                const string sql = @"SELECT PasswordHash FROM [User] WHERE Email = @Email;";
                 return connection.Query<string>(sql, new {Email = email}).FirstOrDefault();
             }
         }
@@ -37,7 +37,7 @@ namespace StockSharer.Web.Data
                     return 0;
                 }
 
-                const string sql = @"   INSERT INTO User (Email, PasswordHash)
+                const string sql = @"   INSERT INTO [User] (Email, PasswordHash)
                                         VALUES (@Email, @PasswordHash);
                                         SELECT LAST_INSERT_ID();";
                 return connection.Query<int>(sql, new { Email = email, PasswordHash = passwordHash }).FirstOrDefault();
@@ -48,7 +48,7 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"SELECT Count(*) FROM User WHERE Email = @Email;";
+                const string sql = @"SELECT Count(*) FROM [User] WHERE Email = @Email;";
                 return connection.Query<int>(sql, new { Email = email }).FirstOrDefault() > 0;
             }
         }

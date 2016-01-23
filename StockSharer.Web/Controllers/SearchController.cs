@@ -18,8 +18,8 @@ namespace StockSharer.Web.Controllers
                                         FROM 	GameAvailability ga
 		                                        INNER JOIN Game g ON g.GameId = ga.GameId
                                                 INNER JOIN Availability a ON a.AvailabilityId = ga.AvailabilityId
-                                                INNER JOIN User u ON u.UserId = ga.UserId
-                                                INNER JOIN Address ad ON ad.AddressId = u.AddressId;";
+                                                INNER JOIN [User] u ON u.UserId = ga.UserId
+                                                INNER JOIN Address ad ON ad.AddressId = u.AddressId";
 
                 var searchResultsViewModel = new SearchResultsViewModel
                     {
