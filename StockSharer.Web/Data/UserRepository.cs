@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using MySql.Data.MySqlClient;
 
 namespace StockSharer.Web.Data
 {
@@ -21,7 +21,7 @@ namespace StockSharer.Web.Data
 
         public string RetrievePasswordHash(string email)
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 const string sql = @"SELECT PasswordHash FROM User WHERE Email = @Email;";
                 return connection.Query<string>(sql, new {Email = email}).FirstOrDefault();
@@ -30,7 +30,7 @@ namespace StockSharer.Web.Data
 
         public int CreateUser(string email, string passwordHash)
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 if (UserExists(email))
                 {
@@ -46,7 +46,7 @@ namespace StockSharer.Web.Data
 
         private bool UserExists(string email)
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 const string sql = @"SELECT Count(*) FROM User WHERE Email = @Email;";
                 return connection.Query<int>(sql, new { Email = email }).FirstOrDefault() > 0;

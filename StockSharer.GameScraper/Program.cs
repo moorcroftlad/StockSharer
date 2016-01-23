@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using HtmlAgilityPack;
-using MySql.Data.MySqlClient;
 
 namespace StockSharer.GameScraper
 {
@@ -25,7 +25,7 @@ namespace StockSharer.GameScraper
 
         private static void Insert(List<Game> games)
         {
-            using (var connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
                 foreach (var game in games)
                 {
