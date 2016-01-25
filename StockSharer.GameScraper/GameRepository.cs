@@ -19,10 +19,10 @@ namespace StockSharer.GameScraper
                                                target.PlatformId = source.PlatformId
                                         when matched then
                                             update
-                                            set Name = @Name
+                                            set Name = @Name, ImageUrl = @ImageUrl
                                         when not matched then
-                                            insert (PlatformId, Name)
-                                            values (@PlatformId, @Name);";
+                                            insert (PlatformId, Name, ImageUrl)
+                                            values (@PlatformId, @Name, @ImageUrl);";
                 connection.Execute(sql, games);
             }
         }
