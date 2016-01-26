@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using StockSharer.Web.Models;
 
 namespace StockSharer.Web.Data
 {
@@ -17,6 +18,15 @@ namespace StockSharer.Web.Data
         public UserRepository(string connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public User RetrieveUser(string email)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"SELECT UserId, Forename, Surname, Email FROM [User] WHERE Email = @Email;";
+                return connection.Query<User>(sql, new { Email = email }).FirstOrDefault();
+            }
         }
 
         public string RetrievePasswordHash(string email)
