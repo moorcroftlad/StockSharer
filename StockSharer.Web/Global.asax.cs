@@ -26,15 +26,6 @@ namespace StockSharer.Web
 
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {
-            //if (Request.Cookies[FormsAuthentication.FormsCookieName] == null) return;
-            //var encryptedTicket = Request.Cookies[FormsAuthentication.FormsCookieName].Value;
-            //var formsAuthenticationTicket = FormsAuthentication.Decrypt(encryptedTicket);
-            //if (formsAuthenticationTicket == null) return;
-            //var username = formsAuthenticationTicket.Name;
-            //HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(username, "Forms"), null);
-
-
-            
             var authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
             if (authCookie == null) return;
             var authTicket = FormsAuthentication.Decrypt(authCookie.Value);
