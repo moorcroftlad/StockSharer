@@ -20,6 +20,7 @@ namespace StockSharer.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
             if (ValidateUser(loginViewModel.Email, loginViewModel.Password))
@@ -42,6 +43,7 @@ namespace StockSharer.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel registerViewModel)
         {
             if (registerViewModel.Password != registerViewModel.ConfirmPassword)
@@ -49,7 +51,7 @@ namespace StockSharer.Web.Controllers
                 registerViewModel.Error = "Passwords must match";
                 return View(registerViewModel);
             }
-            var userId = _userRepository.CreateUser(registerViewModel.Email, PasswordHash.CreateHash(registerViewModel.Password));
+            var userId = _userRepository.CreateUser(registerViewModel.Email, registerViewModel.Forename, registerViewModel.Surname, PasswordHash.CreateHash(registerViewModel.Password));
             if (userId > 0 )
             {
                 FormsAuthentication.SetAuthCookie(registerViewModel.Email, false);

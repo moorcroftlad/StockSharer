@@ -28,7 +28,7 @@ namespace StockSharer.Web.Data
             }
         }
 
-        public int CreateUser(string email, string passwordHash)
+        public int CreateUser(string email, string forename, string surname, string passwordHash)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -37,10 +37,10 @@ namespace StockSharer.Web.Data
                     return 0;
                 }
 
-                const string sql = @"   INSERT INTO [User] (Email, PasswordHash)
-                                        VALUES (@Email, @PasswordHash);
-                                        SELECT LAST_INSERT_ID();";
-                return connection.Query<int>(sql, new { Email = email, PasswordHash = passwordHash }).FirstOrDefault();
+                const string sql = @"   INSERT INTO [User] (Email, Forename, Surname, PasswordHash)
+                                        VALUES (@Email, @Forename, @Surname, @PasswordHash);
+                                        SELECT CAST(SCOPE_IDENTITY() as int)";
+                return connection.Query<int>(sql, new { Email = email, Forename = forename, Surname = surname, PasswordHash = passwordHash }).FirstOrDefault();
             }
         }
 

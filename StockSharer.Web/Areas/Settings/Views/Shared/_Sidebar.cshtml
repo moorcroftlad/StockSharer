@@ -1,0 +1,9 @@
+﻿@model StockSharer.Web.Areas.Settings.ViewModels.AccountSidebarViewModel
+<div class="settings-sidebar">
+    <h2>Andrew Moorcroft</h2>
+    <hr/>
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" @(Model.Page == "Account" ? "class=active" : "")><a href="/settings/account">Account</a></li>
+        <li role="presentation" @(Model.Page == "Games" ? "class=active" : "")><a href="/settings/games">Your games</a></li>
+    </ul>
+</div>

@@ -1,10 +1,15 @@
-.settings-sidebar {
-    
-}
-
-.settings-main {
-}
-
-.settings-main h1 {
+h1 {
     margin-top: 0;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+hr {
+    margin-top: 10px;
+    border-color: #E2E2E2;
 }
