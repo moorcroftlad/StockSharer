@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -14,7 +16,7 @@ namespace StockSharer.Web.Controllers
     {
         private readonly UserRepository _userRepository = new UserRepository();
         private readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
-        private static readonly RedisCache _redisCache = new RedisCache();
+        private readonly RedisCache _redisCache = new RedisCache();
 
         public ActionResult Login(string returnUrl = "")
         {
@@ -70,22 +72,35 @@ namespace StockSharer.Web.Controllers
                 registerViewModel.Error = "Passwords must match";
                 return View(registerViewModel);
             }
-            //var userId = _userRepository.CreateUser(registerViewModel.Email, registerViewModel.Forename, registerViewModel.Surname, PasswordHash.CreateHash(registerViewModel.Password));
-            var userId = 7;
+            var email = registerViewModel.Email.ToLower();
+            var userId = _userRepository.CreateUser(email, registerViewModel.Forename, registerViewModel.Surname, PasswordHash.CreateHash(registerViewModel.Password));
             if (userId > 0)
             {
                 var temporaryAuthGuid = CreateTemporaryAuthGuid(userId);
-                TempData["Test"] = temporaryAuthGuid;
+                SendAuthEmail(temporaryAuthGuid, email);
                 return RedirectToAction("RegistrationSuccessful", "User");
             }
             registerViewModel.Error = "An account with your email address already exists";
             return View(registerViewModel);
         }
 
-        private static Guid CreateTemporaryAuthGuid(int userId)
+        private static void SendAuthEmail(Guid temporaryAuthGuid, string email)
+        {
+            using (var smtpClient = new SmtpClient())
+            {
+                const string subject = "Welcome to StockSharer";
+                var body = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid);
+                using (var mailMessage = new MailMessage("noreply@stocksharer.com", email, subject, body))
+                {
+                    smtpClient.Send(mailMessage);
+                }
+            }
+        }
+
+        private Guid CreateTemporaryAuthGuid(int userId)
         {
             var authGuid = Guid.NewGuid();
-            _redisCache.Set(authGuid.ToString(), userId.ToString(), new TimeSpan(1, 0, 0, 0));
+            _redisCache.Set(authGuid.ToString(), userId.ToString(CultureInfo.InvariantCulture), new TimeSpan(1, 0, 0, 0));
             return authGuid;
         }
 
@@ -97,7 +112,6 @@ namespace StockSharer.Web.Controllers
 
         public ActionResult RegistrationSuccessful()
         {
-            ViewBag.Test = TempData["Test"];
             return View();
         }
 

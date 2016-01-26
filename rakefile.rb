@@ -2,6 +2,8 @@ require 'albacore'
 require 'nokogiri'
 
 $connection_string = ENV['CONNECTION_STRING']
+$smtp_username = ENV['SMTP_USERNAME']
+$smtp_password = ENV['SMTP_PASSWORD']
 
 task :default => [:restore, :compile_this, :transform_config, :deploy]
 
@@ -28,8 +30,13 @@ end
 task :transform_config do
   filename = "deploy/Web.config"
   doc = File.open(filename) { |f| Nokogiri::XML(f) }
-  node = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
-  node['connectionString'] = $connection_string
+  connectionStringNode = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
+  connectionStringNode['connectionString'] = $connection_string
+  
+  networkNode = doc.xpath("//smtp/network[@name='StockSharerDatabase']")[0]
+  networkNode['userName'] = $smtp_username
+  networkNode['password'] = $smtp_password
+  
   File.write(filename, doc.to_xml)
 end
 
