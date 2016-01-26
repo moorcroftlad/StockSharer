@@ -33,7 +33,7 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"SELECT PasswordHash FROM [User] WHERE Email = @Email;";
+                const string sql = @"SELECT PasswordHash FROM [User] WHERE Email = @Email AND Active = 1;";
                 return connection.Query<string>(sql, new {Email = email}).FirstOrDefault();
             }
         }

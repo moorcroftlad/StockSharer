@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using StockSharer.Web.Authentication;
+using StockSharer.Web.Cache;
 using StockSharer.Web.Data;
 using StockSharer.Web.ViewModels;
 
@@ -13,6 +14,7 @@ namespace StockSharer.Web.Controllers
     {
         private readonly UserRepository _userRepository = new UserRepository();
         private readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
+        private static readonly RedisCache _redisCache = new RedisCache();
 
         public ActionResult Login(string returnUrl = "")
         {
@@ -68,20 +70,35 @@ namespace StockSharer.Web.Controllers
                 registerViewModel.Error = "Passwords must match";
                 return View(registerViewModel);
             }
-            var userId = _userRepository.CreateUser(registerViewModel.Email, registerViewModel.Forename, registerViewModel.Surname, PasswordHash.CreateHash(registerViewModel.Password));
-            if (userId > 0 )
+            //var userId = _userRepository.CreateUser(registerViewModel.Email, registerViewModel.Forename, registerViewModel.Surname, PasswordHash.CreateHash(registerViewModel.Password));
+            var userId = 7;
+            if (userId > 0)
             {
-                FormsAuthentication.SetAuthCookie(registerViewModel.Email, false);
-                return RedirectToAction("Index", "Home");
+                var temporaryAuthGuid = CreateTemporaryAuthGuid(userId);
+                TempData["Test"] = temporaryAuthGuid;
+                return RedirectToAction("RegistrationSuccessful", "User");
             }
             registerViewModel.Error = "An account with your email address already exists";
             return View(registerViewModel);
+        }
+
+        private static Guid CreateTemporaryAuthGuid(int userId)
+        {
+            var authGuid = Guid.NewGuid();
+            _redisCache.Set(authGuid.ToString(), userId.ToString(), new TimeSpan(1, 0, 0, 0));
+            return authGuid;
         }
 
         private bool ValidateUser(string email, string password)
         {
             var passwordHash = _userRepository.RetrievePasswordHash(email);
             return passwordHash != null && PasswordHash.ValidatePassword(password, passwordHash);
+        }
+
+        public ActionResult RegistrationSuccessful()
+        {
+            ViewBag.Test = TempData["Test"];
+            return View();
         }
 
         [HttpPost]
