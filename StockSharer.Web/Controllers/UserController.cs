@@ -90,7 +90,7 @@ namespace StockSharer.Web.Controllers
             {
                 const string subject = "Welcome to StockSharer";
                 var body = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid);
-                using (var mailMessage = new MailMessage("amoorcroft@outlook.com", email, subject, body))
+                using (var mailMessage = new MailMessage("noreply@stocksharer.com", email, subject, body))
                 {
                     smtpClient.Send(mailMessage);
                 }
