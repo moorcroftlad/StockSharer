@@ -127,7 +127,9 @@
     <Compile Include="Areas\Settings\Attributes\AuthorizeUserAttribute.cs" />
     <Compile Include="Areas\Settings\Controllers\AccountController.cs" />
     <Compile Include="Areas\Settings\Controllers\BaseSettingsController.cs" />
+    <Compile Include="Areas\Settings\Controllers\GamesController.cs" />
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
+    <Compile Include="Areas\Settings\ViewModels\AccountSidebarViewModel.cs" />
     <Compile Include="Authentication\PasswordHash.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -163,6 +165,8 @@
     <Content Include="Areas\Settings\Views\web.config" />
     <Content Include="Areas\Settings\Views\Account\Index.cshtml" />
     <Content Include="Areas\Settings\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Settings\Views\Games\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Shared\_Sidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -175,7 +179,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Settings\Models\" />
-    <Folder Include="Areas\Settings\Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
