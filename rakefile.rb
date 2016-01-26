@@ -33,7 +33,7 @@ task :transform_config do
   connectionStringNode = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
   connectionStringNode['connectionString'] = $connection_string
   
-  networkNode = doc.xpath("//smtp/network[@name='StockSharerDatabase']")[0]
+  networkNode = doc.xpath("//smtp/network")[0]
   networkNode['userName'] = $smtp_username
   networkNode['password'] = $smtp_password
   
