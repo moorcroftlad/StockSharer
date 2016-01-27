@@ -124,13 +124,10 @@ namespace StockSharer.Web.Controllers
         public ActionResult ActivateAccount(string email)
         {
             var user = _userRepository.RetrieveUser(email);
-            if (user.Active)
+            if (user != null && !user.Active)
             {
-                TempData["Message"] = "It appears as though you have already previously activated your account, if you have forgotten your password please enter your email below";
-                return RedirectToAction("ForgotPassword", "User");
+                SendAuthEmail(user.UserId, user.Email);
             }
-
-            SendAuthEmail(user.UserId, user.Email);
             return RedirectToAction("RegistrationSuccessful", "User");
         }
     }
