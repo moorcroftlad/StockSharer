@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -90,16 +89,6 @@ namespace StockSharer.Web.Controllers
 
         private static void SendAuthEmail(Guid temporaryAuthGuid, string email)
         {
-            //using (var smtpClient = new SmtpClient())
-            //{
-            //    const string subject = "Welcome to StockSharer";
-            //    var body = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid);
-            //    using (var mailMessage = new MailMessage("noreply@stocksharer.com", email, subject, body))
-            //    {
-            //        smtpClient.Send(mailMessage);
-            //    }
-            //}
-
             using (var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.EUWest1))
             {
                 var content = new Content("Welcome to StockSharer");
@@ -108,7 +97,7 @@ namespace StockSharer.Web.Controllers
                 var message = new Message(content, body);
                 var destination = new Destination(new List<string> {email});
                 var sendEmailRequest = new SendEmailRequest("noreply@stocksharer.com", destination, message);
-                client.SendEmailAsync(sendEmailRequest);
+                client.SendEmail(sendEmailRequest);
             }
         }
 
