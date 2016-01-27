@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using StockSharer.Web.Data;
+using StockSharer.Web.Models;
 
 namespace StockSharer.Web.Controllers
 {
@@ -14,6 +15,17 @@ namespace StockSharer.Web.Controllers
         public void SetFormsAuthenticationCookie(HttpResponseBase response, string email)
         {
             var user = _userRepository.RetrieveUser(email);
+            SetCookie(response, user);
+        }
+
+        public void SetFormsAuthenticationCookie(HttpResponseBase response, int userId)
+        {
+            var user = _userRepository.RetrieveUser(userId);
+            SetCookie(response, user);
+        }
+
+        private void SetCookie(HttpResponseBase response, User user)
+        {
             FormsAuthentication.SetAuthCookie(user.Email, false);
             var userData = _serializer.Serialize(user);
             var ticket = new FormsAuthenticationTicket(1, user.Email, DateTime.Now, DateTime.Now.AddDays(30), true, userData, FormsAuthentication.FormsCookiePath);

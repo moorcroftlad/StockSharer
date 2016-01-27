@@ -75,7 +75,9 @@ namespace StockSharer.Web.Controllers
         private void SendAuthEmail(int userId, string email)
         {
             var temporaryAuthGuid = CreateTemporaryAuthGuid(userId);
-            _emailSender.SendEmail(email, "Welcome to StockSharer", string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link: http://www.stocksharer.com/user/authenticate/{0}", temporaryAuthGuid), string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid));
+            var bodyText = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link: http://www.stocksharer.com/user/activate/{0}", temporaryAuthGuid);
+            var bodyHtml = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/activate/{0}\">http://www.stocksharer.com/user/activate/{0}</a>", temporaryAuthGuid);
+            _emailSender.SendEmail(email, "Welcome to StockSharer", bodyText, bodyHtml);
         }
 
         private Guid CreateTemporaryAuthGuid(int userId)
@@ -102,6 +104,19 @@ namespace StockSharer.Web.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "User");
+        }
+
+        public ActionResult Activate(Guid id)
+        {
+            int userId;
+            int.TryParse(_redisCache.Get(id.ToString()), out userId);
+            if (userId > 0)
+            {
+                _userRepository.ActivateUser(userId);
+                _authenticationHelper.SetFormsAuthenticationCookie(Response, userId);
+                return new RedirectResult("/");
+            }
+            return View();
         }
     }
 }
