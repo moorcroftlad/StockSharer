@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using System.Web.Security;
-using Amazon.SimpleEmail;
-using Amazon;
-using Amazon.SimpleEmail.Model;
 using StockSharer.Web.Authentication;
 using StockSharer.Web.Cache;
 using StockSharer.Web.Data;
+using StockSharer.Web.Email;
 using StockSharer.Web.ViewModels;
 
 namespace StockSharer.Web.Controllers
@@ -18,8 +13,9 @@ namespace StockSharer.Web.Controllers
     public class UserController : Controller
     {
         private readonly UserRepository _userRepository = new UserRepository();
-        private readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
         private readonly RedisCache _redisCache = new RedisCache();
+        private readonly ISendEmail _emailSender = new SesEmailSender();
+        private readonly AuthenticationHelper _authenticationHelper = new AuthenticationHelper();
 
         public ActionResult Login(string returnUrl = "")
         {
@@ -36,7 +32,7 @@ namespace StockSharer.Web.Controllers
         {
             if (ValidateUser(loginViewModel.Email, loginViewModel.Password))
             {
-                SetFormsAuthenticationCookie(loginViewModel.Email);
+                _authenticationHelper.SetFormsAuthenticationCookie(Response, loginViewModel.Email);
                 if (!string.IsNullOrEmpty(loginViewModel.ReturnUrl) 
                     && Url.IsLocalUrl(loginViewModel.ReturnUrl) 
                     && loginViewModel.ReturnUrl.StartsWith("/")
@@ -49,16 +45,6 @@ namespace StockSharer.Web.Controllers
             }
             loginViewModel.LoginError = true;
             return View(loginViewModel);
-        }
-
-        private void SetFormsAuthenticationCookie(string email)
-        {
-            var user = _userRepository.RetrieveUser(email);
-            FormsAuthentication.SetAuthCookie(user.Email, false);
-            var userData = _serializer.Serialize(user);
-            var ticket = new FormsAuthenticationTicket(1, user.Email, DateTime.Now, DateTime.Now.AddDays(30), true, userData, FormsAuthentication.FormsCookiePath);
-            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
         }
 
         public ActionResult Register()
@@ -79,27 +65,17 @@ namespace StockSharer.Web.Controllers
             var userId = _userRepository.CreateUser(email, registerViewModel.Forename, registerViewModel.Surname, PasswordHash.CreateHash(registerViewModel.Password));
             if (userId > 0)
             {
-                var temporaryAuthGuid = CreateTemporaryAuthGuid(userId);
-                SendAuthEmail(temporaryAuthGuid, email);
+                SendAuthEmail(userId, email);
                 return RedirectToAction("RegistrationSuccessful", "User");
             }
             registerViewModel.Error = "An account with your email address already exists";
             return View(registerViewModel);
         }
 
-        private static void SendAuthEmail(Guid temporaryAuthGuid, string email)
+        private void SendAuthEmail(int userId, string email)
         {
-            using (var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.EUWest1))
-            {
-                var content = new Content("Welcome to StockSharer");
-                var bodyText = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link: http://www.stocksharer.com/user/authenticate/{0}", temporaryAuthGuid);
-                var bodyHtml = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid);
-                var body = new Body{Html = new Content(bodyHtml), Text = new Content(bodyText)};
-                var message = new Message(content, body);
-                var destination = new Destination(new List<string> {email});
-                var sendEmailRequest = new SendEmailRequest("noreply@stocksharer.com", destination, message);
-                client.SendEmail(sendEmailRequest);
-            }
+            var temporaryAuthGuid = CreateTemporaryAuthGuid(userId);
+            _emailSender.SendEmail(email, "Welcome to StockSharer", string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link: http://www.stocksharer.com/user/authenticate/{0}", temporaryAuthGuid), string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid));
         }
 
         private Guid CreateTemporaryAuthGuid(int userId)

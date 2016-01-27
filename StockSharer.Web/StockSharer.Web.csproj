@@ -144,10 +144,13 @@
     <Compile Include="Authentication\UserPrincipal.cs" />
     <Compile Include="Authentication\PasswordHash.cs" />
     <Compile Include="Cache\RedisCache.cs" />
+    <Compile Include="Controllers\AuthenticationHelper.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\UserRepository.cs" />
+    <Compile Include="Email\ISendEmail.cs" />
+    <Compile Include="Email\SesEmailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
