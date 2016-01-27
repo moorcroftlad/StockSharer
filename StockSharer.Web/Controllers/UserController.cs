@@ -92,8 +92,9 @@ namespace StockSharer.Web.Controllers
             using (var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.EUWest1))
             {
                 var content = new Content("Welcome to StockSharer");
-                var bodyText = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid);
-                var body = new Body(new Content(bodyText));
+                var bodyText = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link: http://www.stocksharer.com/user/authenticate/{0}", temporaryAuthGuid);
+                var bodyHtml = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/authenticate/{0}\">http://www.stocksharer.com/user/authenticate/{0}</a>", temporaryAuthGuid);
+                var body = new Body{Html = new Content(bodyHtml), Text = new Content(bodyText)};
                 var message = new Message(content, body);
                 var destination = new Destination(new List<string> {email});
                 var sendEmailRequest = new SendEmailRequest("noreply@stocksharer.com", destination, message);
