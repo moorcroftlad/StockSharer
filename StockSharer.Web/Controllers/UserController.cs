@@ -120,7 +120,8 @@ namespace StockSharer.Web.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public ActionResult Activate(string email)
+        [HttpPost]
+        public ActionResult ActivateAccount(string email)
         {
             var user = _userRepository.RetrieveUser(email);
             if (user.Active)

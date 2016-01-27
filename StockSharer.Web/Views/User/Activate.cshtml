@@ -10,7 +10,7 @@
                 <div class="page-content login-holder">
                     <h1 class="text-center">Register an account</h1>
                     <h2 class="text-center">Simply enter your name, email address and password</h2>
-                    <form method="POST" data-toggle="validator">
+                    <form method="POST" action="/user/ActivateAccount" data-toggle="validator">
                         @Html.AntiForgeryToken()
                         <div class="alert alert-warning" role="alert">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
