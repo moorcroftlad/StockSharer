@@ -114,9 +114,23 @@ namespace StockSharer.Web.Controllers
             {
                 _userRepository.ActivateUser(userId);
                 _authenticationHelper.SetFormsAuthenticationCookie(Response, userId);
-                return new RedirectResult("/");
+                return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult Activate(string email)
+        {
+            var user = _userRepository.RetrieveUser(email);
+            if (user.Active)
+            {
+                TempData["Message"] = "It appears as though you have already previously activated your account, if you have forgotten your password please enter your email below";
+                return RedirectToAction("ForgotPassword", "User");
+            }
+
+            SendAuthEmail(user.UserId, user.Email);
+            return RedirectToAction("RegistrationSuccessful", "User");
         }
     }
 }

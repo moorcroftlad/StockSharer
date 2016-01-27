@@ -6,6 +6,7 @@
         public string Forename { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
+        public bool Active { get; set; }
 
         public string FullName
         {

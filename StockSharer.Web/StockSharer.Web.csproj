@@ -185,6 +185,7 @@
     <Content Include="Areas\Settings\Views\Games\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\User\RegistrationSuccessful.cshtml" />
+    <Content Include="Views\User\Activate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
