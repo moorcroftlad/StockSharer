@@ -2,8 +2,8 @@ require 'albacore'
 require 'nokogiri'
 
 $connection_string = ENV['CONNECTION_STRING']
-$smtp_username = ENV['SMTP_USERNAME']
-$smtp_password = ENV['SMTP_PASSWORD']
+$aws_access_key = ENV['AWS_ACCESS_KEY']
+$aws_secret_key = ENV['AWS_SECRET_KEY']
 
 task :default => [:restore, :compile_this, :transform_config, :deploy]
 
@@ -33,9 +33,11 @@ task :transform_config do
   connectionStringNode = doc.xpath("//connectionStrings/add[@name='StockSharerDatabase']")[0]
   connectionStringNode['connectionString'] = $connection_string
   
-  networkNode = doc.xpath("//smtp/network")[0]
-  networkNode['userName'] = $smtp_username
-  networkNode['password'] = $smtp_password
+  awsAccessKeyNode = doc.xpath("//appSettings/add[@key='AWSAccessKey']")[0]
+  awsAccessKeyNode['value'] = $aws_access_key
+  
+  awsSecretKeyNode = doc.xpath("//appSettings/add[@key='AWSSecretKey']")[0]
+  awsSecretKeyNode['value'] = $aws_secret_key
   
   File.write(filename, doc.to_xml)
 end
