@@ -198,7 +198,7 @@ namespace StockSharer.Web.Controllers
         private void SendPasswordResetEmail(string email, Guid temporaryAuthGuid)
         {
             var bodyText = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions: http://www.stocksharer.com/user/changepassword/{0}", temporaryAuthGuid);
-            var bodyHtml = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions:<br /><br /><a href=\"http://www.stocksharer.com/user/activate/{0}\">http://www.stocksharer.com/user/changepassword/{0}</a>", temporaryAuthGuid);
+            var bodyHtml = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions:<br /><br /><a href=\"http://www.stocksharer.com/user/changepassword/{0}\">http://www.stocksharer.com/user/changepassword/{0}</a>", temporaryAuthGuid);
             _emailSender.SendEmail(email, "StockSharer password reset", bodyText, bodyHtml);
         }
     }
