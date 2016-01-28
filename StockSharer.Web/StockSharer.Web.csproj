@@ -186,6 +186,7 @@
     <Content Include="Areas\Settings\Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\User\RegistrationSuccessful.cshtml" />
     <Content Include="Views\User\Activate.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

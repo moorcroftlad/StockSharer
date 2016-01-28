@@ -65,32 +65,11 @@ namespace StockSharer.Web.Controllers
             var userId = _userRepository.CreateUser(email, registerViewModel.Forename, registerViewModel.Surname, PasswordHash.CreateHash(registerViewModel.Password));
             if (userId > 0)
             {
-                SendAuthEmail(userId, email);
+                SendActivationEmail(email, CreateTemporaryAuthGuid(userId));
                 return RedirectToAction("RegistrationSuccessful", "User");
             }
             registerViewModel.Error = "An account with your email address already exists";
             return View(registerViewModel);
-        }
-
-        private void SendAuthEmail(int userId, string email)
-        {
-            var temporaryAuthGuid = CreateTemporaryAuthGuid(userId);
-            var bodyText = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link: http://www.stocksharer.com/user/activate/{0}", temporaryAuthGuid);
-            var bodyHtml = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/activate/{0}\">http://www.stocksharer.com/user/activate/{0}</a>", temporaryAuthGuid);
-            _emailSender.SendEmail(email, "Welcome to StockSharer", bodyText, bodyHtml);
-        }
-
-        private Guid CreateTemporaryAuthGuid(int userId)
-        {
-            var authGuid = Guid.NewGuid();
-            _redisCache.Set(authGuid.ToString(), userId.ToString(CultureInfo.InvariantCulture), new TimeSpan(1, 0, 0, 0));
-            return authGuid;
-        }
-
-        private bool ValidateUser(string email, string password)
-        {
-            var passwordHash = _userRepository.RetrievePasswordHash(email);
-            return passwordHash != null && PasswordHash.ValidatePassword(password, passwordHash);
         }
 
         public ActionResult RegistrationSuccessful()
@@ -126,9 +105,55 @@ namespace StockSharer.Web.Controllers
             var user = _userRepository.RetrieveUser(email);
             if (user != null && !user.Active)
             {
-                SendAuthEmail(user.UserId, user.Email);
+                var temporaryAuthGuid = CreateTemporaryAuthGuid(user.UserId);
+                SendActivationEmail(user.Email, temporaryAuthGuid);
             }
             return RedirectToAction("RegistrationSuccessful", "User");
+        }
+
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(string email)
+        {
+            var user = _userRepository.RetrieveUser(email);
+            if (user != null && user.Active)
+            {
+                var temporaryAuthGuid = CreateTemporaryAuthGuid(user.UserId);
+                SendPasswordResetEmail(user.Email, temporaryAuthGuid);
+            }
+            return View();
+        }
+
+        private bool ValidateUser(string email, string password)
+        {
+            var passwordHash = _userRepository.RetrievePasswordHash(email);
+            return passwordHash != null && PasswordHash.ValidatePassword(password, passwordHash);
+        }
+
+        private Guid CreateTemporaryAuthGuid(int userId)
+        {
+            var authGuid = Guid.NewGuid();
+            _redisCache.Set(authGuid.ToString(), userId.ToString(CultureInfo.InvariantCulture), new TimeSpan(1, 0, 0, 0));
+            return authGuid;
+        }
+
+        private void SendActivationEmail(string email, Guid temporaryAuthGuid)
+        {
+            var bodyText = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link: http://www.stocksharer.com/user/activate/{0}", temporaryAuthGuid);
+            var bodyHtml = string.Format("Thank you for registering an account with StockSharer.  To complete your registration please click on the link below:<br /><br /><a href=\"http://www.stocksharer.com/user/activate/{0}\">http://www.stocksharer.com/user/activate/{0}</a>", temporaryAuthGuid);
+            _emailSender.SendEmail(email, "Welcome to StockSharer", bodyText, bodyHtml);
+        }
+
+        private void SendPasswordResetEmail(string email, Guid temporaryAuthGuid)
+        {
+            var bodyText = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions: http://www.stocksharer.com/user/changepassword/{0}", temporaryAuthGuid);
+            var bodyHtml = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions:<br /><br /><a href=\"http://www.stocksharer.com/user/activate/{0}\">http://www.stocksharer.com/user/changepassword/{0}</a>", temporaryAuthGuid);
+            _emailSender.SendEmail(email, "StockSharer password reset", bodyText, bodyHtml);
         }
     }
 }
