@@ -126,6 +126,11 @@ namespace StockSharer.Web.Controllers
                 var temporaryAuthGuid = CreateTemporaryAuthGuid(user.UserId);
                 SendPasswordResetEmail(user.Email, temporaryAuthGuid);
             }
+            return RedirectToAction("ResetPasswordSuccess");
+        }
+
+        public ActionResult ResetPasswordSuccess()
+        {
             return View();
         }
 
