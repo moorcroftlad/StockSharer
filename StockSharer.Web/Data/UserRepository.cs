@@ -89,5 +89,14 @@ namespace StockSharer.Web.Data
                 connection.Execute(updateSql, new { PasswordHash = passwordHash, UserId = userId });
             }
         }
+
+        public void UpdateUser(User user)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string updateSql = @"UPDATE [User] SET Forename = @Forename, Surname = @Surname WHERE UserId = @UserId";
+                connection.Execute(updateSql, user);
+            }
+        }
     }
 }

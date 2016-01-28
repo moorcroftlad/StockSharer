@@ -2,7 +2,7 @@
 
 namespace StockSharer.Web.Areas.Settings.Controllers
 {
-    public class GamesController : BaseSettingsController
+    public class PrivacyController : BaseSettingsController
     {
         public ActionResult Index()
         {

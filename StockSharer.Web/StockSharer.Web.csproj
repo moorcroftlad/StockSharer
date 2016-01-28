@@ -137,6 +137,7 @@
     <Compile Include="Areas\Settings\Attributes\AuthorizeUserAttribute.cs" />
     <Compile Include="Areas\Settings\Controllers\AccountController.cs" />
     <Compile Include="Areas\Settings\Controllers\BaseSettingsController.cs" />
+    <Compile Include="Areas\Settings\Controllers\PrivacyController.cs" />
     <Compile Include="Areas\Settings\Controllers\GamesController.cs" />
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Areas\Settings\ViewModels\AccountSidebarViewModel.cs" />
@@ -192,6 +193,7 @@
     <Content Include="Views\User\ResetPassword.cshtml" />
     <Content Include="Views\User\ResetPasswordSuccess.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Settings\Views\Privacy\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
