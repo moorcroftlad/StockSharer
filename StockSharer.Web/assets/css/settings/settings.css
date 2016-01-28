@@ -13,3 +13,7 @@ hr {
     margin-top: 10px;
     border-color: #E2E2E2;
 }
+
+.settings-main {
+    min-height: 500px;
+}
