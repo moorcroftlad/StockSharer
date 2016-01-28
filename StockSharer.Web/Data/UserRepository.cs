@@ -81,12 +81,12 @@ namespace StockSharer.Web.Data
             }
         }
 
-        public void UpdatePassword(int userId, string password)
+        public void UpdatePassword(int userId, string passwordHash)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string updateSql = @"UPDATE [User] SET Password = 1 WHERE UserId = @UserId";
-                connection.Execute(updateSql, new { UserId = userId });
+                const string updateSql = @"UPDATE [User] SET PasswordHash = @PasswordHash WHERE UserId = @UserId";
+                connection.Execute(updateSql, new { PasswordHash = passwordHash, UserId = userId });
             }
         }
     }
