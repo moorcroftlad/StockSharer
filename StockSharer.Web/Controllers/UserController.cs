@@ -6,6 +6,7 @@ using StockSharer.Web.Authentication;
 using StockSharer.Web.Cache;
 using StockSharer.Web.Data;
 using StockSharer.Web.Email;
+using StockSharer.Web.Models;
 using StockSharer.Web.ViewModels;
 
 namespace StockSharer.Web.Controllers
@@ -201,22 +202,5 @@ namespace StockSharer.Web.Controllers
             var bodyHtml = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions:<br /><br /><a href=\"http://www.stocksharer.com/user/changepassword/{0}\">http://www.stocksharer.com/user/changepassword/{0}</a>", temporaryAuthGuid);
             _emailSender.SendEmail(email, "StockSharer password reset", bodyText, bodyHtml);
         }
-    }
-
-    public class WarningMessageViewModel
-    {
-        public string Message { get; set; }
-    }
-
-    public class ChangePasswordViewModel : WarningMessageViewModel
-    {
-        public ChangePassword ChangePassword { get; set; }
-    }
-
-    public class ChangePassword
-    {
-        public int UserId { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
     }
 }
