@@ -142,6 +142,7 @@
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Areas\Settings\ViewModels\AccountSidebarViewModel.cs" />
     <Compile Include="Areas\Settings\ViewModels\BaseViewPage.cs" />
+    <Compile Include="Areas\Settings\ViewModels\SettingsViewModel.cs" />
     <Compile Include="Authentication\UserPrincipal.cs" />
     <Compile Include="Authentication\PasswordHash.cs" />
     <Compile Include="Cache\RedisCache.cs" />

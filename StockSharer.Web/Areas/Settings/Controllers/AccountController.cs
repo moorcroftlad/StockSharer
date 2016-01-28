@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using StockSharer.Web.Areas.Settings.ViewModels;
 using StockSharer.Web.Controllers;
 using StockSharer.Web.Data;
 
@@ -11,7 +12,8 @@ namespace StockSharer.Web.Areas.Settings.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var settingsViewModel = new SettingsViewModel();
+            return View(settingsViewModel);
         }
 
         [HttpPost]
@@ -21,7 +23,12 @@ namespace StockSharer.Web.Areas.Settings.Controllers
             User.Surname = surname;
             _userRepository.UpdateUser(User);
             _authenticationHelper.SetFormsAuthenticationCookie(Response, User.Email);
-            return View();
+            var settingsViewModel = new SettingsViewModel
+                {
+                    Message = "Details updated",
+                    Success = true
+                };
+            return View(settingsViewModel);
         }
     }
 }
