@@ -188,6 +188,7 @@
     <Content Include="Views\User\Activate.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
     <Content Include="Views\User\ResetPasswordSuccess.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

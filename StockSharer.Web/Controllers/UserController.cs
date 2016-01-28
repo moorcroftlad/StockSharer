@@ -108,12 +108,16 @@ namespace StockSharer.Web.Controllers
                 var temporaryAuthGuid = CreateTemporaryAuthGuid(user.UserId);
                 SendActivationEmail(user.Email, temporaryAuthGuid);
             }
-            return RedirectToAction("RegistrationSuccessful", "User");
+            return RedirectToAction("RegistrationSuccessful");
         }
 
         public ActionResult ResetPassword()
         {
-            return View();
+            var warningMessageViewModel = new WarningMessageViewModel
+                {
+                    Message = TempData["Message"] == null ? null : TempData["Message"].ToString()
+                };
+            return View(warningMessageViewModel);
         }
 
         [HttpPost]
@@ -127,6 +131,43 @@ namespace StockSharer.Web.Controllers
                 SendPasswordResetEmail(user.Email, temporaryAuthGuid);
             }
             return RedirectToAction("ResetPasswordSuccess");
+        }
+
+        public ActionResult ChangePassword(Guid id)
+        {
+            int userId;
+            int.TryParse(_redisCache.Get(id.ToString()), out userId);
+            if (userId == 0)
+            {
+                TempData["Message"] = "Your password reset link has expired, please enter your email again for a new link";
+                return RedirectToAction("ResetPassword");
+            }
+
+            var changePasswordViewModel = new ChangePasswordViewModel
+                {
+                    ChangePassword = new ChangePassword
+                        {
+                            UserId = userId
+                        }
+                };
+            return View(changePasswordViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePassword changePassword)
+        {
+            if (changePassword.Password != changePassword.ConfirmPassword)
+            {
+                return View(new ChangePasswordViewModel
+                    {
+                        ChangePassword = changePassword,
+                        Message = "Your passwords do not match"
+                    });
+            }
+            _userRepository.UpdatePassword(changePassword.UserId, PasswordHash.CreateHash(changePassword.Password));
+            _authenticationHelper.SetFormsAuthenticationCookie(Response, changePassword.UserId);
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult ResetPasswordSuccess()
@@ -160,5 +201,22 @@ namespace StockSharer.Web.Controllers
             var bodyHtml = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions:<br /><br /><a href=\"http://www.stocksharer.com/user/activate/{0}\">http://www.stocksharer.com/user/changepassword/{0}</a>", temporaryAuthGuid);
             _emailSender.SendEmail(email, "StockSharer password reset", bodyText, bodyHtml);
         }
+    }
+
+    public class WarningMessageViewModel
+    {
+        public string Message { get; set; }
+    }
+
+    public class ChangePasswordViewModel : WarningMessageViewModel
+    {
+        public ChangePassword ChangePassword { get; set; }
+    }
+
+    public class ChangePassword
+    {
+        public int UserId { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 }
