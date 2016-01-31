@@ -1,7 +1,7 @@
 ﻿@using StockSharer.Web.Areas.Settings.ViewModels
-@model StockSharer.Web.ViewModels.SearchResultsViewModel
+@model MyGamesViewModel
 @{
-    ViewBag.Title = "Account";
+    ViewBag.Title = "My games";
 }
 
 <div class="page-content-holder">
@@ -29,27 +29,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><img src="http://images.stocksharer.com/cc2c136b-8af2-4efe-bd40-2d517afcb544.jpg" width="50" height="63"/></td>
-                                        <td>FIFA 16</td>
-                                        <td>Xbox One</td>
-                                        <td>15th January 2016</td>
-                                        <td>Available</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="http://images.stocksharer.com/cc2c136b-8af2-4efe-bd40-2d517afcb544.jpg" width="50" height="63"/></td>
-                                        <td>Forza Motorsport</td>
-                                        <td>Xbox One</td>
-                                        <td>15th January 2016</td>
-                                        <td>Available</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="http://images.stocksharer.com/cc2c136b-8af2-4efe-bd40-2d517afcb544.jpg" width="50" height="63"/></td>
-                                        <td>Tiger Woods 2014</td>
-                                        <td>Xbox One</td>
-                                        <td>15th January 2016</td>
-                                        <td>Available</td>
-                                    </tr>
+                                    @foreach (var game in Model.MyGames)
+                                    {
+                                        <tr>
+                                            <td><img src="@game.HostedImageUrl" width="50" height="63"/></td>
+                                            <td>@game.GameName</td>
+                                            <td>@game.PlatformName</td>
+                                            <td>@game.DateAdded.ToString("dd MMMM yyyy")</td>
+                                            <td>@game.AvailabilityName</td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

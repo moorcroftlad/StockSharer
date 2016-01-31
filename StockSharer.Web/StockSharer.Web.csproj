@@ -142,6 +142,7 @@
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Areas\Settings\ViewModels\AccountSidebarViewModel.cs" />
     <Compile Include="Areas\Settings\ViewModels\BaseViewPage.cs" />
+    <Compile Include="Areas\Settings\ViewModels\MyGamesViewModel.cs" />
     <Compile Include="Areas\Settings\ViewModels\SettingsViewModel.cs" />
     <Compile Include="Authentication\UserPrincipal.cs" />
     <Compile Include="Authentication\PasswordHash.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\AvailabilityRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Email\ISendEmail.cs" />
     <Compile Include="Email\SesEmailSender.cs" />
@@ -157,6 +159,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\GameAvailability.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
