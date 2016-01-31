@@ -6,5 +6,6 @@ namespace StockSharer.Web.Areas.Settings.ViewModels
     public class MyGamesViewModel
     {
         public List<GameAvailability> MyGames { get; set; }
+        public List<Game> Games { get; set; }
     }
 }

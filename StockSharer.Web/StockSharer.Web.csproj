@@ -152,6 +152,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\AvailabilityRepository.cs" />
+    <Compile Include="Data\GameRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Email\ISendEmail.cs" />
     <Compile Include="Email\SesEmailSender.cs" />
@@ -159,6 +160,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameAvailability.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\User.cs" />
