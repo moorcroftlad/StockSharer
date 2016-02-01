@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\lib\live-search.css" />
     <Content Include="assets\css\settings\settings.css" />
     <Content Include="assets\css\global\style.css" />
     <Content Include="assets\css\lib\bootstrap.min.css" />
@@ -123,8 +124,11 @@
     <Content Include="assets\images\games.jpg" />
     <Content Include="assets\images\tools.jpg" />
     <Content Include="assets\js\lib\bootstrap.min.js" />
+    <Content Include="assets\js\lib\foot-2-simple-ajax.js" />
+    <Content Include="assets\js\lib\foot-2-live-search.js" />
     <Content Include="assets\js\lib\jquery-1.11.3.min.js" />
     <Content Include="assets\js\lib\validator.js" />
+    <Content Include="assets\js\myGames\addGame.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -200,6 +204,7 @@
     <Content Include="Views\User\ResetPasswordSuccess.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\Settings\Views\Privacy\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Games\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

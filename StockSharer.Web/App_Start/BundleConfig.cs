@@ -22,7 +22,14 @@ namespace StockSharer.Web.App_Start
                 "~/assets/css/user/login.css"));
             
             bundles.Add(new StyleBundle("~/bundles/styles/settings").Include(
-                "~/assets/css/settings/settings.css"));
+                "~/assets/css/settings/settings.css",
+                "~/assets/css/lib/live-search.css"
+                ));
+            
+            bundles.Add(new ScriptBundle("~/bundles/scripts/myGames").Include(
+                "~/assets/js/lib/foot-2-simple-ajax.js",
+                "~/assets/js/lib/foot-2-live-search.js",
+                "~/assets/js/myGames/addGame.js"));
         }
     }
 }

@@ -18,5 +18,19 @@ namespace StockSharer.Web.Areas.Settings.Controllers
                 };
             return View(myGamesViewModel);
         }
+
+        public ActionResult Search(string term)
+        {
+            var searchViewModel = new SearchViewModel
+                {
+                    Term = term
+                };
+            return View(searchViewModel);
+        }
+    }
+
+    public class SearchViewModel
+    {
+        public string Term { get; set; }
     }
 }

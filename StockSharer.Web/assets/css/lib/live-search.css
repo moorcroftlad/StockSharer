@@ -1,0 +1,85 @@
+.live-search-wrap {
+  position: relative;
+}
+
+.live-search-wrap input[type=text] {
+  width: 100%;
+}
+
+.live-search-wrap div.live-search {
+  background: rgb(255, 255, 255);
+  position: absolute;
+  left: 0;
+  top: 40px;
+  z-index: 99;
+  width: 100%;
+  height: 300px;
+  overflow: auto;
+  transition: all .1s ease-out;
+  border: 1px solid #fff;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.live-search-wrap div.live-search h2 {
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+  color: #333;
+  font-weight: bold;
+  padding: 10px 10px 5px;
+}
+
+.live-search-wrap div.live-search ul {
+  margin: 0;
+  list-style: none;
+}
+
+.live-search-wrap div.live-search ul li a {
+  display: block;
+  padding: 5px 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.live-search-wrap div.live-search ul li a:hover {
+  font-weight: bold;
+}
+
+.live-search-wrap div.live-search ul li a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.live-search-wrap div.live-search ul li:nth-child(odd) a {
+  background: rgba(234, 234, 234, 0.8);
+}
+
+.live-search-wrap div.live-search nav {
+  zoom: 1;
+  padding: 5px 10px;
+}
+
+.live-search-wrap div.live-search nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.live-search-wrap div.live-search nav a {
+  float: left;
+  color: inherit;
+  text-decoration: none;
+}
+
+.live-search-wrap div.live-search nav a[rel=next] {
+  float: right;
+}
+
+.live-search-wrap div.live-search:empty {
+  height: 0;
+  box-shadow: none;
+}
