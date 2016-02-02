@@ -25,7 +25,7 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"   select top 20 g.Name GameName, GameId, HostedImageUrl, p.Name PlatformName
+                const string sql = @"   select top 10 g.Name GameName, GameId, HostedImageUrl, p.Name PlatformName
                                         from Game g
                                         inner join Platform p on p.PlatformId = g.PlatformId
                                         where g.Name like @SearchTerm

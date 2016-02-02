@@ -34,6 +34,7 @@
 .live-search-wrap div.live-search ul {
   margin: 0;
   list-style: none;
+  padding-left: 10px;
 }
 
 .live-search-wrap div.live-search ul li a {
@@ -41,6 +42,7 @@
   padding: 5px 10px;
   color: inherit;
   text-decoration: none;
+  margin-right: 10px;
 }
 
 .live-search-wrap div.live-search ul li a:hover {
@@ -48,8 +50,6 @@
 }
 
 .live-search-wrap div.live-search ul li a img {
-  width: 20px;
-  height: 20px;
   margin-right: 10px;
   vertical-align: middle;
 }

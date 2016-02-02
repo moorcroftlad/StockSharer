@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using StockSharer.Web.Areas.Settings.ViewModels;
 using StockSharer.Web.Data;
+using StockSharer.Web.Models;
 
 namespace StockSharer.Web.Areas.Settings.Controllers
 {
@@ -23,7 +25,8 @@ namespace StockSharer.Web.Areas.Settings.Controllers
         {
             var searchViewModel = new SearchViewModel
                 {
-                    Term = term
+                    Term = term,
+                    Games = _gameRepository.SearchForGames(term)
                 };
             return View(searchViewModel);
         }
@@ -32,5 +35,6 @@ namespace StockSharer.Web.Areas.Settings.Controllers
     public class SearchViewModel
     {
         public string Term { get; set; }
+        public List<Game> Games { get; set; }
     }
 }
