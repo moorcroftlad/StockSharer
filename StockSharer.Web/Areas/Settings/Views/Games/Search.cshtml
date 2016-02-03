@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-<h2>Search results (4) for: <strong>"@Model.Term"</strong></h2>
+<h2>Search results (@Model.Games.Count) for: <strong>"@Model.Term"</strong></h2>
 <ul>
     @foreach (var game in Model.Games)
     {

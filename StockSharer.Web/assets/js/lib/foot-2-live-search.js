@@ -31,51 +31,46 @@ var LiveSearch = {
             appendTo.appendChild(container);
         }
 
-        // Hook up keyup on input
-        input.addEventListener('keyup', function (e) {
-            if (this.value != this.liveSearchLastValue) {
-                this.classList.add('loading');
+        var performSearch = function (element, waitTime) {
+            element.classList.add('loading');
 
-                var q = this.value;
+            var q = element.value;
 
-                // Clear previous ajax request
-                if (this.liveSearchTimer) {
-                    clearTimeout(this.liveSearchTimer);
-                }
-
-                // Build the URL
-                var url = config.url + q;
-
-                if (config.data) {
-                    if (url.indexOf('&') != -1 || url.indexOf('?') != -1) {
-                        url += '&' + LiveSearch.serialize(config.data);
-                    }
-                    else {
-                        url += '?' + LiveSearch.serialize(config.data);
-                    }
-                }
-
-                // Wait a little then send the request
-                var self = this;
-
-                this.liveSearchTimer = setTimeout(function () {
-                    if (q) {
-                        SimpleAjax.xhr({
-                            method: 'get',
-                            url: url,
-                            callback: function (data) {
-                                self.classList.remove('loading');
-                                container.innerHTML = data;
-                            }
-                        });
-                    }
-                    else {
-                        container.innerHTML = '';
-                    }
-                }, 300);
-
-                this.liveSearchLastValue = this.value;
+            // Clear previous ajax request
+            if (element.liveSearchTimer) {
+                clearTimeout(element.liveSearchTimer);
             }
+
+            // Build the URL
+            var url = config.url + q;
+
+            if (config.data) {
+                if (url.indexOf('&') != -1 || url.indexOf('?') != -1) {
+                    url += '&' + LiveSearch.serialize(config.data);
+                } else {
+                    url += '?' + LiveSearch.serialize(config.data);
+                }
+            }
+
+            // Wait a little then send the request
+            var self = element;
+            element.liveSearchTimer = setTimeout(function() {
+                SimpleAjax.xhr({
+                    method: 'get',
+                    url: url,
+                    callback: function(data) {
+                        self.classList.remove('loading');
+                        container.innerHTML = data;
+                    }
+                });
+            }, waitTime);
+        };
+
+        input.addEventListener('keyup', function () {
+            performSearch(this, 300);
+        });
+        input.addEventListener('focus', function () {
+            performSearch(this, 300);
         });
     },
 
