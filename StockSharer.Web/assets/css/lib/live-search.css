@@ -47,9 +47,11 @@
   font-weight: bold;
 }
 
-.live-search-wrap div.live-search ul li a:hover {
-  font-weight: bold;
-}
+.live-search-wrap div.live-search ul li a:hover,
+.live-search-wrap div.live-search ul li:nth-child(odd) a:hover
+ {
+   background-color: #CED2D3;
+ }
 
 .live-search-wrap div.live-search ul li a img {
   margin-right: 10px;
