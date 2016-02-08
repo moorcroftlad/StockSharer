@@ -16,7 +16,9 @@
                         <h1>Games</h1>
                         <h2>Manage your games catalogue</h2>
                         <hr/>
-                        
+                        <form method="GET" action="search" id="game-search">
+                            <input type="text" name="term" placeholder="Search for a game to add"/>
+                        </form>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -42,9 +44,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <form method="GET" action="search" id="game-search">
-                            <input type="text" name="term" placeholder="Search"/>
-                        </form>
                     </div>
                 </div>
             </div>
