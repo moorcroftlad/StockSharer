@@ -30,6 +30,13 @@ namespace StockSharer.Web.Areas.Settings.Controllers
                 };
             return View(searchViewModel);
         }
+
+        [HttpPost]
+        public JsonResult AddGameAvailability(int id)
+        {
+            var gameAvailability = _availabilityRepository.AddGameAvailability(id, User.UserId);
+            return Json(gameAvailability);
+        }
     }
 
     public class SearchViewModel

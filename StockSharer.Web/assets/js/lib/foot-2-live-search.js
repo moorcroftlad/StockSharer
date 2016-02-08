@@ -61,6 +61,7 @@ var LiveSearch = {
                     callback: function(data) {
                         self.classList.remove('loading');
                         container.innerHTML = data;
+                        bindGameClick();
                     }
                 });
             }, waitTime);
@@ -72,6 +73,33 @@ var LiveSearch = {
         input.addEventListener('focus', function () {
             performSearch(this, 300);
         });
+        
+        var bindGameClick = function () {
+            $('.js-game').off('click').on('click', function (event) {
+                event.preventDefault();
+                var gameId = $(this).data('game-id');
+                $.post("/settings/games/addgameavailability/" + gameId, function (gameAvailability) {
+                    $('#live-search-term').empty();
+                    $('#game-search input[name="term"]').val('');
+                    var row = '<tr><td><img src="' + gameAvailability.HostedImageUrl + '" width="50" height="63"></td><td>' + gameAvailability.GameName + '</td><td>' + gameAvailability.PlatformName + '</td><td>' + formatDate(gameAvailability.DateAdded) + '</td><td>' + gameAvailability.AvailabilityName + '</td></tr>';
+                    $('.js-game-list').append(row);
+                });
+            });
+        };
+
+        var formatDate = function(jsonDate) {
+            var monthNames = [
+              "January", "February", "March",
+              "April", "May", "June", "July",
+              "August", "September", "October",
+              "November", "December"
+            ];
+            var date = new Date(parseInt(jsonDate.substr(6)));
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var year = date.getFullYear();
+            return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        };
     },
 
     // http://stackoverflow.com/questions/1714786/querystring-encoding-of-a-javascript-object

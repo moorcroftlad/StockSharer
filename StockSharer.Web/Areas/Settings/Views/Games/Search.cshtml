@@ -8,7 +8,7 @@
     @foreach (var game in Model.Games)
     {
         <li>
-            <a href="#">
+            <a href="#" data-game-id="@game.GameId" class="js-game">
                 <img src="@game.HostedImageUrl" width="50" height="63" alt="@game.GameName"/>
                 @game.GameName - <span class="platform-name">@game.PlatformName</span>
             </a>
