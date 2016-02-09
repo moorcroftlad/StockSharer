@@ -11,7 +11,7 @@
                 <div class="page-content login-holder">
                     <h1 class="text-center">Sign in to StockSharer</h1>
                     <h2 class="text-center">Enter your email and password</h2>
-                    <form method="POST" action="/user/login?ReturnUrl=@Model.ReturnUrl" data-toggle="validator">
+                    <form method="POST" action="/user/login?ReturnUrl=@Model.ReturnUrl" data-toggle="validator" data-disable="false">
                         @Html.AntiForgeryToken()
                         @if (Model.LoginError)
                         {
