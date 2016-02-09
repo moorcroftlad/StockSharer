@@ -28,7 +28,7 @@ namespace StockSharer.Web.Data
                 const string sql = @"   select top 10 g.Name GameName, g.GameId, HostedImageUrl, p.Name PlatformName, CASE WHEN EXISTS (select GameId from GameAvailability where GameId = g.GameId AND UserId = 1) THEN 'True' ELSE 'False' END AS OwnsGame
                                         from Game g
                                         inner join Platform p on p.PlatformId = g.PlatformId
-                                        where g.Name like '%%'
+                                        where g.Name like @SearchTerm
                                         order by g.Name";
                 return connection.Query<AddGameResult>(sql, new
                     {
