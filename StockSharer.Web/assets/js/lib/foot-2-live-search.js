@@ -85,8 +85,12 @@ var LiveSearch = {
                 $.post("/settings/games/addgameavailability/" + gameId, function (gameAvailability) {
                     $('#live-search-term').empty();
                     $('#game-search input[name="term"]').val('');
-                    var row = '<tr><td><img src="' + gameAvailability.HostedImageUrl + '" width="50" height="63"></td><td>' + gameAvailability.GameName + '</td><td>' + gameAvailability.PlatformName + '</td><td>' + formatDate(gameAvailability.DateAdded) + '</td><td>' + gameAvailability.AvailabilityName + '</td></tr>';
+                    var row = '<tr data-name="' + gameAvailability.GameName + '"><td><img src="' + gameAvailability.HostedImageUrl + '" width="50" height="63"></td><td>' + gameAvailability.GameName + '</td><td>' + gameAvailability.PlatformName + '</td><td>' + formatDate(gameAvailability.DateAdded) + '</td><td>' + gameAvailability.AvailabilityName + '</td></tr>';
                     $('.js-game-list').append(row);
+
+                    $('.js-game-list tr').sort(function (a, b) {
+                        return $(a).data('name') > $(b).data('name');
+                    }).appendTo('.js-game-list');
                 });
             });
         };

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using StockSharer.Web.Areas.Settings.ViewModels;
 using StockSharer.Web.Data;
@@ -15,7 +16,7 @@ namespace StockSharer.Web.Areas.Settings.Controllers
         {
             var myGamesViewModel = new MyGamesViewModel
                 {
-                    MyGames = _availabilityRepository.RetrieveMyGames(User.UserId),
+                    MyGames = _availabilityRepository.RetrieveMyGames(User.UserId).OrderBy(x => x.GameName).ToList(),
                     Games = _gameRepository.SearchForGames(null)
                 };
             return View(myGamesViewModel);

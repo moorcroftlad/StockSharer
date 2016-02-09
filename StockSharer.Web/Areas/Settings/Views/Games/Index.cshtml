@@ -33,7 +33,7 @@
                                 <tbody class="js-game-list">
                                     @foreach (var game in Model.MyGames)
                                     {
-                                        <tr>
+                                        <tr data-name="@game.GameName">
                                             <td><img src="@game.HostedImageUrl" width="50" height="63"/></td>
                                             <td>@game.GameName</td>
                                             <td>@game.PlatformName</td>
