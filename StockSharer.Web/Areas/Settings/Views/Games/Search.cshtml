@@ -5,12 +5,16 @@
 
 <h2>Search results (@Model.Games.Count) for: <strong>"@Model.Term"</strong></h2>
 <ul>
-    @foreach (var game in Model.Games)
+    @foreach (var gameResult in Model.Games)
     {
         <li>
-            <a href="#" data-game-id="@game.GameId" class="js-game">
-                <img src="@game.HostedImageUrl" width="50" height="63" alt="@game.GameName"/>
-                @game.GameName - <span class="platform-name">@game.PlatformName</span>
+            <a href="#" data-game-id="@gameResult.GameId" class="@(gameResult.OwnsGame ? "js-owns-game" : "js-game")">
+                <img src="@gameResult.HostedImageUrl" width="50" height="63" alt="@gameResult.GameName"/>
+                @gameResult.GameName - <span class="platform-name">@gameResult.PlatformName</span>
+                @if (gameResult.OwnsGame)
+                {
+                    <i class="fa fa-check-circle-o pull-right"></i>
+                }
             </a>
         </li>   
     }

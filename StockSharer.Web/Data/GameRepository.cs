@@ -21,16 +21,16 @@ namespace StockSharer.Web.Data
             _connectionString = connectionString;
         }
 
-        public List<Game> SearchForGames(string name)
+        public List<AddGameResult> SearchForGames(string name)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"   select top 10 g.Name GameName, GameId, HostedImageUrl, p.Name PlatformName
+                const string sql = @"   select top 10 g.Name GameName, g.GameId, HostedImageUrl, p.Name PlatformName, CASE WHEN EXISTS (select GameId from GameAvailability where GameId = g.GameId AND UserId = 1) THEN 'True' ELSE 'False' END AS OwnsGame
                                         from Game g
                                         inner join Platform p on p.PlatformId = g.PlatformId
-                                        where g.Name like @SearchTerm
+                                        where g.Name like '%%'
                                         order by g.Name";
-                return connection.Query<Game>(sql, new
+                return connection.Query<AddGameResult>(sql, new
                     {
                         SearchTerm = name == null ? null : "%" + name + "%"
                     }).ToList();

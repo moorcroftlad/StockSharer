@@ -75,6 +75,10 @@ var LiveSearch = {
         });
         
         var bindGameClick = function () {
+            $('.js-owns-game').off('click').on('click', function(event) {
+                event.preventDefault();
+            });
+
             $('.js-game').off('click').on('click', function (event) {
                 event.preventDefault();
                 var gameId = $(this).data('game-id');

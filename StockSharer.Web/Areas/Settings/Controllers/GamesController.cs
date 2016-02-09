@@ -42,6 +42,6 @@ namespace StockSharer.Web.Areas.Settings.Controllers
     public class SearchViewModel
     {
         public string Term { get; set; }
-        public List<Game> Games { get; set; }
+        public List<AddGameResult> Games { get; set; }
     }
 }

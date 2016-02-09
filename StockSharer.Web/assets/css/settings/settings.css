@@ -25,3 +25,13 @@ hr {
 span.platform-name {
     color: green;
 }
+
+.fa-check-circle-o {
+    color: green;
+    background-color: white;
+    position: relative;
+    font-size: 23px !important;
+    top: 24px;
+    border-radius: 50%;
+    line-height: 16px !important;
+}
