@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,6 +13,24 @@ namespace StockSharer.Web.Controllers
     {
         public ActionResult Index(string postcode, int? radius = null)
         {
+            var searchResults = SearchResults();
+            var locationResults = searchResults.Where(searchResult => DistanceBetweenPostcodes(postcode, searchResult.Postcode) < radius.GetValueOrDefault(1500)).ToList();
+            var searchResultsViewModel = new SearchResultsViewModel
+            {
+                SearchResults = locationResults,
+                Postcode = postcode,
+                Radius = radius
+            };
+            return View(searchResultsViewModel);
+        }
+
+        private static int DistanceBetweenPostcodes(string postcode, string postcodeOfUser)
+        {
+            return 0;
+        }
+
+        private static IEnumerable<SearchResult> SearchResults()
+        {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
                 const string sql = @"   SELECT 	g.ImageUrl, a.Name Availability, g.Name GameName, ad.Postcode, g.HostedImageUrl
@@ -21,13 +40,7 @@ namespace StockSharer.Web.Controllers
                                                 INNER JOIN [User] u ON u.UserId = ga.UserId
                                                 INNER JOIN Address ad ON ad.AddressId = u.AddressId";
 
-                var searchResultsViewModel = new SearchResultsViewModel
-                    {
-                        SearchResults = connection.Query<SearchResult>(sql).ToList(),
-                        Postcode = postcode,
-                        Radius = radius
-                    };
-                return View(searchResultsViewModel);
+                return connection.Query<SearchResult>(sql).ToList();
             }
         }
     }
