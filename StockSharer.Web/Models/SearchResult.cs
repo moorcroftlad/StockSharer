@@ -7,5 +7,7 @@
         public string ImageUrl { get; set; }
         public string HostedImageUrl { get; set; }
         public string Postcode { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
     }
 }
