@@ -15,7 +15,7 @@
                         <form data-toggle="validator" method="GET">
                             <div class="form-group">
                                 <select name="radius" class="form-control">
-                                    <option value="">Distance</option>
+                                    <option @(Model.Radius == 1500 ? "selected" : "") value="1500">National</option>
                                     <option @(Model.Radius == 1 ? "selected" : "") value="1">Within 1 mile</option>
                                     <option @(Model.Radius == 5 ? "selected" : "") value="5">Within 5 miles</option>
                                     <option @(Model.Radius == 10 ? "selected" : "") value="10">Within 10 miles</option>
@@ -34,12 +34,11 @@
                                     <option @(Model.Radius == 90 ? "selected" : "") value="90">Within 90 miles</option>
                                     <option @(Model.Radius == 100 ? "selected" : "") value="100">Within 100 miles</option>
                                     <option @(Model.Radius == 200 ? "selected" : "") value="200">Within 200 miles</option>
-                                    <option @(Model.Radius == 1500 ? "selected" : "") value="1500">National</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
-                                <input name="postcode" class="form-control" type="text" placeholder="Postcode" pattern="^[A-Za-z]{1,2}[0-9][0-9A-Za-z]?\s?[0-9][A-Za-z]{2}$" data-error="Please enter a valid UK postcode" value="@Model.Postcode"/>
+                                <input name="postcode" class="form-control" type="text" placeholder="Postcode" pattern="^[A-Za-z]{1,2}[0-9][0-9A-Za-z]?\s?[0-9][A-Za-z]{2}$" data-error="Please enter a valid UK postcode" value="@Model.Postcode" required/>
                                 <span class="help-block with-errors"></span>
                             </div>
                             

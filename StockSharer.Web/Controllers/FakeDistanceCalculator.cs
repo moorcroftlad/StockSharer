@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Device.Location;
 using System.Net.Http;
 using Newtonsoft.Json;
 
@@ -19,11 +21,16 @@ namespace StockSharer.Web.Controllers
 
     public class GoogleMapsApiDistanceCalculator : ICalulateDistance
     {
+        private const double KilometresPerMile = 1.609344;
+
         public int CalculateDistanceBetweenPostcodes(string postcode, decimal latitude, decimal longitude)
         {
             var location = RetrieveLocation(postcode);
-            //TODO: return distance between location and latitude / longitude
-            return 0;
+            if (location == null) return 0;
+            var gameLocation = new GeoCoordinate((double)latitude, (double)longitude);
+            var userLocation = new GeoCoordinate(location.Latitude, location.Longitude);
+            var distanceInMiles = (gameLocation.GetDistanceTo(userLocation) / 1000) / KilometresPerMile;
+            return (int)Math.Round(distanceInMiles);
         }
 
         private static Location RetrieveLocation(string postcode)
@@ -60,9 +67,9 @@ namespace StockSharer.Web.Controllers
         internal class Location
         {
             [JsonProperty(PropertyName = "lat")]
-            public decimal Latitude { get; set; }
+            public double Latitude { get; set; }
             [JsonProperty(PropertyName = "lng")]
-            public decimal Longitude { get; set; }
+            public double Longitude { get; set; }
         }
     }
 }
