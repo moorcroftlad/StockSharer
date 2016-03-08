@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
@@ -35,6 +36,17 @@ namespace StockSharer.Web.Data
             {
                 const string sql = @"SELECT UserId, Forename, Surname, Email, Active FROM [User] WHERE UserId = @UserId";
                 return connection.Query<User>(sql, new { UserId = userId }).FirstOrDefault();
+            }
+        }
+
+        public List<User> RetrieveAllActiveUsers()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"   SELECT UserId, Forename, Surname, Email, Latitude, Longitude, Active 
+                                        FROM [User] 
+                                        WHERE Active = 1";
+                return connection.Query<User>(sql).ToList();
             }
         }
 

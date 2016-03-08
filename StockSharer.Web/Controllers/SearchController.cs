@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using Dapper;
+using StockSharer.Web.Data;
 using StockSharer.Web.Models;
 using StockSharer.Web.ViewModels;
 
@@ -11,38 +12,79 @@ namespace StockSharer.Web.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly ICalulateDistance _distanceCalculator;
+        private const int DefaultRadius = 1500;
+        private readonly ICalulateLocation _locationCalculator;
+        private readonly UserRepository _userRepository;
+        private readonly DistanceCalculator _distanceCalculator;
 
         public SearchController()
         {
-            _distanceCalculator = new GoogleMapsApiDistanceCalculator();
+            _locationCalculator = new GoogleMapsApiLocationCalculator();
+            _userRepository = new UserRepository();
+            _distanceCalculator = new DistanceCalculator();
         }
 
         public ActionResult Index(string postcode, int? radius = null)
         {
-            var searchResults = RetrieveSearchResults();
-            var locationResults = searchResults.Where(searchResult => _distanceCalculator.CalculateDistanceBetweenPostcodes(postcode, searchResult.Latitude, searchResult.Longitude) < radius.GetValueOrDefault(1500)).ToList();
-            var searchResultsViewModel = new SearchResultsViewModel
+            var searchLocation = _locationCalculator.CalculateLocation(postcode);
+            var searchResults = new List<SearchResult>();
+            if (searchLocation != null)
             {
-                SearchResults = locationResults,
-                Postcode = postcode,
-                Radius = radius
-            };
+                var userResults = RetrieveUsersInArea(searchLocation, radius.GetValueOrDefault(DefaultRadius));
+                searchResults = RetrieveSearchResults(userResults);
+            }
+            var searchResultsViewModel = new SearchResultsViewModel
+                {
+                    SearchResults = searchResults.OrderBy(x => x.Distance).ToList(),
+                    Postcode = postcode,
+                    Radius = radius
+                };
             return View(searchResultsViewModel);
         }
 
-        private static IEnumerable<SearchResult> RetrieveSearchResults()
+        private List<UserResult> RetrieveUsersInArea(Location searchLocation, int radius)
+        {
+            var users = _userRepository.RetrieveAllActiveUsers();
+            var usersInArea = new List<UserResult>();
+            foreach (var user in users)
+            {
+                var location1 = new Location(user.Latitude, user.Longitude);
+                var location2 = new Location(searchLocation.Latitude, searchLocation.Longitude);
+                var distanceBetweenLocations = _distanceCalculator.CalculateDistanceBetweenLocations(location1, location2);
+                if (distanceBetweenLocations < radius)
+                {
+                    usersInArea.Add(new UserResult
+                        {
+                            UserId = user.UserId,
+                            Distance = distanceBetweenLocations
+                        });
+                }
+            }
+            return usersInArea;
+        }
+
+        private static List<SearchResult> RetrieveSearchResults(List<UserResult> userResults)
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
-                const string sql = @"   SELECT 	g.ImageUrl, a.Name Availability, g.Name GameName, ad.Postcode, g.HostedImageUrl, ad.Latitude, ad.Longitude
+                const string sql = @"   SELECT 	a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId
                                         FROM 	GameAvailability ga
 		                                        INNER JOIN Game g ON g.GameId = ga.GameId
                                                 INNER JOIN Availability a ON a.AvailabilityId = ga.AvailabilityId
-                                                INNER JOIN [User] u ON u.UserId = ga.UserId
-                                                INNER JOIN Address ad ON ad.AddressId = u.AddressId";
-                return connection.Query<SearchResult>(sql).ToList();
+                                        WHERE   ga.UserId in @UserIds";
+                var searchResults = connection.Query<SearchResult>(sql, new {UserIds = userResults.Select(x => x.UserId)}).ToList();
+                foreach (var searchResult in searchResults)
+                {
+                    searchResult.Distance = userResults.Single(x => x.UserId == searchResult.UserId).Distance;
+                }
+                return searchResults;
             }
         }
+    }
+
+    public class UserResult
+    {
+        public int UserId { get; set; }
+        public int Distance { get; set; }
     }
 }

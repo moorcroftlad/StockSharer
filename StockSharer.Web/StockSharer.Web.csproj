@@ -155,6 +155,7 @@
     <Compile Include="Authentication\PasswordHash.cs" />
     <Compile Include="Cache\RedisCache.cs" />
     <Compile Include="Controllers\AuthenticationHelper.cs" />
+    <Compile Include="Controllers\DistanceCalculator.cs" />
     <Compile Include="Controllers\FakeDistanceCalculator.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
