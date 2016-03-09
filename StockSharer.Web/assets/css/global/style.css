@@ -210,5 +210,20 @@ margin: 0 0 30px 0;font-weight: bold;}
     margin: 0;
 }
 
-.result-filter h2 {
+@media (min-width: 768px){
+    .modal-dialog {
+        width: 250px;
+    }
+}
+
+#postcodeModal .form-group {
+    margin-bottom: 0;
+}
+
+#postcodeModal .help-block{
+    margin-bottom:0;
+}
+
+#postcodeModal .list-unstyled{
+    margin-bottom:0;
 }

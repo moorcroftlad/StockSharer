@@ -13,7 +13,7 @@
                 <div class="main-cta-buttons">
                     <div class="row">
                         <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
-                            <a class="btn btn-default btn-block main-cta-btn main-cta-btn-primary" href="/search">Search for games</a>
+                            <a class="btn btn-default btn-block main-cta-btn main-cta-btn-primary js-btn-game-search" href="/search">Search for games</a>
                         </div>
                     </div>
                     <div class="row">
@@ -135,6 +135,29 @@
             <div class="col-sm-6 col-sm-pull-6 col-lg-4 col-lg-pull-4">
                 <img class="center-block" src="http://i.imgur.com/REiKSJ9.png" width="200" height="200"/>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="postcodeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form data-toggle="validator" action="/postcode/save" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">What's your postcode?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>We need your postcode in order to provide accurate search results.</p>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter postcode" required data-error="Please enter a valid UK postcode" pattern="^[A-Za-z]{1,2}[0-9][0-9A-Za-z]?\s?[0-9][A-Za-z]{2}$"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info btn-block">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
