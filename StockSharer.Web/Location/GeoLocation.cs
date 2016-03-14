@@ -1,3 +1,6 @@
+using System;
+using Newtonsoft.Json;
+
 namespace StockSharer.Web.Location
 {
     public class GeoLocation

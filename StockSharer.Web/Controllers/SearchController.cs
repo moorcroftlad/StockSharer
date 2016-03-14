@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Dapper;
+using Newtonsoft.Json;
 using StockSharer.Web.Data;
 using StockSharer.Web.Location;
 using StockSharer.Web.Models;
@@ -27,11 +30,36 @@ namespace StockSharer.Web.Controllers
 
         public ActionResult Index(string postcode, int? radius = null)
         {
-            var searchLocation = _locationCalculator.CalculateLocation(postcode);
-            var searchResults = new List<SearchResult>();
-            if (searchLocation != null)
+            GeoLocation geoLocation = null;
+            if (!string.IsNullOrEmpty(postcode))
             {
-                var userResults = RetrieveUsersInArea(searchLocation, radius.GetValueOrDefault(DefaultRadius));
+                postcode = postcode.Replace(" ", "").ToUpper();
+                geoLocation = _locationCalculator.CalculateLocation(postcode.Replace(" ", "").ToUpper());
+                Response.Cookies.Add(new HttpCookie("GeoLocation", JsonConvert.SerializeObject(geoLocation))
+                {
+                    Expires = DateTime.Now.AddYears(10)
+                });
+            }
+            else
+            {
+                var geoLocationCookie = Request.Cookies["GeoLocation"];
+                if (geoLocationCookie != null)
+                {
+                    try
+                    {
+                        geoLocation = JsonConvert.DeserializeObject<GeoLocation>(geoLocationCookie.Value);
+                        postcode = geoLocation.Postcode;
+                    }
+                    catch
+                    {
+                        Response.Cookies.Remove("GeoLocation");
+                    }
+                }
+            }
+            var searchResults = new List<SearchResult>();
+            if (geoLocation != null)
+            {
+                var userResults = RetrieveUsersInArea(geoLocation, radius.GetValueOrDefault(DefaultRadius));
                 searchResults = RetrieveSearchResults(userResults);
             }
             var searchResultsViewModel = new SearchResultsViewModel
