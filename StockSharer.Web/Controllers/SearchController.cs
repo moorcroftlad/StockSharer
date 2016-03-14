@@ -43,15 +43,13 @@ namespace StockSharer.Web.Controllers
             return View(searchResultsViewModel);
         }
 
-        private List<UserResult> RetrieveUsersInArea(Location.Location searchLocation, int radius)
+        private List<UserResult> RetrieveUsersInArea(GeoLocation searchLocation, int radius)
         {
             var users = _userRepository.RetrieveAllActiveUsers();
             var usersInArea = new List<UserResult>();
             foreach (var user in users)
             {
-                var location1 = new Location.Location(user.Latitude, user.Longitude);
-                var location2 = new Location.Location(searchLocation.Latitude, searchLocation.Longitude);
-                var distanceBetweenLocations = _distanceCalculator.CalculateDistanceBetweenLocations(location1, location2);
+                var distanceBetweenLocations = _distanceCalculator.CalculateDistanceBetweenLocations(searchLocation, user.Latitude, user.Longitude);
                 if (distanceBetweenLocations < radius)
                 {
                     usersInArea.Add(new UserResult

@@ -146,6 +146,7 @@
     <Compile Include="Areas\Settings\Attributes\AuthorizeUserAttribute.cs" />
     <Compile Include="Areas\Settings\Controllers\AccountController.cs" />
     <Compile Include="Areas\Settings\Controllers\BaseSettingsController.cs" />
+    <Compile Include="Controllers\PostcodeController.cs" />
     <Compile Include="Areas\Settings\Controllers\PrivacyController.cs" />
     <Compile Include="Areas\Settings\Controllers\GamesController.cs" />
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
@@ -169,10 +170,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Location\DistanceCalculator.cs" />
+    <Compile Include="Location\GeoLocation.cs" />
     <Compile Include="Location\LocationCalculator.cs" />
     <Compile Include="Models\ChangePassword.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameAvailability.cs" />
+    <Compile Include="Models\PostcodeFoundResponse.cs" />
+    <Compile Include="Models\PostcodeNotFoundResponse.cs" />
+    <Compile Include="Models\SavePostcodeResponse.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using StockSharer.Web.Areas.Settings.ViewModels;
 using StockSharer.Web.Authentication;
-using StockSharer.Web.Controllers;
 using StockSharer.Web.Data;
 
 namespace StockSharer.Web.Areas.Settings.Controllers
