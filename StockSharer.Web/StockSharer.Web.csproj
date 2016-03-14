@@ -153,12 +153,10 @@
     <Compile Include="Areas\Settings\ViewModels\BaseViewPage.cs" />
     <Compile Include="Areas\Settings\ViewModels\MyGamesViewModel.cs" />
     <Compile Include="Areas\Settings\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Authentication\AuthenticationHelper.cs" />
     <Compile Include="Authentication\UserPrincipal.cs" />
     <Compile Include="Authentication\PasswordHash.cs" />
     <Compile Include="Cache\RedisCache.cs" />
-    <Compile Include="Controllers\AuthenticationHelper.cs" />
-    <Compile Include="Controllers\DistanceCalculator.cs" />
-    <Compile Include="Controllers\FakeDistanceCalculator.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -170,6 +168,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Location\DistanceCalculator.cs" />
+    <Compile Include="Location\LocationCalculator.cs" />
     <Compile Include="Models\ChangePassword.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameAvailability.cs" />

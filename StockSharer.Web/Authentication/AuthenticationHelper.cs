@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using StockSharer.Web.Data;
 using StockSharer.Web.Models;
 
-namespace StockSharer.Web.Controllers
+namespace StockSharer.Web.Authentication
 {
     public class AuthenticationHelper
     {

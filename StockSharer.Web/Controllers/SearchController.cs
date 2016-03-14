@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Dapper;
 using StockSharer.Web.Data;
+using StockSharer.Web.Location;
 using StockSharer.Web.Models;
 using StockSharer.Web.ViewModels;
 
@@ -42,14 +43,14 @@ namespace StockSharer.Web.Controllers
             return View(searchResultsViewModel);
         }
 
-        private List<UserResult> RetrieveUsersInArea(Location searchLocation, int radius)
+        private List<UserResult> RetrieveUsersInArea(Location.Location searchLocation, int radius)
         {
             var users = _userRepository.RetrieveAllActiveUsers();
             var usersInArea = new List<UserResult>();
             foreach (var user in users)
             {
-                var location1 = new Location(user.Latitude, user.Longitude);
-                var location2 = new Location(searchLocation.Latitude, searchLocation.Longitude);
+                var location1 = new Location.Location(user.Latitude, user.Longitude);
+                var location2 = new Location.Location(searchLocation.Latitude, searchLocation.Longitude);
                 var distanceBetweenLocations = _distanceCalculator.CalculateDistanceBetweenLocations(location1, location2);
                 if (distanceBetweenLocations < radius)
                 {

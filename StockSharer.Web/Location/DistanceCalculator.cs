@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Device.Location;
 
-namespace StockSharer.Web.Controllers
+namespace StockSharer.Web.Location
 {    
     public class DistanceCalculator
     {

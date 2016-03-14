@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-namespace StockSharer.Web.Controllers
+namespace StockSharer.Web.Location
 {
     public interface ICalulateLocation
     {
