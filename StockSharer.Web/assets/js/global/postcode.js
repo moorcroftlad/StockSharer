@@ -2,10 +2,10 @@ $(document).ready(function() {
     $('.js-btn-game-search').on('click', function (event) {
         if (docCookies.getItem('GeoLocation') === null) {
             event.preventDefault();
+            $('#postcodeModal').on('shown.bs.modal', function () {
+                $('input[name="postcode"]').focus();
+            });
             $('#postcodeModal').modal('show');
-            setTimeout(function() {
-                 $('input[name="postcode"]').focus();
-            }, 500);
         }
     });
 
