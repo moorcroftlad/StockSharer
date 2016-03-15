@@ -5,7 +5,7 @@ $(document).ready(function() {
             $('#postcodeModal').modal('show');
             setTimeout(function() {
                  $('input[name="postcode"]').focus();
-            }, 1);
+            }, 500);
         }
     });
 
