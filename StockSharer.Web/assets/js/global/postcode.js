@@ -3,7 +3,9 @@ $(document).ready(function() {
         if (docCookies.getItem('GeoLocation') === null) {
             event.preventDefault();
             $('#postcodeModal').modal('show');
-            $('input[name="postcode"]').focus();
+            setTimeout(function() {
+                 $('input[name="postcode"]').focus();
+            }, 1);
         }
     });
 
