@@ -1,0 +1,92 @@
+﻿@using System.Globalization
+@using System.Web.Optimization
+@model StockSharer.Web.ViewModels.SearchResultsViewModel
+@{
+    ViewBag.Title = "Search results";
+}
+
+<div class="page-content-holder">
+    <div class="container">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="result-filter">
+                        <h2>Filter</h2>
+                        <form data-toggle="validator" method="GET">
+                            <div class="form-group">
+                                <select name="radius" class="form-control">
+                                    <option @(Model.Radius == 1500 ? "selected" : "") value="1500">National</option>
+                                    <option @(Model.Radius == 1 ? "selected" : "") value="1">Within 1 mile</option>
+                                    <option @(Model.Radius == 5 ? "selected" : "") value="5">Within 5 miles</option>
+                                    <option @(Model.Radius == 10 ? "selected" : "") value="10">Within 10 miles</option>
+                                    <option @(Model.Radius == 15 ? "selected" : "") value="15">Within 15 miles</option>
+                                    <option @(Model.Radius == 20 ? "selected" : "") value="20">Within 20 miles</option>
+                                    <option @(Model.Radius == 25 ? "selected" : "") value="25">Within 25 miles</option>
+                                    <option @(Model.Radius == 30 ? "selected" : "") value="30">Within 30 miles</option>
+                                    <option @(Model.Radius == 35 ? "selected" : "") value="35">Within 35 miles</option>
+                                    <option @(Model.Radius == 40 ? "selected" : "") value="40">Within 40 miles</option>
+                                    <option @(Model.Radius == 45 ? "selected" : "") value="45">Within 45 miles</option>
+                                    <option @(Model.Radius == 50 ? "selected" : "") value="50">Within 50 miles</option>
+                                    <option @(Model.Radius == 55 ? "selected" : "") value="55">Within 55 miles</option>
+                                    <option @(Model.Radius == 60 ? "selected" : "") value="60">Within 60 miles</option>
+                                    <option @(Model.Radius == 70 ? "selected" : "") value="70">Within 70 miles</option>
+                                    <option @(Model.Radius == 80 ? "selected" : "") value="80">Within 80 miles</option>
+                                    <option @(Model.Radius == 90 ? "selected" : "") value="90">Within 90 miles</option>
+                                    <option @(Model.Radius == 100 ? "selected" : "") value="100">Within 100 miles</option>
+                                    <option @(Model.Radius == 200 ? "selected" : "") value="200">Within 200 miles</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input name="postcode" class="form-control" type="text" placeholder="Postcode" pattern="^[A-Za-z]{1,2}[0-9][0-9A-Za-z]?\s?[0-9][A-Za-z]{2}$" data-error="Please enter a valid UK postcode" value="@Model.Postcode" required/>
+                                <span class="help-block with-errors"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-block btn-primary" value="Search"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="search-results">
+                        @if (Model.SearchResults.Any())
+                        {
+                            <h1>Games found near @Model.Postcode</h1>
+                        }
+                        else
+                        {
+                            <h1>No results found, please broaden your search</h1>
+                        }
+                        
+                        <div class="row">
+                            @foreach (var searchResult in Model.SearchResults)
+                            {
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="result-holder">
+                                        <div class="result-header">
+                                            <h3>@searchResult.GameName</h3>
+                                        </div>
+                                        <div class="result-image">
+                                            <img class="center-block" src="@searchResult.HostedImageUrl"/>
+                                        </div>
+                                        <div class="label label-success center-block">@searchResult.Availability</div>
+                                        <div class="result-footer">
+                                            <span class="price"><strong>&pound;2.00</strong> / day</span>
+                                            <span class="user pull-right">@searchResult.Distance miles away</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/search")
+}

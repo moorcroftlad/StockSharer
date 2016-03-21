@@ -217,6 +217,7 @@
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\Settings\Views\Privacy\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Games\Search.cshtml" />
+    <Content Include="Views\Search\IndexV2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
