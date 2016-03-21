@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\lib\live-search.css" />
+    <Content Include="assets\css\search\resultsv2.css" />
     <Content Include="assets\css\settings\settings.css" />
     <Content Include="assets\css\global\style.css" />
     <Content Include="assets\css\lib\bootstrap.min.css" />

@@ -20,6 +20,9 @@ namespace StockSharer.Web.App_Start
             bundles.Add(new StyleBundle("~/bundles/styles/search").Include(
                 "~/assets/css/search/results.css"));
 
+            bundles.Add(new StyleBundle("~/bundles/styles/searchv2").Include(
+                "~/assets/css/search/resultsv2.css"));
+
             bundles.Add(new StyleBundle("~/bundles/styles/user").Include(
                 "~/assets/css/user/login.css"));
             
