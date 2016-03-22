@@ -30,11 +30,25 @@
                                 <h3 title="@searchResult.GameName">@searchResult.GameName</h3>
                                 <div class="result-image">
                                     <img class="center-block" src="@searchResult.HostedImageUrl"/>
+                                    <div class="label label-success">@searchResult.Availability</div>
                                 </div>
-                                <div class="label label-success center-block">@searchResult.Availability</div>
                                 <div class="result-footer">
-                                    <span class="price"><strong>&pound;2.00</strong> / day</span>
-                                    <span class="user pull-right">@searchResult.Distance miles away</span>
+                                    <p>Duo ubique civibus officiis no, legimus fastidii euripidis vel no. Dicant aperiri nostrum vim ei. Ex vix aliquid evertitur efficiendi. Id sed idque harum postea, at erat putent vim. Et has timeam dolorem, mei ei nominati concludaturque, ei vel feugiat molestie hendrerit.</p>
+                                    <div class="result-meta">
+                                        <table>
+                                            <tr>
+                                                <td><strong>Price:</strong></td>
+                                                <td>&pound;2.00 / day</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Distance:</strong></td>
+                                                <td>@searchResult.Distance miles away</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="result-cta">
+                                        <a class="btn btn-block"><i class="fa fa-calendar pull-left"></i>Check Availability</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
