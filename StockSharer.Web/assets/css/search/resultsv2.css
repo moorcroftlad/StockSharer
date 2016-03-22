@@ -32,3 +32,35 @@ h1 {
 .content-page-header {
     margin-bottom: 30px;
 }
+
+a.navbar-brand {
+    padding-left: 0;
+}
+
+.result-holder h3 {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: bold;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    line-height: 18px;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-image {
+    height: 375px;
+    overflow: hidden;
+}
+
+.result-holder {
+    margin-bottom: 20px;
+}
+
+.result-image img {
+    width: 100%;
+}
