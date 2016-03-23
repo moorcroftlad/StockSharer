@@ -20,6 +20,7 @@ h1 {
 .content-page {
     background-color: #0bb8e3;
     padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .content-page-inner {
