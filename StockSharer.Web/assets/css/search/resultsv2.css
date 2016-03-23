@@ -53,7 +53,7 @@ a.navbar-brand {
 }
 
 .result-image {
-    height: 375px;
+    height: 350px;
     overflow: hidden;
     position: relative;
     background-color: white;
@@ -108,4 +108,30 @@ a.navbar-brand {
 
 .result-cta .fa {
     font-size: 22px;
+}
+
+.result-filter {
+    background-color: #E7E7E7;
+    margin-bottom: 20px;
+}
+
+.result-filter h2 {
+    margin-top: 0;
+    background-color: #444444;
+    color: white;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.result-filter .btn {
+    background-color: #0BB8E3;
+    color: white;
+    font-weight: bold;
+    border-color: #0BB8E3;
+}
+
+.result-filter form {
+    padding: 0 10px;
 }
