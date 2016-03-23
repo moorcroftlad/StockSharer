@@ -118,11 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\lib\live-search.css" />
-    <Content Include="assets\css\search\resultsv2.css" />
+    <Content Include="assets\css\search\results.css" />
     <Content Include="assets\css\settings\settings.css" />
     <Content Include="assets\css\global\style.css" />
     <Content Include="assets\css\lib\bootstrap.min.css" />
-    <Content Include="assets\css\search\results.css" />
     <Content Include="assets\css\user\login.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\games.jpg" />
@@ -203,7 +202,6 @@
     <Content Include="Views\Home\Tools.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Areas\Settings\Views\web.config" />
@@ -218,7 +216,7 @@
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\Settings\Views\Privacy\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Games\Search.cshtml" />
-    <Content Include="Views\Search\IndexV2.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

@@ -63,49 +63,6 @@ namespace StockSharer.Web.Controllers
                 searchResults = RetrieveSearchResults(userResults);
             }
             var searchResultsViewModel = new SearchResultsViewModel
-                {
-                    SearchResults = searchResults.OrderBy(x => x.Distance).ToList(),
-                    Postcode = postcode,
-                    Radius = radius
-                };
-            return View(searchResultsViewModel);
-        }
-
-        public ActionResult IndexV2(string postcode, int? radius = null)
-        {
-            GeoLocation geoLocation = null;
-            if (!string.IsNullOrEmpty(postcode))
-            {
-                postcode = postcode.Replace(" ", "").ToUpper();
-                geoLocation = _locationCalculator.CalculateLocation(postcode.Replace(" ", "").ToUpper());
-                Response.Cookies.Add(new HttpCookie("GeoLocation", JsonConvert.SerializeObject(geoLocation))
-                {
-                    Expires = DateTime.Now.AddYears(10)
-                });
-            }
-            else
-            {
-                var geoLocationCookie = Request.Cookies["GeoLocation"];
-                if (geoLocationCookie != null)
-                {
-                    try
-                    {
-                        geoLocation = JsonConvert.DeserializeObject<GeoLocation>(geoLocationCookie.Value);
-                        postcode = geoLocation.Postcode;
-                    }
-                    catch
-                    {
-                        Response.Cookies.Remove("GeoLocation");
-                    }
-                }
-            }
-            var searchResults = new List<SearchResult>();
-            if (geoLocation != null)
-            {
-                var userResults = RetrieveUsersInArea(geoLocation, radius.GetValueOrDefault(DefaultRadius));
-                searchResults = RetrieveSearchResults(userResults);
-            }
-            var searchResultsViewModel = new SearchResultsViewModel
             {
                 SearchResults = searchResults.OrderBy(x => x.Distance).ToList(),
                 Postcode = postcode,
