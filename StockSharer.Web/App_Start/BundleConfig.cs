@@ -27,7 +27,10 @@ namespace StockSharer.Web.App_Start
                 "~/assets/css/settings/settings.css",
                 "~/assets/css/lib/live-search.css"
                 ));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/scripts/search").Include(
+                "~/assets/js/search/availability.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/scripts/myGames").Include(
                 "~/assets/js/lib/foot-2-simple-ajax.js",
                 "~/assets/js/lib/foot-2-live-search.js",
