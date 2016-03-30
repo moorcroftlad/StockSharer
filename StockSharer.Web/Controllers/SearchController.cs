@@ -94,10 +94,11 @@ namespace StockSharer.Web.Controllers
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
-                const string sql = @"   SELECT 	a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId
+                const string sql = @"   SELECT 	a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId, p.Name PlatformName
                                         FROM 	GameAvailability ga
 		                                        INNER JOIN Game g ON g.GameId = ga.GameId
                                                 INNER JOIN Availability a ON a.AvailabilityId = ga.AvailabilityId
+                                                INNER JOIN Platform p ON p.PlatformId = g.PlatformId
                                         WHERE   ga.UserId in @UserIds";
                 var searchResults = connection.Query<SearchResult>(sql, new {UserIds = userResults.Select(x => x.UserId)}).ToList();
                 foreach (var searchResult in searchResults)
@@ -107,11 +108,5 @@ namespace StockSharer.Web.Controllers
                 return searchResults;
             }
         }
-    }
-
-    public class UserResult
-    {
-        public int UserId { get; set; }
-        public int Distance { get; set; }
     }
 }
