@@ -137,3 +137,9 @@ a.navbar-brand {
 .result-filter form {
     padding: 0 10px;
 }
+
+@media (min-width: 768px){
+    #availabilityModal .modal-dialog {
+        width: 370px;
+    }
+}
