@@ -142,4 +142,13 @@ a.navbar-brand {
     #availabilityModal .modal-dialog {
         width: 370px;
     }
+
+    .nav>li>a {
+        padding-right: 0;
+    }
 }
+
+.navbar-container {
+}
+
+.navbar-container {padding-right: 0;}

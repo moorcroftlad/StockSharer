@@ -159,6 +159,6 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     @Scripts.Render("~/bundles/scripts/search")
     <script type="text/javascript">
-        var loggedIn = @(User.Identity.IsAuthenticated ? "true;" : "false;")
+        var loggedIn = @(User != null ? "true;" : "false;")
     </script>
 }
