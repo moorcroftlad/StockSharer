@@ -1,7 +1,11 @@
 $(document).ready(function() {
     $('.js-btn-availability').on('click', function(event) {
         event.preventDefault();
-        $('#availabilityModal').modal('show');
+        if (window.loggedIn) {
+            $('#availabilityModal').modal('show');
+        } else {
+            window.location.href = "/user/login?ReturnUrl=/search";
+        }
     });
 
     var updateDate = function(start, end) {
