@@ -10,6 +10,7 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public decimal Balance { get; set; }
+        public int Rating { get; set; }
 
         public string FullName
         {

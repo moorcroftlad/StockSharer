@@ -223,3 +223,7 @@ margin: 0 0 30px 0;font-weight: bold;}
 #postcodeModal .list-unstyled{
     margin-bottom:0;
 }
+
+.fa-star {
+    color: #EFCE1C;
+}
