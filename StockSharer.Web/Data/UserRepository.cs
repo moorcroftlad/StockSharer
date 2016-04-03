@@ -25,7 +25,7 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"SELECT UserId, Forename, Surname, Email, Active FROM [User] WHERE Email = @Email";
+                const string sql = @"SELECT UserId, Forename, Surname, Email, Latitude, Longitude, Balance, Active FROM [User] WHERE Email = @Email";
                 return connection.Query<User>(sql, new { Email = email }).FirstOrDefault();
             }
         }
@@ -34,7 +34,7 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"SELECT UserId, Forename, Surname, Email, Active FROM [User] WHERE UserId = @UserId";
+                const string sql = @"SELECT UserId, Forename, Surname, Email, Latitude, Longitude, Balance, Active FROM [User] WHERE UserId = @UserId";
                 return connection.Query<User>(sql, new { UserId = userId }).FirstOrDefault();
             }
         }
@@ -43,7 +43,7 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"   SELECT UserId, Forename, Surname, Email, Latitude, Longitude, Active 
+                const string sql = @"   SELECT UserId, Forename, Surname, Email, Latitude, Longitude, Balance, Active 
                                         FROM [User] 
                                         WHERE Active = 1";
                 return connection.Query<User>(sql).ToList();

@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Security.Principal;
 using StockSharer.Web.App_Start;
 using StockSharer.Web.Authentication;
+using StockSharer.Web.Data;
 using StockSharer.Web.Models;
 
 namespace StockSharer.Web
@@ -15,6 +16,7 @@ namespace StockSharer.Web
     public class MvcApplication : HttpApplication
     {
         private readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
+        private readonly UserRepository _userRepository = new UserRepository();
 
         protected void Application_Start()
         {
@@ -33,8 +35,15 @@ namespace StockSharer.Web
             var identity = new GenericIdentity(authTicket.Name, "Forms");
             var principal = new UserPrincipal(identity);
             var userData = ((FormsIdentity)(Context.User.Identity)).Ticket.UserData;
-            principal.User = (User)_serializer.Deserialize(userData, typeof(User));
+            var user = (User) _serializer.Deserialize(userData, typeof (User));
+            principal.User = RetrieveUser(user.UserId);
             Context.User = principal;
+        }
+
+        private User RetrieveUser(int userId)
+        {
+            //TODO: retrieving user from database to get updated balance, improve this by caching the user
+            return _userRepository.RetrieveUser(userId);
         }
     }
 }

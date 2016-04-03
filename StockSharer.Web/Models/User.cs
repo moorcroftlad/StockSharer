@@ -9,6 +9,7 @@
         public bool Active { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public decimal Balance { get; set; }
 
         public string FullName
         {
