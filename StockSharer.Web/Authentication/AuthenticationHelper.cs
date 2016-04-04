@@ -26,7 +26,7 @@ namespace StockSharer.Web.Authentication
 
         private void SetCookie(HttpResponseBase response, User user)
         {
-            FormsAuthentication.SetAuthCookie(user.Email, false);
+            FormsAuthentication.SetAuthCookie(user.Email, true);
             var userData = _serializer.Serialize(user);
             var ticket = new FormsAuthenticationTicket(1, user.Email, DateTime.Now, DateTime.Now.AddDays(30), true, userData, FormsAuthentication.FormsCookiePath);
             var encryptedTicket = FormsAuthentication.Encrypt(ticket);
