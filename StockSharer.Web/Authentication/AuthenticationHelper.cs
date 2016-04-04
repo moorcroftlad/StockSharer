@@ -30,7 +30,10 @@ namespace StockSharer.Web.Authentication
             var userData = _serializer.Serialize(user);
             var ticket = new FormsAuthenticationTicket(1, user.Email, DateTime.Now, DateTime.Now.AddDays(30), true, userData, FormsAuthentication.FormsCookiePath);
             var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-            response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
+            response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
+                {
+                    Expires = DateTime.Now.AddYears(10)
+                });
         }
     }
 }
