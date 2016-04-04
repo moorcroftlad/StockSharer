@@ -4,5 +4,6 @@
     {
         public int UserId { get; set; }
         public int Distance { get; set; }
+        public int Rating { get; set; }
     }
 }

@@ -83,7 +83,8 @@ namespace StockSharer.Web.Controllers
                     usersInArea.Add(new UserResult
                         {
                             UserId = user.UserId,
-                            Distance = distanceBetweenLocations
+                            Distance = distanceBetweenLocations,
+                            Rating = user.Rating
                         });
                 }
             }
@@ -103,7 +104,9 @@ namespace StockSharer.Web.Controllers
                 var searchResults = connection.Query<SearchResult>(sql, new {UserIds = userResults.Select(x => x.UserId)}).ToList();
                 foreach (var searchResult in searchResults)
                 {
-                    searchResult.Distance = userResults.Single(x => x.UserId == searchResult.UserId).Distance;
+                    var user = userResults.Single(x => x.UserId == searchResult.UserId);
+                    searchResult.Distance = user.Distance;
+                    searchResult.Rating = user.Rating;
                 }
                 return searchResults;
             }
