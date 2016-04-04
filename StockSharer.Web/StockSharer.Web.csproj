@@ -148,6 +148,7 @@
     <Compile Include="Areas\Settings\Controllers\AccountController.cs" />
     <Compile Include="Areas\Settings\Controllers\BaseSettingsController.cs" />
     <Compile Include="Areas\Settings\Controllers\BalanceController.cs" />
+    <Compile Include="Areas\Settings\Controllers\AddressController.cs" />
     <Compile Include="Controllers\PostcodeController.cs" />
     <Compile Include="Areas\Settings\Controllers\PrivacyController.cs" />
     <Compile Include="Areas\Settings\Controllers\GamesController.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\AvailabilityRepository.cs" />
+    <Compile Include="Data\AddressRepository.cs" />
     <Compile Include="Data\GameRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Email\ISendEmail.cs" />
@@ -221,6 +223,7 @@
     <Content Include="Areas\Settings\Views\Games\Search.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Balance\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Address\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

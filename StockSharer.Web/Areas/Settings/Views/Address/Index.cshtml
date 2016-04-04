@@ -1,0 +1,79 @@
+﻿@using System.Web.Optimization
+@using StockSharer.Web.Areas.Settings.ViewModels
+@model StockSharer.Web.Areas.Settings.Controllers.AddressViewModel
+@{
+    ViewBag.Title = "Address";
+}
+
+<div class="page-content-holder">
+    <div class="container">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    @Html.Partial("_Sidebar", new AccountSidebarViewModel{Page = "Address"})
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="settings-main">
+                        <h1>Address</h1>
+                        <h2>You must have a valid address to borrow or rent out games</h2>
+                        <hr/>
+                        
+                        @if (Model.Message != null)
+                        {
+                            <div class="alert @(Model.Success ? "alert-success" : "alert-danger")" role="alert">
+                                <span class="glyphicon" aria-hidden="true"></span>
+                                @Model.Message
+                            </div>
+                        }
+                        
+                        <form class="form-horizontal" method="POST">
+                            <div class="form-group">
+                                <label for="Line1" class="col-sm-3 control-label">House number or name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="Line1" value="@Model.Address.Line1"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Line2" class="col-sm-3 control-label">Street</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="Line2" value="@Model.Address.Line2"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Town" class="col-sm-3 control-label">Town</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="Town" value="@Model.Address.Town"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="County" class="col-sm-3 control-label">County</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="County">
+                                        <option value="">Select county..</option>
+                                        <option selected="@(Model.Address.County == "Belfast")" value="Belfast">Belfast</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Postcode" class="col-sm-3 control-label">Postcode</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="Postcode" value="@Model.Address.Postcode"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/settings")
+}
