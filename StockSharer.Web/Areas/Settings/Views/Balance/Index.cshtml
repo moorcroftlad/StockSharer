@@ -1,0 +1,61 @@
+﻿@using System.Web.Optimization
+@using StockSharer.Web.Areas.Settings.ViewModels
+@model SettingsViewModel
+@{
+    ViewBag.Title = "Balance";
+}
+
+<div class="page-content-holder">
+    <div class="container">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    @Html.Partial("_Sidebar", new AccountSidebarViewModel{Page = "Balance"})
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="settings-main">
+                        <h1>Balance</h1>
+                        
+                        <h2>Deposit funds</h2>
+                        <hr/>
+                        
+                        @if (Model.Message != null)
+                        {
+                            <div class="alert @(Model.Success ? "alert-success" : "alert-danger")" role="alert">
+                                <span class="glyphicon" aria-hidden="true"></span>
+                                @Model.Message
+                            </div>
+                        }
+                        
+                        <form class="form-horizontal" method="POST">
+                            <div class="form-group">
+                                <label for="Amount" class="col-sm-3 control-label">Deposit amount</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="Amount">
+                                        <option value="5">&pound;5.00</option>
+                                        <option value="10">&pound;10.00</option>
+                                        <option value="15">&pound;15.00</option>
+                                        <option value="20">&pound;20.00</option>
+                                        <option value="30">&pound;30.00</option>
+                                        <option value="40">&pound;40.00</option>
+                                        <option value="50">&pound;50.00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/settings")
+}

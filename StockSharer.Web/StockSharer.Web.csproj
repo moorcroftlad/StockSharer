@@ -147,6 +147,7 @@
     <Compile Include="Areas\Settings\Attributes\AuthorizeUserAttribute.cs" />
     <Compile Include="Areas\Settings\Controllers\AccountController.cs" />
     <Compile Include="Areas\Settings\Controllers\BaseSettingsController.cs" />
+    <Compile Include="Areas\Settings\Controllers\BalanceController.cs" />
     <Compile Include="Controllers\PostcodeController.cs" />
     <Compile Include="Areas\Settings\Controllers\PrivacyController.cs" />
     <Compile Include="Areas\Settings\Controllers\GamesController.cs" />
@@ -219,6 +220,7 @@
     <Content Include="Areas\Settings\Views\Privacy\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Games\Search.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Balance\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

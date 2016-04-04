@@ -110,5 +110,15 @@ namespace StockSharer.Web.Data
                 connection.Execute(updateSql, user);
             }
         }
+
+        public void UpdateBalance(int amount, int userId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string updateSql = @" UPDATE [User] SET Balance = Balance + @Amount 
+                                            WHERE UserId = @UserId";
+                connection.Execute(updateSql, new {Amount = amount, UserId = userId});
+            }
+        }
     }
 }
