@@ -21,9 +21,26 @@ namespace StockSharer.Web.Areas.Settings.Controllers
             address.Latitude = 0;
             address.Longitude = 0;
             address.UserId = User.UserId;
-            _addressRepository.UpdateAddress(address);
-            TempData["ViewModel"] = new AddressViewModel {Message = "Address updated", Success = true};
+            if (ValidAddress(address))
+            {
+                _addressRepository.UpdateAddress(address);
+                TempData["ViewModel"] = new AddressViewModel { Message = "Address updated", Success = true };
+            }
+            else
+            {
+                TempData["ViewModel"] = new AddressViewModel {Message = "Please enter valid address", Success = false};
+            }
             return RedirectToAction("Index");
+        }
+
+        private static bool ValidAddress(Address address)
+        {
+            return address != null &&
+                   !string.IsNullOrEmpty(address.Line1) &&
+                   !string.IsNullOrEmpty(address.Line2) &&
+                   !string.IsNullOrEmpty(address.Town) &&
+                   !string.IsNullOrEmpty(address.County) &&
+                   !string.IsNullOrEmpty(address.Postcode);
         }
     }
 
