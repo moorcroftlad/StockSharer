@@ -26,7 +26,7 @@ namespace StockSharer.Web.Areas.Settings.Controllers
                 address.Longitude = geoLocation.Longitude;
                 address.UserId = User.UserId;
                 _addressRepository.UpdateAddress(address);
-                TempData["ViewModel"] = new AddressViewModel { Message = "Address updated", Success = true };
+                TempData["ViewModel"] = new AddressViewModel { Message = "Address updated", Success = true, Address = address};
             }
             else
             {

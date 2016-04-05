@@ -43,8 +43,9 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"   SELECT UserId, Forename, Surname, Email, Latitude, Longitude, Balance, Rating, Active 
-                                        FROM [User] 
+                const string sql = @"   SELECT u.UserId, Forename, Surname, Email, a.Latitude, a.Longitude, Balance, Rating, Active 
+                                        FROM [User] u 
+                                        INNER JOIN Address a on a.UserId = u.UserId
                                         WHERE Active = 1";
                 return connection.Query<User>(sql).ToList();
             }
