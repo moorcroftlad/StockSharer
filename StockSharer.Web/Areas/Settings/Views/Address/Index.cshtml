@@ -26,38 +26,43 @@
                             </div>
                         }
                         
-                        <form class="form-horizontal" method="POST">
+                        <form class="form-horizontal" method="POST" data-toggle="validator">
                             <div class="form-group">
                                 <label for="Line1" class="col-sm-3 control-label">House number or name</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="Line1" value="@Model.Address.Line1"/>
+                                    <input type="text" class="form-control" name="Line1" value="@Model.Address.Line1" required data-error="Please enter your house number or name"/>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="Line2" class="col-sm-3 control-label">Street</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="Line2" value="@Model.Address.Line2"/>
+                                    <input type="text" class="form-control" name="Line2" value="@Model.Address.Line2" required data-error="Please enter street"/>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="Town" class="col-sm-3 control-label">Town</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="Town" value="@Model.Address.Town"/>
+                                    <input type="text" class="form-control" name="Town" value="@Model.Address.Town" required data-error="Please enter town"/>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="County" class="col-sm-3 control-label">County</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" name="County">
+                                    <select class="form-control" name="County" required data-error="Please enter county">
                                         <option value="">Select county..</option>
                                         <option selected="@(Model.Address.County == "Belfast")" value="Belfast">Belfast</option>
+                                        <div class="help-block with-errors"></div>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="Postcode" class="col-sm-3 control-label">Postcode</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="Postcode" value="@Model.Address.Postcode"/>
+                                    <input type="text" class="form-control" name="Postcode" value="@Model.Address.Postcode" pattern="^[A-Za-z]{1,2}[0-9][0-9A-Za-z]?\s?[0-9][A-Za-z]{2}$" data-error="Please enter a valid UK postcode" required/>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
