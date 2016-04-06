@@ -2,6 +2,7 @@
 {
     public class SearchResult
     {
+        public int GameAvailabilityId { get; set; }
         public string GameName { get; set; }
         public string PlatformName { get; set; }
         public string Availability { get; set; }

@@ -2,6 +2,11 @@ $(document).ready(function() {
     $('.js-btn-availability').on('click', function(event) {
         event.preventDefault();
         if (window.loggedIn) {
+            var clickElement = $(this);
+            var gameAvailabilityId = clickElement.data('game-availability-id');
+            var name = clickElement.data('name');
+            $('#availabilityRequest input[name="GameAvailabilityId"]').val(gameAvailabilityId);
+            $('#availabilityRequest').find('.js-availability-request-header').text(name);
             $('#availabilityModal').modal('show');
         } else {
             window.location.href = "/user/login?ReturnUrl=/search";
@@ -10,7 +15,10 @@ $(document).ready(function() {
 
     var updateDate = function(start, end) {
         $('#dateRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        $('#availabilityRequest input[name="EndDate"]').val(end.format('YYYY-MM-DD'));
     };
+
+    updateDate(window.moment(), window.moment().add(2, 'days'));
 
     $('#dateRange').daterangepicker({
         ranges: {
@@ -26,6 +34,11 @@ $(document).ready(function() {
         endDate: window.moment().add(2, 'days'),
         minDate: window.moment()
     }, updateDate);
-    
-    updateDate(window.moment(), window.moment().add(2, 'days'));
+
+    $('#availabilityRequest').on('submit', function (event) {
+        event.preventDefault();
+        var form = $(this);
+        form.find('.js-no-request-made').hide();
+        form.find('.js-request-made').show();
+    });
 });

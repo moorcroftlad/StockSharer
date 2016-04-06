@@ -167,3 +167,11 @@ padding-right: 0;
 .navbar-container {padding-right: 0;}
 
 .ranges li:last-child { display: none; }
+
+.text-success {
+    color: green;
+    padding: 10px;
+    background-color: #E6EEE6;
+    font-weight: bold;
+    border: 1px solid green;
+}
