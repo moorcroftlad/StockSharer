@@ -164,7 +164,6 @@ padding-right: 0;
     }
 }
 
-.navbar-container {
-}
-
 .navbar-container {padding-right: 0;}
+
+.ranges li:last-child { display: none; }

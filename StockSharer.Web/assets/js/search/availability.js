@@ -22,8 +22,10 @@ $(document).ready(function() {
         locale: {
             format: 'YYYY-MM-DD'
         },
+        startDate: window.moment(),
+        endDate: window.moment().add(2, 'days'),
         minDate: window.moment()
     }, updateDate);
     
-    updateDate(window.moment(), window.moment().add(1, 'day'));
+    updateDate(window.moment(), window.moment().add(2, 'days'));
 });
