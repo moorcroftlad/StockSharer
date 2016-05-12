@@ -108,7 +108,7 @@
                                         </table>
                                     </div>
                                     <div class="result-cta">
-                                        <a class="btn btn-block js-btn-availability" data-name="@searchResult.GameName" data-game-availability-id="@searchResult.GameAvailabilityId"><i class="fa fa-calendar pull-left"></i>Check Availability</a>
+                                        <a class="btn btn-block js-btn-availability" data-name="@searchResult.GameName" data-reference="@searchResult.Reference"><i class="fa fa-calendar pull-left"></i>Check Availability</a>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
         <div class="modal-content">
             <form id="availabilityRequest" method="POST" action="/Availability/SubmitRequest">
                 @Html.AntiForgeryToken()
-                <input type="hidden" name="GameAvailabilityId" value=""/>
+                <input type="hidden" name="Reference" value=""/>
                 <input type="hidden" name="EndDate" value=""/>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

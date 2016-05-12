@@ -150,6 +150,7 @@
     <Compile Include="Areas\Settings\Controllers\BalanceController.cs" />
     <Compile Include="Areas\Settings\Controllers\AddressController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PostcodeController.cs" />
     <Compile Include="Areas\Settings\Controllers\PrivacyController.cs" />
     <Compile Include="Areas\Settings\Controllers\GamesController.cs" />

@@ -3,9 +3,9 @@ $(document).ready(function() {
         event.preventDefault();
         if (window.loggedIn) {
             var clickElement = $(this);
-            var gameAvailabilityId = clickElement.data('game-availability-id');
+            var reference = clickElement.data('reference');
             var name = clickElement.data('name');
-            $('#availabilityRequest input[name="GameAvailabilityId"]').val(gameAvailabilityId);
+            $('#availabilityRequest input[name="Reference"]').val(reference);
             $('#availabilityRequest').find('.js-availability-request-header').text(name);
             $('#availabilityModal').modal('show');
         } else {
@@ -40,5 +40,6 @@ $(document).ready(function() {
         var form = $(this);
         form.find('.js-no-request-made').hide();
         form.find('.js-request-made').show();
+        $.post(form.attr('action'), form.serialize());
     });
 });

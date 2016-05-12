@@ -95,7 +95,7 @@ namespace StockSharer.Web.Controllers
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
-                const string sql = @"   SELECT 	ga.GameAvailabilityId, a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId, p.Name PlatformName
+                const string sql = @"   SELECT 	ga.Reference, a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId, p.Name PlatformName
                                         FROM 	GameAvailability ga
 		                                        INNER JOIN Game g ON g.GameId = ga.GameId
                                                 INNER JOIN Availability a ON a.AvailabilityId = ga.AvailabilityId
