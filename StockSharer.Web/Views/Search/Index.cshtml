@@ -108,7 +108,7 @@
                                         </table>
                                     </div>
                                     <div class="result-cta">
-                                        <a class="btn btn-block js-btn-availability" data-name="@searchResult.GameName" data-reference="@searchResult.Reference" data-requested-today="@searchResult.RequestedToday.ToString().ToLower()"><i class="fa fa-calendar pull-left"></i>Check Availability</a>
+                                        <a class="btn btn-block js-btn-availability" data-name="@searchResult.GameName" data-reference="@searchResult.Reference" data-requested-today="@searchResult.RequestedToday.ToString().ToLower()" data-owns-game="@searchResult.OwnsGame.ToString().ToLower()"><i class="fa fa-calendar pull-left"></i>Check Availability</a>
                                     </div>
                                 </div>
                             </div>
@@ -145,6 +145,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-info btn-block js-no-request-made">Submit request</button>
                     <p class="js-request-made text-center text-success" style="display: none;">The user has been notified of your request</p>
+                    <p class="js-owns-game text-center text-warning" style="display: none;">You own this game and cannot request it</p>
                 </div>
             </form>
         </div>

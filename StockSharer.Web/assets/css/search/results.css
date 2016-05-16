@@ -175,3 +175,11 @@ padding-right: 0;
     font-weight: bold;
     border: 1px solid green;
 }
+
+.text-warning {
+    padding: 10px;
+    background-color: #EFF0ED;
+    font-weight: bold;
+    border: 1px solid #B4BB50;
+    color: #504E19;
+}

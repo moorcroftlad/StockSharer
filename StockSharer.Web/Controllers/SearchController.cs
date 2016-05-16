@@ -96,7 +96,8 @@ namespace StockSharer.Web.Controllers
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
                 const string sql = @"   SELECT	ga.GameAvailabilityId, ga.Reference, a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId, p.Name PlatformName,
-		                                        CASE WHEN r.UserId IS NOT NULL THEN 1 ELSE 0 END AS RequestedToday
+		                                        CASE WHEN r.UserId IS NOT NULL THEN 1 ELSE 0 END AS RequestedToday,
+                                                CASE WHEN ga.UserId = @LoggedInUserId THEN 1 ELSE 0 END AS OwnsGame
                                         FROM 	GameAvailability ga
 		                                        INNER JOIN Game g ON g.GameId = ga.GameId
                                                 INNER JOIN Availability a ON a.AvailabilityId = ga.AvailabilityId

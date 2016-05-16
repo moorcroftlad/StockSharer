@@ -7,10 +7,21 @@ $(document).ready(function() {
             var name = clickElement.data('name');
             $('#availabilityRequest input[name="Reference"]').val(reference);
             $('#availabilityRequest').find('.js-availability-request-header').text(name);
-            if (clickElement.data('requested-today')) {
-                hideRequestButton();
+
+            if (clickElement.data('owns-game')) {
+                $('.js-owns-game').show();
+                $('.js-no-request-made').hide();
+                $('.js-request-made').hide();
             } else {
-                showRequestButton();
+                if (clickElement.data('requested-today')) {
+                    $('.js-owns-game').hide();
+                    $('.js-no-request-made').hide();
+                    $('.js-request-made').show();
+                } else {
+                    $('.js-owns-game').hide();
+                    $('.js-no-request-made').show();
+                    $('.js-request-made').hide();
+                }
             }
             $('#availabilityModal').modal('show');
         } else {
@@ -21,16 +32,6 @@ $(document).ready(function() {
     var updateDate = function(start, end) {
         $('#dateRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         $('#availabilityRequest input[name="EndDate"]').val(end.format('YYYY-MM-DD'));
-    };
-
-    var hideRequestButton = function () {
-        $('#availabilityRequest').find('.js-no-request-made').hide();
-        $('#availabilityRequest').find('.js-request-made').show();
-    };
-    
-    var showRequestButton = function () {
-        $('#availabilityRequest').find('.js-no-request-made').show();
-        $('#availabilityRequest').find('.js-request-made').hide();
     };
 
     updateDate(window.moment(), window.moment().add(2, 'days'));
@@ -55,7 +56,9 @@ $(document).ready(function() {
         var form = $(this);
         var reference = form.find('input[name="Reference"]');
         $('.js-btn-availability[data-reference="' + reference.val() + '"]').data('requested-today', true);
-        hideRequestButton();
+        $('.js-owns-game').hide();
+        $('.js-no-request-made').hide();
+        $('.js-request-made').show();
         $.post(form.attr('action'), form.serialize());
     });
 });
