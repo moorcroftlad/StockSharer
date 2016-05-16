@@ -17,7 +17,7 @@ namespace StockSharer.Web.Areas.Settings.Controllers
             var myGamesViewModel = new MyGamesViewModel
                 {
                     MyGames = _availabilityRepository.RetrieveMyGames(User.UserId).OrderBy(x => x.GameName).ToList(),
-                    Games = _gameRepository.SearchForGames(null)
+                    Games = _gameRepository.SearchForGames(null, User.UserId)
                 };
             return View(myGamesViewModel);
         }
@@ -27,7 +27,7 @@ namespace StockSharer.Web.Areas.Settings.Controllers
             var searchViewModel = new SearchViewModel
                 {
                     Term = term,
-                    Games = _gameRepository.SearchForGames(term)
+                    Games = _gameRepository.SearchForGames(term, User.UserId)
                 };
             return View(searchViewModel);
         }
