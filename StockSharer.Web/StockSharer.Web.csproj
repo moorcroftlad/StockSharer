@@ -149,6 +149,7 @@
     <Compile Include="Areas\Settings\Controllers\BaseSettingsController.cs" />
     <Compile Include="Areas\Settings\Controllers\BalanceController.cs" />
     <Compile Include="Areas\Settings\Controllers\AddressController.cs" />
+    <Compile Include="Areas\Settings\Controllers\RequestsController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PostcodeController.cs" />
@@ -225,7 +226,7 @@
     <Content Include="Areas\Settings\Views\Games\Search.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Balance\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\Address\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Requests\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
