@@ -7,6 +7,11 @@ $(document).ready(function() {
             var name = clickElement.data('name');
             $('#availabilityRequest input[name="Reference"]').val(reference);
             $('#availabilityRequest').find('.js-availability-request-header').text(name);
+            if (clickElement.data('requested-today')) {
+                hideRequestButton();
+            } else {
+                showRequestButton();
+            }
             $('#availabilityModal').modal('show');
         } else {
             window.location.href = "/user/login?ReturnUrl=/search";
@@ -16,6 +21,16 @@ $(document).ready(function() {
     var updateDate = function(start, end) {
         $('#dateRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         $('#availabilityRequest input[name="EndDate"]').val(end.format('YYYY-MM-DD'));
+    };
+
+    var hideRequestButton = function () {
+        $('#availabilityRequest').find('.js-no-request-made').hide();
+        $('#availabilityRequest').find('.js-request-made').show();
+    };
+    
+    var showRequestButton = function () {
+        $('#availabilityRequest').find('.js-no-request-made').show();
+        $('#availabilityRequest').find('.js-request-made').hide();
     };
 
     updateDate(window.moment(), window.moment().add(2, 'days'));
@@ -38,8 +53,9 @@ $(document).ready(function() {
     $('#availabilityRequest').on('submit', function (event) {
         event.preventDefault();
         var form = $(this);
-        form.find('.js-no-request-made').hide();
-        form.find('.js-request-made').show();
+        var reference = form.find('input[name="Reference"]');
+        $('.js-btn-availability[data-reference="' + reference.val() + '"]').data('requested-today', true);
+        hideRequestButton();
         $.post(form.attr('action'), form.serialize());
     });
 });

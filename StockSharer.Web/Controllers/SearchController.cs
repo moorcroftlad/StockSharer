@@ -14,7 +14,7 @@ using StockSharer.Web.ViewModels;
 
 namespace StockSharer.Web.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : BaseController
     {
         private const int DefaultRadius = 1500;
         private readonly ICalulateLocation _locationCalculator;
@@ -91,17 +91,23 @@ namespace StockSharer.Web.Controllers
             return usersInArea;
         }
 
-        private static List<SearchResult> RetrieveSearchResults(List<UserResult> userResults)
+        private List<SearchResult> RetrieveSearchResults(List<UserResult> userResults)
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
-                const string sql = @"   SELECT 	ga.Reference, a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId, p.Name PlatformName
+                const string sql = @"   SELECT	ga.GameAvailabilityId, ga.Reference, a.Name Availability, g.Name GameName, g.HostedImageUrl, ga.UserId, p.Name PlatformName,
+		                                        CASE WHEN r.UserId IS NOT NULL THEN 1 ELSE 0 END AS RequestedToday
                                         FROM 	GameAvailability ga
 		                                        INNER JOIN Game g ON g.GameId = ga.GameId
                                                 INNER JOIN Availability a ON a.AvailabilityId = ga.AvailabilityId
                                                 INNER JOIN Platform p ON p.PlatformId = g.PlatformId
+		                                        LEFT OUTER JOIN Request r on r.GameAvailabilityId = ga.GameAvailabilityId and r.StartDate = cast (GETDATE() as DATE) and (NULL = @LoggedInUserId OR r.UserId = @LoggedInUserId)
                                         WHERE   ga.UserId in @UserIds";
-                var searchResults = connection.Query<SearchResult>(sql, new {UserIds = userResults.Select(x => x.UserId)}).ToList();
+                var searchResults = connection.Query<SearchResult>(sql, new
+                    {
+                        UserIds = userResults.Select(x => x.UserId),
+                        LoggedInUserId = User != null ? User.UserId : (int?)null
+                    }).ToList();
                 foreach (var searchResult in searchResults)
                 {
                     var user = userResults.Single(x => x.UserId == searchResult.UserId);

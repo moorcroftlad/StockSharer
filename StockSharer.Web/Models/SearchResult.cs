@@ -13,5 +13,6 @@ namespace StockSharer.Web.Models
         public int UserId { get; set; }
         public int Rating { get; set; }
         public Guid Reference { get; set; }
+        public bool RequestedToday { get; set; }
     }
 }
