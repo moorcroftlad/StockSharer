@@ -230,6 +230,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Balance\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Requests\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Address\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
