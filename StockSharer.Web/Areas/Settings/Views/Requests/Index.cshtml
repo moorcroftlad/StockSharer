@@ -1,0 +1,81 @@
+﻿@using StockSharer.Web.Areas.Settings.ViewModels
+@model StockSharer.Web.Areas.Settings.Models.ViewModels.RequestsViewModel
+@{
+    ViewBag.Title = "Game requests";
+}
+
+<div class="page-content-holder">
+    <div class="container">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    @Html.Partial("_Sidebar", new AccountSidebarViewModel{Page = "Requests"})
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="settings-main">
+                        <h1>Game requests</h1>
+                        <h2>You have the following requests</h2>
+                        <hr/>
+                        <table class="table table-striped table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-sm-2">
+                                        Date
+                                    </th>
+                                    <th class="col-sm-3">
+                                        Game
+                                    </th>
+                                    <th class="col-sm-2">
+                                        Nights
+                                    </th>
+                                    <th class="col-sm-2">
+                                        Total
+                                    </th>
+                                    <th class="col-sm-3">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var request in Model.Requests)
+                                {
+                                    <tr>
+                                        <td class="col-sm-2">
+                                            @if (request.StartDate.Equals(DateTime.Today))
+                                            {
+                                                @:Today
+                                            }
+                                            else
+                                            {
+                                                @request.StartDate.ToString("dd-MMM-yyyy")
+                                            }
+                                        </td>
+                                        <td class="col-sm-3">
+                                            @request.GameName
+                                        </td>
+                                        <td class="col-sm-2">
+                                            @request.Nights
+                                        </td>
+                                        <td class="col-sm-2">
+                                            @string.Format("{0:C}", request.TotalPrice)
+                                        </td>
+                                        <td class="col-sm-3">
+                                            <button class="btn btn-primary">Accept</button>
+                                            &nbsp;
+                                            <button class="btn btn-default">Reject</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/settings")
+}

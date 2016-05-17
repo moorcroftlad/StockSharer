@@ -150,6 +150,8 @@
     <Compile Include="Areas\Settings\Controllers\BalanceController.cs" />
     <Compile Include="Areas\Settings\Controllers\AddressController.cs" />
     <Compile Include="Areas\Settings\Controllers\RequestsController.cs" />
+    <Compile Include="Areas\Settings\Models\GameRequest.cs" />
+    <Compile Include="Areas\Settings\Models\ViewModels\RequestsViewModel.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PostcodeController.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\AvailabilityRepository.cs" />
     <Compile Include="Data\AddressRepository.cs" />
+    <Compile Include="Data\RequestRepository.cs" />
     <Compile Include="Data\GameRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Email\ISendEmail.cs" />
@@ -238,7 +241,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Settings\Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
