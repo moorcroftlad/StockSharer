@@ -35,3 +35,7 @@ span.platform-name {
     border-radius: 50%;
     line-height: 16px !important;
 }
+
+.inline-form {
+    display: inline-block;
+}

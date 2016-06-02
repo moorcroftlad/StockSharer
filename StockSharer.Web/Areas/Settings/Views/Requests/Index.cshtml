@@ -41,14 +41,7 @@
                                 {
                                     <tr>
                                         <td class="col-sm-2">
-                                            @if (request.StartDate.Equals(DateTime.Today))
-                                            {
-                                                @:Today
-                                            }
-                                            else
-                                            {
-                                                @request.StartDate.ToString("dd-MMM-yyyy")
-                                            }
+                                            @(request.IsToday ? request.Timestamp.ToString("HH:mm:ss") : request.StartDate.ToString("dd-MMM-yyyy"))
                                         </td>
                                         <td class="col-sm-3">
                                             @request.GameName
@@ -60,9 +53,37 @@
                                             @string.Format("{0:C}", request.TotalPrice)
                                         </td>
                                         <td class="col-sm-3">
-                                            <button class="btn btn-primary">Accept</button>
-                                            &nbsp;
-                                            <button class="btn btn-default">Reject</button>
+                                            @if (request.Accepted.HasValue || request.Rejected.HasValue)
+                                            {
+                                                if (request.Accepted.HasValue)
+                                                {
+                                                    @:Accepted (@(request.AcceptedToday ? request.Accepted.Value.ToString("HH:mm:ss") : request.Accepted.Value.ToString("dd-MMM-yyyy")))
+                                                }
+                                                else
+                                                {
+                                                    @:Rejected (@(request.RejectedToday ? request.Rejected.Value.ToString("HH:mm:ss") : request.Rejected.Value.ToString("dd-MMM-yyyy")))
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (request.IsToday)
+                                                {
+                                                    <form class="inline-form" method="POST" action="/settings/requests/accept">
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="Reference" value="@request.Reference"/>
+                                                        <button class="btn btn-primary">Accept</button>
+                                                    </form>
+                                                    <form class="inline-form" method="POST" action="/settings/requests/reject">
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="Reference" value="@request.Reference"/>
+                                                        <button class="btn btn-default">Reject</button>
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    @:Request expired
+                                                }
+                                            }
                                         </td>
                                     </tr>
                                 }
@@ -78,4 +99,9 @@
 @section styles
 {
     @Styles.Render("~/bundles/styles/settings")
+}
+
+@section scripts
+{
+    @Styles.Render("~/bundles/scripts/requests")
 }

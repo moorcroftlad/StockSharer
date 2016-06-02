@@ -9,5 +9,23 @@ namespace StockSharer.Web.Areas.Settings.Models
         public int Nights { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime? Accepted { get; set; }
+        public DateTime? Rejected { get; set; }
+        public DateTime Timestamp { get; set; }
+
+        public bool IsToday
+        {
+            get { return StartDate.Date.Equals(DateTime.Today); }
+        }
+
+        public bool AcceptedToday
+        {
+            get { return Accepted.GetValueOrDefault(DateTime.MinValue).Date.Equals(DateTime.Today); }
+        }
+
+        public bool RejectedToday
+        {
+            get { return Rejected.GetValueOrDefault(DateTime.MinValue).Date.Equals(DateTime.Today); }
+        }
     }
 }

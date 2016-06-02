@@ -45,13 +45,33 @@ namespace StockSharer.Web.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"   SELECT  r.Reference, g.Name GameName, DateDiff(day, r.StartDate, r.EndDate) Nights, (DateDiff(day, r.StartDate, r.EndDate) * ga.PricePerNight) TotalPrice, r.StartDate
+                const string sql = @"   SELECT  r.Reference, g.Name GameName, DateDiff(day, r.StartDate, r.EndDate) Nights, 
+                                                (DateDiff(day, r.StartDate, r.EndDate) * ga.PricePerNight) TotalPrice, r.StartDate, 
+                                                r.Accepted, r.Rejected, r.Timestamp
                                         FROM    Request r
                                                 INNER JOIN GameAvailability ga on ga.GameAvailabilityId = r.GameAvailabilityId
                                                 INNER JOIN Game g on g.GameId = ga.GameId
                                         WHERE   ga.UserId = @UserId
                                         ORDER BY Timestamp DESC";
                 return connection.Query<GameRequest>(sql, new { UserId = userId }).ToList();
+            }
+        }
+
+        public void AcceptRequest(Guid reference)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"UPDATE Request SET Accepted = @TimeNow WHERE Reference = @Reference";
+                connection.Execute(sql, new { Reference = reference, TimeNow = DateTime.Now });
+            }
+        }
+
+        public void RejectRequest(Guid reference)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"UPDATE Request SET Rejected = @TimeNow WHERE Reference = @Reference";
+                connection.Execute(sql, new { Reference = reference, TimeNow = DateTime.Now });
             }
         }
     }
