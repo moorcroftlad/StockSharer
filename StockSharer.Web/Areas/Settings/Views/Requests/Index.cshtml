@@ -19,19 +19,25 @@
                         <table class="table table-striped table-condensed table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-sm-2">
+                                    <th>
                                         Date
                                     </th>
-                                    <th class="col-sm-3">
+                                    <th>
+                                        Origin
+                                    </th>
+                                    <th>
                                         Game
                                     </th>
-                                    <th class="col-sm-2">
+                                    <th>
                                         Nights
                                     </th>
-                                    <th class="col-sm-2">
+                                    <th>
                                         Total
                                     </th>
-                                    <th class="col-sm-3">
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
                                         Actions
                                     </th>
                                 </tr>
@@ -40,19 +46,22 @@
                                 @foreach (var request in Model.Requests)
                                 {
                                     <tr>
-                                        <td class="col-sm-2">
+                                        <td>
                                             @(request.IsToday ? request.Timestamp.ToString("HH:mm:ss") : request.StartDate.ToString("dd-MMM-yyyy"))
                                         </td>
-                                        <td class="col-sm-3">
+                                        <td>
+                                            @request.Origin
+                                        </td>
+                                        <td>
                                             @request.GameName
                                         </td>
-                                        <td class="col-sm-2">
+                                        <td>
                                             @request.Nights
                                         </td>
-                                        <td class="col-sm-2">
+                                        <td>
                                             @string.Format("{0:C}", request.TotalPrice)
                                         </td>
-                                        <td class="col-sm-3">
+                                        <td>
                                             @if (request.Accepted.HasValue || request.Rejected.HasValue)
                                             {
                                                 if (request.Accepted.HasValue)
@@ -64,25 +73,28 @@
                                                     @:Rejected (@(request.RejectedToday ? request.Rejected.Value.ToString("HH:mm:ss") : request.Rejected.Value.ToString("dd-MMM-yyyy")))
                                                 }
                                             }
+                                            else if (!request.IsToday)
+                                            {
+                                                @:Request expired
+                                            }
                                             else
                                             {
-                                                if (request.IsToday)
-                                                {
-                                                    <form class="inline-form" method="POST" action="/settings/requests/accept">
-                                                        @Html.AntiForgeryToken()
-                                                        <input type="hidden" name="Reference" value="@request.Reference"/>
-                                                        <button class="btn btn-primary">Accept</button>
-                                                    </form>
-                                                    <form class="inline-form" method="POST" action="/settings/requests/reject">
-                                                        @Html.AntiForgeryToken()
-                                                        <input type="hidden" name="Reference" value="@request.Reference"/>
-                                                        <button class="btn btn-default">Reject</button>
-                                                    </form>
-                                                }
-                                                else
-                                                {
-                                                    @:Request expired
-                                                }
+                                                @:Open
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (request.Received && request.IsToday && !request.Accepted.HasValue && !request.Rejected.HasValue)
+                                            {
+                                                <form class="inline-form" method="POST" action="/settings/requests/accept">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="Reference" value="@request.Reference"/>
+                                                    <button class="btn btn-primary">Accept</button>
+                                                </form>
+                                                <form class="inline-form" method="POST" action="/settings/requests/reject">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="Reference" value="@request.Reference"/>
+                                                    <button class="btn btn-default">Reject</button>
+                                                </form>
                                             }
                                         </td>
                                     </tr>

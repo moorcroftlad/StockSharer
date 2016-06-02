@@ -12,6 +12,12 @@ namespace StockSharer.Web.Areas.Settings.Models
         public DateTime? Accepted { get; set; }
         public DateTime? Rejected { get; set; }
         public DateTime Timestamp { get; set; }
+        public string Origin { get; set; }
+
+        public bool Received
+        {
+            get { return Origin == "Received"; }
+        }
 
         public bool IsToday
         {

@@ -47,13 +47,41 @@ namespace StockSharer.Web.Data
             {
                 const string sql = @"   SELECT  r.Reference, g.Name GameName, DateDiff(day, r.StartDate, r.EndDate) Nights, 
                                                 (DateDiff(day, r.StartDate, r.EndDate) * ga.PricePerNight) TotalPrice, r.StartDate, 
-                                                r.Accepted, r.Rejected, r.Timestamp
+                                                r.Accepted, r.Rejected, r.Timestamp, CASE WHEN ga.UserId = @UserId THEN 'Received' ELSE 'Sent' END AS Origin
                                         FROM    Request r
                                                 INNER JOIN GameAvailability ga on ga.GameAvailabilityId = r.GameAvailabilityId
                                                 INNER JOIN Game g on g.GameId = ga.GameId
                                         WHERE   ga.UserId = @UserId
+		                                        OR r.UserId = @UserId
                                         ORDER BY Timestamp DESC";
                 return connection.Query<GameRequest>(sql, new { UserId = userId }).ToList();
+            }
+        }
+
+        public RequestDetail RetrieveGameOwner(Guid reference)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"   SELECT  u.Email, g.Name GameName
+                                        FROM    GameAvailability ga
+                                                INNER JOIN [User] u on u.UserId = ga.UserId
+                                                INNER JOIN Game g on g.GameId = ga.GameId
+                                        WHERE   ga.Reference = @Reference";
+                return connection.Query<RequestDetail>(sql, new { Reference = reference }).FirstOrDefault();
+            }
+        }
+
+        public RequestDetail RetrieveGameRequester(Guid reference)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"   SELECT  u.Email, g.Name GameName
+                                        FROM    Request r 
+                                                INNER JOIN GameAvailability ga on ga.GameAvailabilityId = r.GameAvailabilityId
+                                                INNER JOIN [User] u on u.UserId = r.UserId
+                                                INNER JOIN Game g on g.GameId = ga.GameId
+                                        WHERE   r.Reference = @Reference";
+                return connection.Query<RequestDetail>(sql, new { Reference = reference }).FirstOrDefault();
             }
         }
 
@@ -74,5 +102,11 @@ namespace StockSharer.Web.Data
                 connection.Execute(sql, new { Reference = reference, TimeNow = DateTime.Now });
             }
         }
+    }
+
+    public class RequestDetail
+    {
+        public string GameName { get; set; }
+        public string Email { get; set; }
     }
 }
