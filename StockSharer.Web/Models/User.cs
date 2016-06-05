@@ -11,6 +11,7 @@
         public double Longitude { get; set; }
         public decimal Balance { get; set; }
         public int Rating { get; set; }
+        public int Requests { get; set; }
 
         public string FullName
         {

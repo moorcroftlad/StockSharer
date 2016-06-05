@@ -17,6 +17,7 @@ namespace StockSharer.Web
     {
         private readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
         private readonly UserRepository _userRepository = new UserRepository();
+        private readonly RequestRepository _requestRepository = new RequestRepository();
 
         protected void Application_Start()
         {
@@ -43,7 +44,9 @@ namespace StockSharer.Web
         private User RetrieveUser(int userId)
         {
             //TODO: retrieving user from database to get updated balance, improve this by caching the user
-            return _userRepository.RetrieveUser(userId);
+            var user = _userRepository.RetrieveUser(userId);
+            user.Requests = _requestRepository.RetrieveNumberOfRequests(userId);
+            return user;
         }
     }
 }

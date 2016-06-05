@@ -102,6 +102,25 @@ namespace StockSharer.Web.Data
                 connection.Execute(sql, new { Reference = reference, TimeNow = DateTime.Now });
             }
         }
+
+        public int RetrieveNumberOfRequests(int userId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"   SELECT  Count(*) Total
+                                        FROM    Request r
+                                                INNER JOIN GameAvailability ga on ga.GameAvailabilityId = r.GameAvailabilityId
+                                        WHERE   r.StartDate = @Today
+                                                AND Accepted IS NULL
+                                                AND Rejected IS NULL
+                                                AND ga.UserId = @UserId";
+                return connection.Query<int>(sql, new
+                    {
+                        UserId = userId,
+                        DateTime.Today
+                    }).SingleOrDefault();
+            }
+        }
     }
 
     public class RequestDetail

@@ -16,6 +16,15 @@
                 @if (User != null)
                 {
                     <li>
+                        <a href="/settings/requests" class="tray-icon-holder">
+                            <i class="fa fa-inbox" aria-hidden="true"></i>
+                            @if (User.Requests > 0)
+                            {
+                                <span class="badge">@User.Requests</span>
+                            }
+                        </a>
+                    </li>
+                    <li>
                         <a href="/settings/balance">Balance: &pound;@User.Balance.ToString("0.00")</a>
                     </li>
                     <li class="dropdown">
@@ -32,7 +41,6 @@
                     <li><a href="/user/login">Login</a></li>
                     <li><a href="/user/register">Register</a></li>
                 }
-                
             </ul>
         </div>
     </div>

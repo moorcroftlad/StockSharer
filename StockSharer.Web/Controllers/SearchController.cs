@@ -20,12 +20,14 @@ namespace StockSharer.Web.Controllers
         private readonly ICalulateLocation _locationCalculator;
         private readonly UserRepository _userRepository;
         private readonly DistanceCalculator _distanceCalculator;
+        private readonly RequestRepository _requestRepository;
 
         public SearchController()
         {
             _locationCalculator = new GoogleMapsApiLocationCalculator();
             _userRepository = new UserRepository();
             _distanceCalculator = new DistanceCalculator();
+            _requestRepository = new RequestRepository();
         }
 
         public ActionResult Index(string postcode, int? radius = null)
