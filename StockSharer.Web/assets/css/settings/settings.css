@@ -39,3 +39,9 @@ span.platform-name {
 .inline-form {
     display: inline-block;
 }
+
+@media (min-width: 768px) {
+    #viewAddressModal .modal-dialog {
+        width: 480px;
+    }
+}

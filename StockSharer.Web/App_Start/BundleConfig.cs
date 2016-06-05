@@ -11,6 +11,7 @@ namespace StockSharer.Web.App_Start
                 "~/assets/js/lib/bootstrap.min.js",
                 "~/assets/js/lib/validator.js",
                 "~/assets/js/lib/cookies.js",
+                "~/assets/js/lib/handlebars-v4.0.5.js",
                 "~/assets/js/global/postcode.js"));
 
             bundles.Add(new StyleBundle("~/bundles/styles/global").Include(

@@ -47,14 +47,18 @@ namespace StockSharer.Web.Data
             {
                 const string sql = @"   SELECT  r.Reference, g.Name GameName, DateDiff(day, r.StartDate, r.EndDate) Nights, 
                                                 (DateDiff(day, r.StartDate, r.EndDate) * ga.PricePerNight) TotalPrice, r.StartDate, 
-                                                r.Accepted, r.Rejected, r.Timestamp, CASE WHEN ga.UserId = @UserId THEN 'Received' ELSE 'Sent' END AS Origin
+                                                r.Accepted, r.Rejected, r.Timestamp, CASE WHEN ga.UserId = @UserId THEN 'Received' ELSE 'Sent' END AS Origin,
+                                                CONVERT(DATETIME, ua.StartTime) StartTime, CONVERT(DATETIME, ua.EndTime) EndTime, 
+                                                a.Line1, a.Line2, a.Town, a.County, a.Postcode, u.Forename, u.Surname
                                         FROM    Request r
                                                 INNER JOIN GameAvailability ga on ga.GameAvailabilityId = r.GameAvailabilityId
                                                 INNER JOIN Game g on g.GameId = ga.GameId
-                                        WHERE   ga.UserId = @UserId
-		                                        OR r.UserId = @UserId
+                                                INNER JOIN [User] u on u.UserId = ga.UserId
+                                                LEFT OUTER JOIN Address a on a.UserId = ga.UserId
+                                                LEFT OUTER JOIN UserAvailability ua ON ua.UserId = ga.UserId AND ua.Day = @DayOfWeek
+                                        WHERE   (ga.UserId = @UserId OR r.UserId = @UserId)
                                         ORDER BY Timestamp DESC";
-                return connection.Query<GameRequest>(sql, new { UserId = userId }).ToList();
+                return connection.Query<GameRequest>(sql, new { UserId = userId, DayOfWeek = (int)DateTime.Today.DayOfWeek }).ToList();
             }
         }
 
