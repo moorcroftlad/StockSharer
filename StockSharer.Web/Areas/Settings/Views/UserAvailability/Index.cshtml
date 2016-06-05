@@ -1,0 +1,92 @@
+﻿@using StockSharer.Web.Areas.Settings.ViewModels
+@model StockSharer.Web.Areas.Settings.Controllers.UserAvailabilityViewModel
+@{
+    ViewBag.Title = "User availability";
+}
+
+<div class="page-content-holder">
+    <div class="container">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    @Html.Partial("_Sidebar", new AccountSidebarViewModel{Page = "User availability"})
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="settings-main">
+                        <h1>Availability</h1>
+                        <h2>Select which hours you wish to advertise your games for availability</h2>
+                        <hr/>
+                        
+                        @if (Model.Message != null)
+                        {
+                            <div class="alert @(Model.Success ? "alert-success" : "alert-danger")" role="alert">
+                                <span class="glyphicon" aria-hidden="true"></span>
+                                @Model.Message
+                            </div>
+                        }
+                        
+                        <form class="form-horizontal" method="POST" data-toggle="validator">
+                            @Html.AntiForgeryToken()
+                            @foreach (DayOfWeek day in Enum.GetValues(typeof (DayOfWeek)))
+                            {
+                                <input type="hidden" name="UserAvailabilitys[@((int)day)].Day" value="@((int)day)"/>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">@day.ToString()</label>
+                                    @if (Model.UserAvailabilitys.Count > 0)
+                                    {
+                                        <div class="col-xs-4">
+                                            <div class="input-group bootstrap-timepicker timepicker">
+                                                <input name="UserAvailabilitys[@((int)day)].StartTime" type="text" class="form-control input-small availability-timepicker" value="@Model.UserAvailabilitys[(int)day].StartTime.ToString("HH:mm tt")">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-1 text-center">-</div>
+                                        <div class="col-xs-4">
+                                            <div class="input-group bootstrap-timepicker timepicker">
+                                                <input name="UserAvailabilitys[@((int)day)].EndTime" type="text" class="form-control input-small availability-timepicker" value="@Model.UserAvailabilitys[(int)day].EndTime.ToString("HH:mm tt")" >
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-xs-4">
+                                            <div class="input-group bootstrap-timepicker timepicker">
+                                                <input name="UserAvailabilitys[@((int)day)].StartTime" type="text" class="form-control input-small availability-timepicker" value="00:00 AM">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-1 text-center">-</div>
+                                        <div class="col-xs-4">
+                                            <div class="input-group bootstrap-timepicker timepicker">
+                                                <input name="UserAvailabilitys[@((int)day)].EndTime" type="text" class="form-control input-small availability-timepicker" value="00:00 AM">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/settings")
+    @Styles.Render("~/bundles/styles/settings/userAvailability")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/scripts/userAvailability")
+}

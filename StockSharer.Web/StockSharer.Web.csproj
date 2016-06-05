@@ -117,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\lib\bootstrap-timepicker.min.css" />
     <Content Include="assets\css\lib\live-search.css" />
     <Content Include="assets\css\search\results.css" />
     <Content Include="assets\css\settings\settings.css" />
@@ -126,7 +127,9 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\games.jpg" />
     <Content Include="assets\images\tools.jpg" />
+    <Content Include="assets\js\lib\bootstrap-timepicker.min.js" />
     <Content Include="assets\js\settings\addGame.js" />
+    <Content Include="assets\js\settings\userAvailability.js" />
     <Content Include="assets\js\settings\requests.js" />
     <Content Include="assets\js\search\availability.js" />
     <Content Include="assets\js\global\postcode.js" />
@@ -150,6 +153,7 @@
     <Compile Include="Areas\Settings\Controllers\BaseSettingsController.cs" />
     <Compile Include="Areas\Settings\Controllers\BalanceController.cs" />
     <Compile Include="Areas\Settings\Controllers\AddressController.cs" />
+    <Compile Include="Areas\Settings\Controllers\UserAvailabilityController.cs" />
     <Compile Include="Areas\Settings\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Settings\Models\GameRequest.cs" />
     <Compile Include="Areas\Settings\Models\ViewModels\RequestsViewModel.cs" />
@@ -172,6 +176,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\AvailabilityRepository.cs" />
     <Compile Include="Data\AddressRepository.cs" />
+    <Compile Include="Data\UserAvailabilityRepository.cs" />
     <Compile Include="Data\RequestRepository.cs" />
     <Compile Include="Data\GameRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />
@@ -232,6 +237,7 @@
     <Content Include="Areas\Settings\Views\Balance\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Requests\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Address\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\UserAvailability\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
