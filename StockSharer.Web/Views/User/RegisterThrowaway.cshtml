@@ -1,0 +1,26 @@
+﻿@using System.Web.Optimization
+@model StockSharer.Web.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Register an account";
+}
+<div class="page-content-holder">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+                <div class="page-content login-holder">
+                    <h1 class="text-center">Register a throwaway account</h1>
+                    <h2 class="text-center">Click the button below to create a throwaway account. You will be automatically logged in and can change your password in the account area.</h2>
+                    <form method="POST" action="/user/CreateThrowawayAccount" data-toggle="validator">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-default btn-block main-cta-btn main-cta-btn-primary">Register throwaway account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/user")
+}

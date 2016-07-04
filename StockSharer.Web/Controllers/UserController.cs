@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using RandomNameGenerator;
 using StockSharer.Web.Authentication;
 using StockSharer.Web.Cache;
 using StockSharer.Web.Data;
@@ -71,6 +72,28 @@ namespace StockSharer.Web.Controllers
             }
             registerViewModel.Error = "An account with your email address already exists";
             return View(registerViewModel);
+        }
+
+        public ActionResult RegisterThrowaway()
+        {
+            var registerThrowawayViewModel = TempData["RegisterThrowawayViewModel"] as RegisterThrowawayViewModel;
+            return View(registerThrowawayViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateThrowawayAccount()
+        {
+            var email = string.Format("{0}@stocksharer.com", (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
+            var forename = NameGenerator.GenerateFirstName(Gender.Male);
+            var surname = NameGenerator.GenerateLastName();
+            var textInfo = new CultureInfo("en-US", false).TextInfo;
+            forename = textInfo.ToTitleCase(forename.ToLower());
+            surname = textInfo.ToTitleCase(surname.ToLower());
+            var userId = _userRepository.CreateUser(email, forename, surname, "test");
+            _userRepository.ActivateUser(userId);
+            _authenticationHelper.SetFormsAuthenticationCookie(Response, userId);
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult RegistrationSuccessful()
@@ -202,5 +225,9 @@ namespace StockSharer.Web.Controllers
             var bodyHtml = string.Format("We have received a request to reset your StockSharer password, if this was not from you please ignore this email.  To change your password please click on the link and follow the instructions:<br /><br /><a href=\"http://www.stocksharer.com/user/changepassword/{0}\">http://www.stocksharer.com/user/changepassword/{0}</a>", temporaryAuthGuid);
             _emailSender.SendEmail(email, "StockSharer password reset", bodyText, bodyHtml);
         }
+    }
+
+    public class RegisterThrowawayViewModel
+    {
     }
 }
