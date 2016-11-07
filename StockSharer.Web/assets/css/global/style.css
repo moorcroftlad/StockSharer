@@ -5,6 +5,9 @@ body {
 .navbar {
     margin-bottom: 0;
     background-color: white;
+    border: none;
+    border-bottom: 5px solid #0bb8e3;
+    heighT: 65px;
 }
 
 .main-cta {
@@ -248,4 +251,14 @@ margin: 0 0 30px 0;font-weight: bold;}
         right: inherit;
         top: 0px;
     }
+}
+
+.navbar-brand {
+    padding: 0;
+    margin-top: 10px;
+    height: 41px;
+}
+
+.navbar-nav {
+    margin-top: 5px;
 }
