@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@using System.Web.Optimization
+﻿@using System.Web.Optimization
 @model StockSharer.Web.ViewModels.SearchResultsViewModel
 @{
     ViewBag.Title = "Search results";
@@ -10,110 +9,124 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="content-page-header">
-                    @if (Model.SearchResults.Any())
-                    {
-                        <h1>Games found near @Model.Postcode</h1>
-                    }
-                    else
-                    {
-                        <h1>No results found, please broaden your search</h1>
-                    }
+                    <h1>Games found in Lisburn</h1>
             
                     <p>Vis et nisl labores, no vis probo erant. Ei homero reprimique vix. Saperet legimus salutatus has in. Pro munere maiorum no, sed idque similique at.</p>
                     <p>No vim latine phaedrum dissentiet. Reque viris nominavi pro an, eu atqui postea dissentiunt nec. Praesent qualisque urbanitas ex vel. Vix an prodesset adolescens.</p>
                 </div>
                 
-                <div class="row">
-                    <div class="col-xs-12">
+                <div class="row">   
+                    <div class="col-sm-3">
                         <div class="result-filter">
-                            <h2>Filter Games</h2>
+                            <h2>@Model.SearchResults.Count games found</h2>
                             <form data-toggle="validator" method="GET">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label>Distance</label>
-                                        <select name="radius" class="form-control">
-                                            <option @(Model.Radius == 1500 ? "selected" : "") value="1500">National</option>
-                                            <option @(Model.Radius == 1 ? "selected" : "") value="1">Within 1 mile</option>
-                                            <option @(Model.Radius == 5 ? "selected" : "") value="5">Within 5 miles</option>
-                                            <option @(Model.Radius == 10 ? "selected" : "") value="10">Within 10 miles</option>
-                                            <option @(Model.Radius == 15 ? "selected" : "") value="15">Within 15 miles</option>
-                                            <option @(Model.Radius == 20 ? "selected" : "") value="20">Within 20 miles</option>
-                                            <option @(Model.Radius == 25 ? "selected" : "") value="25">Within 25 miles</option>
-                                            <option @(Model.Radius == 30 ? "selected" : "") value="30">Within 30 miles</option>
-                                            <option @(Model.Radius == 35 ? "selected" : "") value="35">Within 35 miles</option>
-                                            <option @(Model.Radius == 40 ? "selected" : "") value="40">Within 40 miles</option>
-                                            <option @(Model.Radius == 45 ? "selected" : "") value="45">Within 45 miles</option>
-                                            <option @(Model.Radius == 50 ? "selected" : "") value="50">Within 50 miles</option>
-                                            <option @(Model.Radius == 55 ? "selected" : "") value="55">Within 55 miles</option>
-                                            <option @(Model.Radius == 60 ? "selected" : "") value="60">Within 60 miles</option>
-                                            <option @(Model.Radius == 70 ? "selected" : "") value="70">Within 70 miles</option>
-                                            <option @(Model.Radius == 80 ? "selected" : "") value="80">Within 80 miles</option>
-                                            <option @(Model.Radius == 90 ? "selected" : "") value="90">Within 90 miles</option>
-                                            <option @(Model.Radius == 100 ? "selected" : "") value="100">Within 100 miles</option>
-                                            <option @(Model.Radius == 200 ? "selected" : "") value="200">Within 200 miles</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Town / City</label>
+                                    <select class="form-control" name="town">
+                                        <option value="lisburn">Lisburn</option>
+                                    </select>
+                                    <span class="help-block with-errors"></span>
+                                </div>
                                 
-                                    <div class="col-sm-4">
-                                        <label>Postcode</label>
-                                        <input name="postcode" class="form-control" type="text" placeholder="Postcode" pattern="^[A-Za-z]{1,2}[0-9][0-9A-Za-z]?\s?[0-9][A-Za-z]{2}$" data-error="Please enter a valid UK postcode" value="@Model.Postcode" required/>
-                                        <span class="help-block with-errors"></span>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Platform</label>
+                                    <select class="form-control" name="platform">
+                                        <option value="">Any</option>
+                                        <option value="1">PS3</option>
+                                        <option value="2">PS4</option>
+                                        <option value="3">Xbox 360</option>
+                                        <option value="4">Xbox One</option>
+                                    </select>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control" name="status">
+                                        <option value="">Any</option>
+                                        <option value="1">Available</option>
+                                        <option value="2">On loan</option>
+                                    </select>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Lender</label>
+                                    <select class="form-control" name="lendertype">
+                                        <option value="">Any</option>
+                                        <option value="1">Private</option>
+                                        <option value="2">Business</option>
+                                    </select>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Sort</label>
+                                    <select class="form-control" name="sort">
+                                        <option value="">Default</option>
+                                        <option value="1">Name</option>
+                                        <option value="2">Price (low-high)</option>
+                                        <option value="3">Price (high-low)</option>
+                                    </select>
+                                    <span class="help-block with-errors"></span>
+                                </div>
                                     
-                                    <div class="col-sm-4">
-                                        <label>&nbsp;</label>
-                                        <input type="submit" class="btn btn-block btn-primary" value="Search"/>
-                                    </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-block btn-primary" value="Search"/>
                                 </div>
                             </form>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    @foreach (var searchResult in Model.SearchResults)
-                    {
-                        <div class="col-sm-6 col-md-4">
-                            <div class="result-holder">
-                                <h3 title="@searchResult.GameName">@searchResult.GameName</h3>
-                                <div class="result-image">
-                                    <img class="center-block" src="@searchResult.HostedImageUrl"/>
-                                    <div class="label label-success label-ratings">@searchResult.Rating <i class="fa fa-star"></i></div>
-                                    <div class="label label-success label-distance"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;@searchResult.Distance miles</div>
-                                </div>
-                                <div class="result-footer">
-                                    <p>Duo ubique civibus officiis no, legimus fastidii euripidis vel no. Dicant aperiri nostrum vim ei. Ex vix aliquid evertitur efficiendi. Id sed idque harum postea, at erat putent vim. Et has timeam dolorem, mei ei nominati concludaturque, ei vel feugiat molestie hendrerit.</p>
-                                    <div class="result-meta">
-                                        <table>
-                                            <tr>
-                                                <td><strong>Type:</strong></td>
-                                                <td>Game</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Platform:</strong></td>
-                                                <td>@searchResult.PlatformName</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Price:</strong></td>
-                                                <td>&pound;2.00 / day</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Distance:</strong></td>
-                                                <td>@searchResult.Distance miles away</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Status:</strong></td>
-                                                <td>@searchResult.Availability</td>
-                                            </tr>
-                                        </table>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            @if (!Model.SearchResults.Any())
+                            {
+                                <h2>No results found, please refine your search</h2>
+                            }
+                            @foreach (var searchResult in Model.SearchResults)
+                            {
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="result-holder">
+                                        <h3 title="@searchResult.GameName">@searchResult.GameName</h3>
+                                        <div class="result-image">
+                                            <img class="center-block" src="@searchResult.ImageUrl">
+                                        </div>
+                                        <div class="result-footer">
+                                            <p>Duo ubique civibus officiis no, legimus fastidii euripidis vel no. Dicant aperiri nostrum vim ei. Ex vix aliquid evertitur efficiendi. Id sed idque harum postea, at erat putent vim. Et has timeam dolorem, mei ei nominati concludaturque, ei vel feugiat molestie hendrerit.</p>
+                                            <div class="result-meta">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><strong>Type:</strong></td>
+                                                            <td>@searchResult.StockTypeName</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Platform:</strong></td>
+                                                            <td>@searchResult.PlatformName</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Price:</strong></td>
+                                                            <td>@string.Format("{0:C}", searchResult.Price) / night</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Town:</strong></td>
+                                                            <td>@searchResult.Town</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Status:</strong></td>
+                                                            <td>@searchResult.StockStatusName</td>
+                                                        </tr>
+                                                    </tbody></table>
+                                            </div>
+                                            <div class="result-cta">
+                                                <a class="btn btn-block js-btn-availability" data-name="@searchResult.GameName" data-reference="51382b5c-6b3b-4680-8882-ece0385987d8" data-requested-today="false" data-owns-game="false"><i class="fa fa-calendar pull-left"></i>Check Availability</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="result-cta">
-                                        <a class="btn btn-block js-btn-availability" data-name="@searchResult.GameName" data-reference="@searchResult.Reference" data-requested-today="@searchResult.RequestedToday.ToString().ToLower()" data-owns-game="@searchResult.OwnsGame.ToString().ToLower()"><i class="fa fa-calendar pull-left"></i>Check Availability</a>
-                                    </div>
                                 </div>
-                            </div>
+                            }
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>

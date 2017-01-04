@@ -200,6 +200,7 @@
     <Compile Include="Models\PostcodeFoundResponse.cs" />
     <Compile Include="Models\PostcodeNotFoundResponse.cs" />
     <Compile Include="Models\SavePostcodeResponse.cs" />
+    <Compile Include="Models\SearchFilter.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserResult.cs" />
@@ -239,12 +240,12 @@
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\Settings\Views\Privacy\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Games\Search.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Balance\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Requests\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Address\Index.cshtml" />
     <Content Include="Areas\Settings\Views\UserAvailability\Index.cshtml" />
     <Content Include="Views\User\RegisterThrowaway.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

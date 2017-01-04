@@ -139,6 +139,7 @@ a.navbar-brand {
     font-size: 16px;
     padding: 10px;
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .result-filter .btn {
@@ -150,7 +151,7 @@ a.navbar-brand {
 }
 
 .result-filter form {
-    padding: 0 10px;
+    padding: 10px;
 }
 
 @media (min-width: 768px){
@@ -182,4 +183,17 @@ padding-right: 0;
     font-weight: bold;
     border: 1px solid #B4BB50;
     color: #504E19;
+}
+
+.result-filter .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-top: 0;
 }

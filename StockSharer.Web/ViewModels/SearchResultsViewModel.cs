@@ -6,7 +6,6 @@ namespace StockSharer.Web.ViewModels
     public class SearchResultsViewModel
     {
         public List<SearchResult> SearchResults { get; set; }
-        public string Postcode { get; set; }
-        public int? Radius { get; set; }
+        public SearchFilter SearchFilter { get; set; }
     }
 }
