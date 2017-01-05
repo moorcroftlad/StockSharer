@@ -248,6 +248,7 @@
     <Content Include="Views\User\RegisterThrowaway.cshtml" />
     <Content Include="Views\Search\Town.cshtml" />
     <Content Include="Views\Search\TownNotFound.cshtml" />
+    <Content Include="Views\Shared\_GamesFilter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

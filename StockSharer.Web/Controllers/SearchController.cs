@@ -13,6 +13,11 @@ namespace StockSharer.Web.Controllers
     {
         public ActionResult Town(string id, SearchFilter filter)
         {
+            /*
+            TODO switch to indexed location pages rather than town
+            TODO add a search by location page, set it to noindex, nofollow
+            */
+
             var town = RetrieveTown(id);
             if (town == null)
             {
