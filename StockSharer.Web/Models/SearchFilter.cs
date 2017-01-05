@@ -3,10 +3,9 @@
     public class SearchFilter
     {
         public string Town { get; set; }
-        public int? Platform { get; set; }
-        public int? SearchType { get; set; }
-        public int? Status { get; set; }
-        public int? LenderType { get; set; }
+        public int? PlatformId { get; set; }
+        public int? StockTypeId { get; set; }
+        public int? StoreTypeId { get; set; }
         public string Sort { get; set; }
     }
 }

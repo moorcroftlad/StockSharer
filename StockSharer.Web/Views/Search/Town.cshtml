@@ -21,16 +21,8 @@
                             <h2>@Model.SearchResults.Count games found</h2>
                             <form data-toggle="validator" method="GET">
                                 <div class="form-group">
-                                    <label>Town / City</label>
-                                    <select class="form-control" name="town">
-                                        <option value="lisburn">Lisburn</option>
-                                    </select>
-                                    <span class="help-block with-errors"></span>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label>Platform</label>
-                                    <select class="form-control" name="platform">
+                                    <select class="form-control" name="platformid">
                                         <option value="">Any</option>
                                         <option value="1">PS3</option>
                                         <option value="2">PS4</option>
@@ -42,7 +34,7 @@
                                 
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select class="form-control" name="status">
+                                    <select class="form-control" name="stocktypeid">
                                         <option value="">Any</option>
                                         <option value="1">Available</option>
                                         <option value="2">On loan</option>
@@ -52,7 +44,7 @@
                                 
                                 <div class="form-group">
                                     <label>Lender</label>
-                                    <select class="form-control" name="lendertype">
+                                    <select class="form-control" name="storetypeid">
                                         <option value="">Any</option>
                                         <option value="1">Private</option>
                                         <option value="2">Business</option>

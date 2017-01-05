@@ -11,17 +11,18 @@ namespace StockSharer.Web.Controllers
 {
     public class SearchController : BaseController
     {
-        public ActionResult Index(SearchFilter filter)
+        public ActionResult Town(string id, SearchFilter filter)
         {
+            filter.Town = id;
             var searchResultsViewModel = new SearchResultsViewModel
                 {
                     SearchFilter = filter,
-                    SearchResults = RetrieveSearhResults(filter)
+                    SearchResults = RetrieveSearchResults(filter)
                 };
             return View(searchResultsViewModel);
         }
 
-        private static List<SearchResult> RetrieveSearhResults(SearchFilter filter)
+        private static List<SearchResult> RetrieveSearchResults(SearchFilter filter)
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
             {
@@ -34,8 +35,12 @@ namespace StockSharer.Web.Controllers
                                                 INNER JOIN Address a on a.AddressId = sr.AddressId
                                                 INNER JOIN StockStatus ss on ss.StockStatusId = sc.StockStatusId
                                         WHERE   sr.Active = 1
-                                                AND ss.StockStatusId != 3";
-                return connection.Query<SearchResult>(sql).ToList();
+                                                AND ss.StockStatusId != 3
+                                                AND (@Town IS NULL OR a.Town = @Town)
+                                                AND (@PlatformId IS NULL OR g.PlatformId = @PlatformId)
+                                                AND (@StockTypeId IS NULL OR sc.StockTypeId = @StockTypeId)
+                                                AND (@StoreTypeId IS NULL OR sr.StoreTypeId = @StoreTypeId);";
+                return connection.Query<SearchResult>(sql, filter).ToList();
             }
         }
     }

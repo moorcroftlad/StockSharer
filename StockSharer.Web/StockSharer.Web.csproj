@@ -245,7 +245,7 @@
     <Content Include="Areas\Settings\Views\Address\Index.cshtml" />
     <Content Include="Areas\Settings\Views\UserAvailability\Index.cshtml" />
     <Content Include="Views\User\RegisterThrowaway.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\Town.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
