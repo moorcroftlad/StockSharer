@@ -202,6 +202,7 @@
     <Compile Include="Models\SavePostcodeResponse.cs" />
     <Compile Include="Models\SearchFilter.cs" />
     <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\Town.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -246,6 +247,7 @@
     <Content Include="Areas\Settings\Views\UserAvailability\Index.cshtml" />
     <Content Include="Views\User\RegisterThrowaway.cshtml" />
     <Content Include="Views\Search\Town.cshtml" />
+    <Content Include="Views\Search\TownNotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

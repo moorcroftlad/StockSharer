@@ -28,6 +28,7 @@ h1 {
     border-top: 6px solid #444444;
     padding-left: 30px;
     padding-right: 30px;
+    min-height: 500px;
 }
 
 .content-page-header {

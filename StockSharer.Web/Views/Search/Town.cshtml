@@ -1,7 +1,7 @@
 ﻿@using System.Web.Optimization
-@model StockSharer.Web.ViewModels.SearchResultsViewModel
+@model StockSharer.Web.ViewModels.TownSearchResultsViewModel
 @{
-    ViewBag.Title = "Search results";
+    ViewBag.Title = "Games to rent in " + Model.Town;
 }
 
 <div class="content-page">
@@ -9,8 +9,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="content-page-header">
-                    <h1>Games found in Lisburn</h1>
-            
+                    <h1>Games to rent in Lisburn</h1>
                     <p>Vis et nisl labores, no vis probo erant. Ei homero reprimique vix. Saperet legimus salutatus has in. Pro munere maiorum no, sed idque similique at.</p>
                     <p>No vim latine phaedrum dissentiet. Reque viris nominavi pro an, eu atqui postea dissentiunt nec. Praesent qualisque urbanitas ex vel. Vix an prodesset adolescens.</p>
                 </div>
@@ -24,10 +23,10 @@
                                     <label>Platform</label>
                                     <select class="form-control" name="platformid">
                                         <option value="">Any</option>
-                                        <option value="1">PS3</option>
-                                        <option value="2">PS4</option>
-                                        <option value="3">Xbox 360</option>
-                                        <option value="4">Xbox One</option>
+                                        <option selected="@(Model.SearchFilter.PlatformId == 1)" value="1">Xbox One</option>
+                                        <option selected="@(Model.SearchFilter.PlatformId == 4)" value="4">PS4</option>
+                                        <option selected="@(Model.SearchFilter.PlatformId == 2)" value="2">Xbox 360</option>
+                                        <option selected="@(Model.SearchFilter.PlatformId == 3)" value="3">PS3</option>
                                     </select>
                                     <span class="help-block with-errors"></span>
                                 </div>
@@ -36,8 +35,8 @@
                                     <label>Status</label>
                                     <select class="form-control" name="stocktypeid">
                                         <option value="">Any</option>
-                                        <option value="1">Available</option>
-                                        <option value="2">On loan</option>
+                                        <option selected="@(Model.SearchFilter.StockTypeId == 1)" value="1">Available</option>
+                                        <option selected="@(Model.SearchFilter.StockTypeId == 2)" value="2">On loan</option>
                                     </select>
                                     <span class="help-block with-errors"></span>
                                 </div>
@@ -46,19 +45,8 @@
                                     <label>Lender</label>
                                     <select class="form-control" name="storetypeid">
                                         <option value="">Any</option>
-                                        <option value="1">Private</option>
-                                        <option value="2">Business</option>
-                                    </select>
-                                    <span class="help-block with-errors"></span>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Sort</label>
-                                    <select class="form-control" name="sort">
-                                        <option value="">Default</option>
-                                        <option value="1">Name</option>
-                                        <option value="2">Price (low-high)</option>
-                                        <option value="3">Price (high-low)</option>
+                                        <option selected="@(Model.SearchFilter.StoreTypeId == 1)" value="1">Private</option>
+                                        <option selected="@(Model.SearchFilter.StoreTypeId == 2)" value="2">Business</option>
                                     </select>
                                     <span class="help-block with-errors"></span>
                                 </div>
@@ -89,6 +77,10 @@
                                                 <table>
                                                     <tbody>
                                                         <tr>
+                                                            <td><strong>Date added:</strong></td>
+                                                            <td>@searchResult.DateAdded.ToShortDateString()</td>
+                                                        </tr>
+                                                        <tr>
                                                             <td><strong>Type:</strong></td>
                                                             <td>@searchResult.StockTypeName</td>
                                                         </tr>
@@ -102,7 +94,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td><strong>Town:</strong></td>
-                                                            <td>@searchResult.Town</td>
+                                                            <td>@searchResult.TownName</td>
                                                         </tr>
                                                         <tr>
                                                             <td><strong>Status:</strong></td>

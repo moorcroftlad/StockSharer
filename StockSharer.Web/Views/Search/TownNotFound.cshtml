@@ -1,0 +1,19 @@
+﻿@using System.Web.Optimization
+@model StockSharer.Web.ViewModels.TownSearchResultsViewModel
+@{
+    ViewBag.Title = "Town not found";
+}
+
+<div class="content-page">
+    <div class="container content-page-inner">
+        <h1>Town not found</h1>
+        <p>Unfortunately your town was not found.  To add your town to our database, please fill in the form below, thanks.</p>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/bundles/styles/search")
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+}

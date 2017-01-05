@@ -8,4 +8,9 @@ namespace StockSharer.Web.ViewModels
         public List<SearchResult> SearchResults { get; set; }
         public SearchFilter SearchFilter { get; set; }
     }
+
+    public class TownSearchResultsViewModel : SearchResultsViewModel
+    {
+        public string Town { get; set; }
+    }
 }

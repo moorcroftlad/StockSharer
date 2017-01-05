@@ -1,4 +1,6 @@
-﻿namespace StockSharer.Web.Models
+﻿using System;
+
+namespace StockSharer.Web.Models
 {
     public class SearchResult
     {
@@ -7,7 +9,8 @@
         public string StockTypeName { get; set; }
         public string PlatformName { get; set; }
         public decimal Price { get; set; }
-        public string Town { get; set; }
+        public string TownName { get; set; }
         public string StockStatusName { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 }
