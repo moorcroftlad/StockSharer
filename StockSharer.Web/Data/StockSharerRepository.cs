@@ -21,26 +21,38 @@ namespace StockSharer.Web.Data
             _connectionString = connectionString;
         }
 
+        //TODO: Cache these results for a period of time
         public List<SearchResult> RetrieveSearchResults(SearchFilter filter)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                const string sql = @"   SELECT  g.name GameName, g.ImageUrl, st.Name StockTypeName, p.Name PlatformName, sc.Price, a.Town TownName, ss.Name StockStatusName, sc.Timestamp DateAdded
+                const string sql = @"   WITH Descendants as (
+                                            SELECT SearchLocationId, ParentSearchLocationId
+                                            FROM SearchLocation
+                                            WHERE SearchLocationId = @SearchLocationId
+                                            UNION all
+                                            SELECT l.SearchLocationId, l.ParentSearchLocationId
+                                            FROM SearchLocation l
+                                            join Descendants on l.ParentSearchLocationId = Descendants.SearchLocationId
+                                        )
+                                        SELECT  g.name GameName, g.ImageUrl, st.Name StockTypeName, p.Name PlatformName, sc.Price, a.Town TownName, ss.Name StockStatusName, sc.Timestamp DateAdded
                                         FROM    Game g 
                                                 INNER JOIN Stock sc on sc.GameId = g.GameId
                                                 INNER JOIN Platform p on p.PlatformId = g.PlatformId
                                                 INNER JOIN StockType st on st.StockTypeId = sc.StockTypeId
                                                 INNER JOIN Store sr on sr.StoreId = sc.StoreId
                                                 INNER JOIN Address a on a.AddressId = sr.AddressId
-                                                INNER JOIN SearchLocation l on a.SearchLocationId = l.SearchLocationId
                                                 INNER JOIN StockStatus ss on ss.StockStatusId = sc.StockStatusId
                                         WHERE   sr.Active = 1
                                                 AND ss.StockStatusId != 3
-                                                AND (@SearchLocationId IS NULL OR a.SearchLocationId = @SearchLocationId)
+                                                AND (@SearchLocationId IS NULL OR a.SearchLocationId in 
+		                                        (
+			                                        SELECT SearchLocationId 
+			                                        FROM Descendants
+		                                        ))
                                                 AND (@PlatformId IS NULL OR g.PlatformId = @PlatformId)
                                                 AND (@StockStatusId IS NULL OR sc.StockStatusId = @StockStatusId)
-                                                AND (@StoreTypeId IS NULL OR sr.StoreTypeId = @StoreTypeId)
-                                        ORDER BY sc.Timestamp DESC";
+                                                AND (@StoreTypeId IS NULL OR sr.StoreTypeId = @StoreTypeId)";
                 return connection.Query<SearchResult>(sql, filter).ToList();
             }
         }
