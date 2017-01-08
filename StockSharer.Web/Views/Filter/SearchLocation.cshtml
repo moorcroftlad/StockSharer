@@ -1,0 +1,14 @@
+﻿@model StockSharer.Web.Controllers.SearchLocationFilterViewModel
+@{
+    Layout = null;
+}
+
+<div class="result-filter">
+    <h2>Location</h2>
+    <ul class="nav nav-pills nav-stacked">
+        @foreach (var searchLocation in Model.SearchLocations)
+        {
+            <li role="presentation" @(searchLocation.SearchLocationId == Model.ActiveSearchLocationId ? Html.Raw("class=\"active\"") : Html.Raw(""))><a href="/search/location/@searchLocation.UrlToken">@searchLocation.Name</a></li>
+        }
+    </ul>
+</div>

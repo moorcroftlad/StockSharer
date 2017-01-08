@@ -11,6 +11,6 @@ namespace StockSharer.Web.ViewModels
 
     public class LocationSearchResultsViewModel : SearchResultsViewModel
     {
-        public Models.Location Location { get; set; }
+        public SearchLocation SearchLocation { get; set; }
     }
 }

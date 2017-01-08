@@ -1,8 +1,8 @@
 ﻿namespace StockSharer.Web.Models
 {
-    public class Location
+    public class SearchLocation
     {
-        public int LocationId { get; set; }
+        public int SearchLocationId { get; set; }
         public string Name { get; set; }
         public string UrlToken { get; set; }
         public int? ParentLocationId { get; set; }
