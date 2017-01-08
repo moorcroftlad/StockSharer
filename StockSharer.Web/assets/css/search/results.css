@@ -198,3 +198,11 @@ h2 {
     font-size: 28px;
     margin-top: 0;
 }
+
+.nav-pills>li>a {
+    border-radius: 0;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    background-color: #0bb8e3;
+}

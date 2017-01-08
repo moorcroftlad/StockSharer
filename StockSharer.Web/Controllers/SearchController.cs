@@ -26,7 +26,7 @@ namespace StockSharer.Web.Controllers
             filter.LocationId = location.LocationId;
             var searchResultsViewModel = new LocationSearchResultsViewModel
                 {
-                    LocationName = location.Name,
+                    Location = location,
                     SearchFilter = filter,
                     SearchResults = RetrieveSearchResults(filter)
                 };
