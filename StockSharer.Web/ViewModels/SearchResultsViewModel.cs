@@ -9,8 +9,8 @@ namespace StockSharer.Web.ViewModels
         public SearchFilter SearchFilter { get; set; }
     }
 
-    public class TownSearchResultsViewModel : SearchResultsViewModel
+    public class LocationSearchResultsViewModel : SearchResultsViewModel
     {
-        public string Town { get; set; }
+        public string LocationName { get; set; }
     }
 }

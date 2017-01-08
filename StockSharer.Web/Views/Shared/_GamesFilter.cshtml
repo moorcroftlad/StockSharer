@@ -17,10 +17,10 @@
                                 
         <div class="form-group">
             <label>Status</label>
-            <select class="form-control" name="stocktypeid">
+            <select class="form-control" name="stockstatusid">
                 <option value="">Any</option>
-                <option selected="@(Model.SearchFilter.StockTypeId == 1)" value="1">Available</option>
-                <option selected="@(Model.SearchFilter.StockTypeId == 2)" value="2">On loan</option>
+                <option selected="@(Model.SearchFilter.StockStatusId == 1)" value="1">Available</option>
+                <option selected="@(Model.SearchFilter.StockStatusId == 2)" value="2">On loan</option>
             </select>
             <span class="help-block with-errors"></span>
         </div>

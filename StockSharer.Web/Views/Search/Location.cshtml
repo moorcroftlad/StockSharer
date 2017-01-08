@@ -1,7 +1,7 @@
 ﻿@using System.Web.Optimization
-@model StockSharer.Web.ViewModels.TownSearchResultsViewModel
+@model StockSharer.Web.ViewModels.LocationSearchResultsViewModel
 @{
-    ViewBag.Title = "Games to rent in " + Model.Town;
+    ViewBag.Title = "Games to rent in " + Model.LocationName;
 }
 
 <div class="content-page">
@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="content-page-header">
-                    <h1>Games to rent in Lisburn</h1>
+                    <h1>Games to rent in @Model.LocationName</h1>
                     <p>Vis et nisl labores, no vis probo erant. Ei homero reprimique vix. Saperet legimus salutatus has in. Pro munere maiorum no, sed idque similique at.</p>
                     <p>No vim latine phaedrum dissentiet. Reque viris nominavi pro an, eu atqui postea dissentiunt nec. Praesent qualisque urbanitas ex vel. Vix an prodesset adolescens.</p>
                 </div>

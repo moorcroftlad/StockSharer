@@ -2,9 +2,9 @@
 {
     public class SearchFilter
     {
-        public int? TownId { get; set; }
+        public int? LocationId { get; set; }
         public int? PlatformId { get; set; }
-        public int? StockTypeId { get; set; }
+        public int? StockStatusId { get; set; }
         public int? StoreTypeId { get; set; }
     }
 }
