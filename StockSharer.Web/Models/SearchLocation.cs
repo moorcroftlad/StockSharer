@@ -5,7 +5,7 @@
         public int SearchLocationId { get; set; }
         public string Name { get; set; }
         public string UrlToken { get; set; }
-        public int? ParentLocationId { get; set; }
+        public int? ParentSearchLocationId { get; set; }
     }
 
     public class SearchLocationItem
