@@ -156,7 +156,7 @@ a.navbar-brand {
 }
 
 @media (min-width: 768px){
-    #availabilityModal .modal-dialog {
+    #reservationModal .modal-dialog {
         width: 370px;
     }
 

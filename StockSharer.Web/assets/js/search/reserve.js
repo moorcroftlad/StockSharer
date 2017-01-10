@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    $('.js-btn-availability').on('click', function(event) {
+    $('.js-btn-reserve').on('click', function(event) {
         event.preventDefault();
         if (window.loggedIn) {
             var clickElement = $(this);
             var reference = clickElement.data('reference');
             var name = clickElement.data('name');
-            $('#availabilityRequest input[name="Reference"]').val(reference);
-            $('#availabilityRequest').find('.js-availability-request-header').text(name);
+            $('#reservation input[name="Reference"]').val(reference);
+            $('#reservation').find('.js-reservation-header').text(name);
 
             if (clickElement.data('owns-game')) {
                 $('.js-owns-game').show();
@@ -23,7 +23,7 @@ $(document).ready(function() {
                     $('.js-request-made').hide();
                 }
             }
-            $('#availabilityModal').modal('show');
+            $('#reservationModal').modal('show');
         } else {
             window.location.href = "/user/login?ReturnUrl=/search";
         }
@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     var updateDate = function(start, end) {
         $('#dateRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        $('#availabilityRequest input[name="EndDate"]').val(end.format('YYYY-MM-DD'));
+        $('#reservation input[name="EndDate"]').val(end.format('YYYY-MM-DD'));
     };
 
     updateDate(window.moment(), window.moment().add(2, 'days'));
@@ -51,11 +51,11 @@ $(document).ready(function() {
         minDate: window.moment()
     }, updateDate);
 
-    $('#availabilityRequest').on('submit', function (event) {
+    $('#reservation').on('submit', function (event) {
         event.preventDefault();
         var form = $(this);
         var reference = form.find('input[name="Reference"]');
-        $('.js-btn-availability[data-reference="' + reference.val() + '"]').data('requested-today', true);
+        $('.js-btn-reserve[data-reference="' + reference.val() + '"]').data('requested-today', true);
         $('.js-owns-game').hide();
         $('.js-no-request-made').hide();
         $('.js-request-made').show();

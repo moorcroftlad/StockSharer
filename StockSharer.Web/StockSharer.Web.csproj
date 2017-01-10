@@ -137,7 +137,7 @@
     <Content Include="assets\js\settings\addGame.js" />
     <Content Include="assets\js\settings\userAvailability.js" />
     <Content Include="assets\js\settings\requests.js" />
-    <Content Include="assets\js\search\availability.js" />
+    <Content Include="assets\js\search\reserve.js" />
     <Content Include="assets\js\lib\bootstrap.min.js" />
     <Content Include="assets\js\lib\cookies.js" />
     <Content Include="assets\js\lib\foot-2-simple-ajax.js" />
@@ -164,6 +164,7 @@
     <Compile Include="Areas\Settings\Models\ViewModels\RequestsViewModel.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\PostcodeController.cs" />

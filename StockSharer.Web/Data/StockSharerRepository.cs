@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
@@ -35,7 +36,9 @@ namespace StockSharer.Web.Data
                                             FROM SearchLocation l
                                             join Descendants on l.ParentSearchLocationId = Descendants.SearchLocationId
                                         )
-                                        SELECT  g.name GameName, g.ImageUrl, st.Name StockTypeName, p.Name PlatformName, sc.Price, a.Town TownName, ss.Name StockStatusName, sc.Timestamp DateAdded
+                                        SELECT  g.name GameName, g.ImageUrl, st.Name StockTypeName, p.Name PlatformName, 
+                                                sc.Price, a.Town TownName, ss.Name StockStatusName, sc.Timestamp DateAdded,
+                                                sc.Reference StockReference
                                         FROM    Game g 
                                                 INNER JOIN Stock sc on sc.GameId = g.GameId
                                                 INNER JOIN Platform p on p.PlatformId = g.PlatformId
@@ -70,7 +73,7 @@ namespace StockSharer.Web.Data
 
         public List<SearchLocation> RetrieveSearchLocations(int id)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["StockSharerDatabase"].ToString()))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 const string sql = @"   WITH Descendants as (
                                           SELECT SearchLocationId, ParentSearchLocationId, Name, UrlToken
@@ -98,6 +101,24 @@ namespace StockSharer.Web.Data
                                         WHERE SearchLocationId <> @SearchLocationId
                                         ORDER BY ParentSearchLocationId, Name";
                 return connection.Query<SearchLocation>(sql, new { SearchLocationId = id }).ToList();
+            }
+        }
+
+        public void SubmitReservation(Guid reference, DateTime endDate, int userId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"   INSERT INTO Reservation (UserId,StockId,StartDate,EndDate)
+                                        SELECT @UserId, StockId, @StartDate, @EndDate
+                                        FROM Stock
+                                        WHERE Reference = @Reference";
+                connection.Execute(sql, new
+                    {
+                        UserId = userId,
+                        StartDate = DateTime.Today,
+                        EndDate = endDate,
+                        Reference = reference
+                    });
             }
         }
     }

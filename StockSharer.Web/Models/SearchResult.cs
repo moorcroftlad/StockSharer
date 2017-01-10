@@ -12,5 +12,6 @@ namespace StockSharer.Web.Models
         public string TownName { get; set; }
         public string StockStatusName { get; set; }
         public DateTime DateAdded { get; set; }
+        public Guid StockReference { get; set; }
     }
 }
