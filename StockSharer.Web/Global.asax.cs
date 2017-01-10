@@ -45,7 +45,6 @@ namespace StockSharer.Web
         {
             //TODO: retrieving user from database to get updated balance, improve this by caching the user
             var user = _userRepository.RetrieveUser(userId);
-            user.Requests = _requestRepository.RetrieveNumberOfRequests(userId);
             return user;
         }
     }

@@ -164,6 +164,7 @@
     <Compile Include="Areas\Settings\Models\ViewModels\RequestsViewModel.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\PostcodeController.cs" />
     <Compile Include="Areas\Settings\Controllers\PrivacyController.cs" />
@@ -226,7 +227,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Home\Tools.cshtml" />
-    <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Navigation\Top.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
@@ -251,6 +252,7 @@
     <Content Include="Views\Search\LocationNotFound.cshtml" />
     <Content Include="Views\Shared\_GamesFilter.cshtml" />
     <Content Include="Views\Filter\SearchLocation.cshtml" />
+    <Content Include="Views\Shared\_Authentication.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

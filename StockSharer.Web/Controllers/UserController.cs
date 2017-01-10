@@ -49,6 +49,18 @@ namespace StockSharer.Web.Controllers
             return View(loginViewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult JsLogin(LoginViewModel loginViewModel)
+        {
+            if (ValidateUser(loginViewModel.Email, loginViewModel.Password))
+            {
+                _authenticationHelper.SetFormsAuthenticationCookie(Response, loginViewModel.Email);
+                return Json(new {Success = true});
+            }
+            return Json(new { Success = false });
+        }
+
         public ActionResult Register()
         {
             return View(new RegisterViewModel());

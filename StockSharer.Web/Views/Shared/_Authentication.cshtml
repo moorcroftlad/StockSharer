@@ -1,0 +1,63 @@
+﻿<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Log in</h3>
+            </div>
+            <div class="modal-body">
+                <h2 class="text-center">Enter your email and password</h2>
+                <form method="POST" action="/user/jslogin/" data-toggle="validator" data-disable="false">
+                    @Html.AntiForgeryToken()
+                    <p class="text-center">If you have not previously registered, please <a href="/user/register/">click here</a> to register</p>
+                    <p class="text-center">Forgot your password, <a href="/user/resetpassword/">click here</a></p>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="Email" placeholder="Email" required data-error="Please enter a valid email address" autofocus>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="Password" placeholder="Password" required data-error="Please enter a valid password">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="alert alert-danger js-login-error" style="display: none;" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        Please enter a valid email address and password
+                    </div>
+                    <button type="submit" class="btn btn-default btn-block main-cta-btn main-cta-btn-primary">Login</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var loggedIn = @(User != null ? "true;" : "false;")
+        $('.js-auth-required').on('click', function (event) {
+            if (!loggedIn) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+                $('#loginModal').modal('show');
+            }
+        });
+
+        $('#loginModal form').on('submit', function(event) {
+            event.preventDefault();
+            var $form = $(this);
+            var action = $form.attr('action');
+            $.post(action, $form.serialize(), function(response) {
+                if (response.Success) {
+                    loggedIn = true;
+                    $("#mainNavigation").load("/navigation/top/");
+                    $('#loginModal').modal('hide');
+                } else {
+                    $('.js-login-error').show();
+                }
+            });
+        });
+    });
+</script>

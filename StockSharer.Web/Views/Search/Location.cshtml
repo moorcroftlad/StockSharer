@@ -67,7 +67,7 @@
                                                     </tbody></table>
                                             </div>
                                             <div class="result-cta">
-                                                <a class="btn btn-block js-btn-availability" data-name="@searchResult.GameName" data-reference="51382b5c-6b3b-4680-8882-ece0385987d8" data-requested-today="false" data-owns-game="false"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Reserve</a>
+                                                <a class="btn btn-block js-auth-required js-btn-availability" data-name="@searchResult.GameName" data-reference="51382b5c-6b3b-4680-8882-ece0385987d8" data-requested-today="false" data-owns-game="false"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Reserve</a>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +124,4 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     @Scripts.Render("~/bundles/scripts/search")
-    <script type="text/javascript">
-        var loggedIn = @(User != null ? "true;" : "false;")
-    </script>
 }
