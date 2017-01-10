@@ -35,10 +35,13 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        var loggedIn = @(User != null ? "true;" : "false;")
+    var loggedIn = @(User != null ? "true;" : "false;")
+    $(document).ready(function () {
+        var lastClickedElement;
+
         $('.js-auth-required').on('click', function (event) {
             if (!loggedIn) {
+                lastClickedElement = this;
                 event.stopImmediatePropagation();
                 event.preventDefault();
                 $('#loginModal').modal('show');
@@ -54,6 +57,7 @@
                     loggedIn = true;
                     $("#mainNavigation").load("/navigation/top/");
                     $('#loginModal').modal('hide');
+                    $(lastClickedElement).trigger('click');
                 } else {
                     $('.js-login-error').show();
                 }
