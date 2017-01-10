@@ -9,7 +9,7 @@
         @foreach (var searchLocation in Model.SearchLocations)
         {
             <li role="presentation" @(searchLocation.SearchLocation.SearchLocationId == Model.ActiveSearchLocationId ? Html.Raw("class=\"active\"") : Html.Raw(""))>
-                <a href="/search/location/@searchLocation.SearchLocation.UrlToken">@searchLocation.SearchLocation.Name <span class="badge">@searchLocation.NumberOfResults</span></a>
+                <a href="/search/location/@searchLocation.SearchLocation.UrlToken">@searchLocation.SearchLocation.Name <span class="badge pull-right">@searchLocation.NumberOfResults</span></a>
             </li>
         }
     </ul>

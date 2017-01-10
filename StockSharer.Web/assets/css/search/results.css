@@ -160,9 +160,8 @@ a.navbar-brand {
         width: 370px;
     }
 
-    .nav>li>a {
-        
-padding-right: 0;
+    .navbar-nav>li>a {
+        padding-right: 0;
     }
 }
 
