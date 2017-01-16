@@ -1,32 +1,14 @@
 $(document).ready(function() {
     $('.js-btn-reserve').on('click', function(event) {
         event.preventDefault();
-        if (window.loggedIn) {
-            var clickElement = $(this);
-            var reference = clickElement.data('reference');
-            var name = clickElement.data('name');
-            $('#reservation input[name="Reference"]').val(reference);
-            $('#reservation').find('.js-reservation-header').text(name);
-
-            if (clickElement.data('owns-game')) {
-                $('.js-owns-game').show();
-                $('.js-no-request-made').hide();
-                $('.js-request-made').hide();
-            } else {
-                if (clickElement.data('requested-today')) {
-                    $('.js-owns-game').hide();
-                    $('.js-no-request-made').hide();
-                    $('.js-request-made').show();
-                } else {
-                    $('.js-owns-game').hide();
-                    $('.js-no-request-made').show();
-                    $('.js-request-made').hide();
-                }
-            }
-            $('#reservationModal').modal('show');
-        } else {
-            window.location.href = "/user/login?ReturnUrl=/search";
-        }
+        $('#reservationModal').modal('show');
+        //TODO - clear current modal contents
+        $('#reservationModal').load('/reservation/validate/', {
+                reference: $(this).data('reference'),
+                gameName: $(this).data('name')
+            }, function() {
+                initialiseModal();
+            });
     });
 
     var updateDate = function(start, end) {
@@ -34,31 +16,36 @@ $(document).ready(function() {
         $('#reservation input[name="EndDate"]').val(end.format('YYYY-MM-DD'));
     };
 
-    updateDate(window.moment(), window.moment().add(2, 'days'));
+    var initialiseDatePicker = function () {
+        $('#dateRange').daterangepicker({
+            ranges: {
+                'One night': [window.moment(), window.moment().add(1, 'day')],
+                'Two nights': [window.moment(), window.moment().add(2, 'days')],
+                'Three nights': [window.moment(), window.moment().add(3, 'days')],
+                'One week': [window.moment(), window.moment().add(7, 'days')]
+            },
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+            startDate: window.moment(),
+            endDate: window.moment().add(2, 'days'),
+            minDate: window.moment()
+        }, updateDate);
+        updateDate(window.moment(), window.moment().add(2, 'days'));
+    };
 
-    $('#dateRange').daterangepicker({
-        ranges: {
-            'One night': [window.moment(), window.moment().add(1, 'day')],
-            'Two nights': [window.moment(), window.moment().add(2, 'days')],
-            'Three nights': [window.moment(), window.moment().add(3, 'days')],
-            'One week': [window.moment(), window.moment().add(7, 'days')]
-        },
-        locale: {
-            format: 'YYYY-MM-DD'
-        },
-        startDate: window.moment(),
-        endDate: window.moment().add(2, 'days'),
-        minDate: window.moment()
-    }, updateDate);
+    var initialiseReservationForm = function () {
+        $('#reservation').on('submit', function (event) {
+            event.preventDefault();
+            var form = $(this);
+            $('.js-no-request-made').hide();
+            $('.js-request-made').show();
+            $.post(form.attr('action'), form.serialize());
+        });
+    };
 
-    $('#reservation').on('submit', function (event) {
-        event.preventDefault();
-        var form = $(this);
-        var reference = form.find('input[name="Reference"]');
-        $('.js-btn-reserve[data-reference="' + reference.val() + '"]').data('requested-today', true);
-        $('.js-owns-game').hide();
-        $('.js-no-request-made').hide();
-        $('.js-request-made').show();
-        $.post(form.attr('action'), form.serialize());
-    });
+    var initialiseModal = function () {
+        initialiseDatePicker();
+        initialiseReservationForm();
+    };
 });

@@ -67,7 +67,7 @@
                                                     </tbody></table>
                                             </div>
                                             <div class="result-cta">
-                                                <a class="btn btn-block js-auth-required js-btn-reserve" data-name="@searchResult.GameName" data-reference="@searchResult.StockReference" data-requested-today="false" data-owns-game="false"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Reserve</a>
+                                                <a class="btn btn-block js-auth-required js-btn-reserve" data-name="@searchResult.GameName" data-reference="@searchResult.StockReference" data-owns-game="false"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Reserve</a>
                                             </div>
                                         </div>
                                     </div>
@@ -84,31 +84,15 @@
 <div id="reservationModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="reservation" method="POST" action="/reservation/reserve/">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="Reference" value=""/>
-                <input type="hidden" name="EndDate" value=""/>
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title js-reservation-header">Game request</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Please select the dates you would like to reserve your game and press submit.</p>
-                    <p>The owner will be notified of your reservation and can decide to accept or reject.</p>
-                    <div class="form-group js-no-request-made">
-                        <label for="dateRange">Select date:</label>
-                        <div id="dateRange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                            <span></span> <b class="caret"></b>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-info btn-block js-no-request-made">Submit request</button>
-                    <p class="js-request-made text-center text-success" style="display: none;">The user has been notified of your reservation</p>
-                    <p class="js-owns-game text-center text-warning" style="display: none;">You own this game and cannot reserve it</p>
-                </div>
-            </form>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Checking availability...</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </p>
+            </div>
         </div>
     </div>
 </div>

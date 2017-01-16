@@ -254,6 +254,7 @@
     <Content Include="Views\Shared\_GamesFilter.cshtml" />
     <Content Include="Views\Filter\SearchLocation.cshtml" />
     <Content Include="Views\Shared\_Authentication.cshtml" />
+    <Content Include="Views\Reservation\Validate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

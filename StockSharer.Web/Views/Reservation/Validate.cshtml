@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+@model StockSharer.Web.Controllers.ReservationController.ValidateReservationViewModel
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">@Model.GameName</h4>
+        </div>
+        <div class="modal-body">
+            @if (!Model.ReservationExists)
+            {
+                <form id="reservation" method="POST" action="/reservation/reserve/">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="Reference" value="@Model.Reference"/>
+                    <input type="hidden" name="EndDate" value=""/>
+                    <p>Please select the dates you would like to reserve your game and press submit.</p>
+                    <p>The owner will be notified of your reservation and can decide to accept or reject.</p>
+                    <div class="form-group js-no-request-made">
+                        <label for="dateRange">Select date:</label>
+                        <div id="dateRange">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                            <span></span> <b class="caret"></b>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-block js-no-request-made">Submit request</button>
+                    <p class="js-request-made text-center text-success" style="display: none;">The user has been notified of your reservation</p>
+                </form>
+            }
+            else
+            {
+                <p class="text-center text-success">The user has been notified of your reservation</p>
+            }
+        </div>
+    </div>
+</div>

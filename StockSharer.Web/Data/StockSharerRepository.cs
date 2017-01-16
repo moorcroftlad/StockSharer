@@ -121,5 +121,28 @@ namespace StockSharer.Web.Data
                     });
             }
         }
+
+        public bool ReservationExists(Guid reference, int userId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                const string sql = @"   SELECT  r.ReservationId
+                                        FROM    Stock s
+		                                        INNER JOIN Reservation r on r.StockId = s.StockId
+                                        WHERE   s.Reference = @Reference
+		                                        AND r.StartDate = @StartDate
+		                                        AND r.UserId = @UserId";
+                return connection.Query<ReservationResult>(sql, new
+                {
+                    UserId = userId,
+                    Reference = reference,
+                    StartDate = DateTime.Today
+                }).Any();
+            }
+        }
+    }
+
+    public class ReservationResult
+    {
     }
 }
